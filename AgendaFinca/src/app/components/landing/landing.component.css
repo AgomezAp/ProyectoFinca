@@ -1,0 +1,1042 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Crimson+Text:wght@400;600;700&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+/* SECCIÓN HERO CON CAROUSEL */
+.hero-carousel-section {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* CAROUSEL DE FONDO (solo para la sección hero) */
+.carousel-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+}
+
+.carousel-slide.active {
+  opacity: 1;
+}
+
+/* Controles del carousel - DISEÑO MEJORADO */
+.carousel-controls {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 40px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.carousel-btn {
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  backdrop-filter: blur(20px);
+  color: white;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1001;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.05)
+  );
+  transition: all 0.3s ease;
+}
+
+.carousel-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
+}
+
+.carousel-btn:hover::before {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.1)
+  );
+}
+
+.carousel-btn:active {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
+}
+
+.carousel-btn svg {
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  position: relative;
+  z-index: 2;
+}
+
+/* Animación para los botones */
+.carousel-btn {
+  animation: fadeInScale 0.6s ease-out;
+}
+
+@keyframes fadeInScale {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Indicadores del carousel - DISEÑO MEJORADO */
+.carousel-indicators {
+  position: absolute;
+  bottom: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 16px;
+  z-index: 1000;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 12px 20px;
+  border-radius: 25px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  border: 2px solid transparent;
+  pointer-events: auto;
+  position: relative;
+  z-index: 1001;
+}
+
+.indicator::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 0;
+  height: 0;
+  background: white;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.indicator.active {
+  background: white;
+  transform: scale(1.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+}
+
+.indicator.active::before {
+  width: 6px;
+  height: 6px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.indicator:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.7);
+  transform: scale(1.1);
+}
+
+/* Efecto de pulso para el indicador activo */
+.indicator.active {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Línea blanca del navbar */
+.navbar-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  z-index: 99;
+}
+
+/* Header y navegación */
+.header {
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 25px 40px;
+  z-index: 900;
+  background: rgba(255, 255, 255, 1);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.nav-link {
+  color: #2c3e50;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.nav-link:hover {
+  color: #f1c40f; /* Amarillo dorado al hover */
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-1px);
+}
+/* Contenido principal */
+.main-content {
+  position: relative;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 40px;
+  pointer-events: none;
+}
+
+.hero-section {
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  pointer-events: auto;
+}
+
+/* Título principal */
+.title {
+  font-size: 5rem;
+  color: #ffffff; /* Cambiar a blanco para mejor contraste */
+  margin-bottom: 100px;
+  font-weight: 700;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4); /* Sombra más fuerte para legibilidad */
+  letter-spacing: -2px;
+  line-height: 1.1;
+  font-family: "Playfair Display", "Georgia", serif; /* Tipografía más elegante */
+}
+
+/* Formulario de reserva */
+.booking-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 50px;
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
+.booking-form:hover {
+  transform: translateY(-5px);
+}
+
+.form-row {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 30px;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Labels */
+.form-label {
+  font-size: 16px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+  font-weight: 600;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+/* Inputs de fecha */
+.date-input {
+  padding: 16px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+}
+
+.date-input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  filter: invert(0.4);
+  width: 20px;
+  height: 20px;
+}
+
+/* Select de huéspedes */
+.guests-select {
+  padding: 16px 20px;
+  border: 2px solid #e1e8ed;
+  border-radius: 12px;
+  font-size: 18px;
+  color: #2c3e50;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 14px;
+}
+
+.guests-select:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Botón de reservar */
+.reserve-btn {
+  background: #2d5f3f;
+  color: white;
+  border: none;
+  padding: 18px 40px;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 31px;
+  font-family: "Inter", sans-serif;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  min-width: 160px;
+}
+
+.reserve-btn:hover {
+  background: #1e4129;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(45, 95, 63, 0.3);
+}
+
+.reserve-btn:active {
+  transform: translateY(-1px);
+}
+
+/* SECCIÓN DE INFORMACIÓN DE LA FINCA CON ANIMACIONES */
+.finca-info-section {
+  background: white;
+  padding: 120px 0;
+  position: relative;
+  z-index: 10;
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 80px;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.section-title {
+  font-size: 3rem;
+  color: #2c3e50;
+  font-weight: 400;
+  line-height: 1.2;
+  margin-bottom: 30px;
+  letter-spacing: -1px;
+}
+
+.section-description {
+  font-size: 18px;
+  color: #5a6c7d;
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+/* Grid de características */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 60px;
+  margin-top: 80px;
+}
+
+.feature-item {
+  text-align: center;
+  padding: 40px 20px;
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.3s ease;
+}
+
+.feature-icon {
+  width: 80px;
+  height: 80px;
+  background: #f8f9fa;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 30px;
+  color: #2c3e50;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-icon:hover {
+  transform: translateY(-10px) scale(1.05);
+  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.feature-title {
+  font-size: 24px;
+  color: #2c3e50;
+  font-weight: 600;
+  margin-bottom: 15px;
+  letter-spacing: 0.5px;
+}
+
+.feature-description {
+  font-size: 16px;
+  color: #5a6c7d;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* ANIMACIONES DE ENTRADA */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(60px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Clases de animación */
+.section-header.animate-in {
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.feature-item.animate-in {
+  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* ANIMACIÓN DEL CALENDARIO */
+.calendar-feature .feature-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+
+.calendar-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.calendar-header {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 2px 2px 0 0;
+  position: relative;
+}
+
+.calendar-header::before,
+.calendar-header::after {
+  content: "";
+  position: absolute;
+  top: -3px;
+  width: 4px;
+  height: 14px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 2px;
+}
+
+.calendar-header::before {
+  left: 8px;
+}
+
+.calendar-header::after {
+  right: 8px;
+}
+
+.calendar-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.calendar-day {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 1px;
+  animation: calendarPulse 2s infinite;
+}
+
+.calendar-selected {
+  position: absolute;
+  top: 16px;
+  left: 12px;
+  width: 8px;
+  height: 8px;
+  background: #ff6b6b;
+  border-radius: 50%;
+  animation: selectedPulse 1.5s infinite;
+}
+
+@keyframes calendarPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes selectedPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    background: #ff6b6b;
+  }
+  50% {
+    transform: scale(1.2);
+    background: #ff5252;
+  }
+}
+
+/* ANIMACIÓN DE HUÉSPEDES */
+.guests-feature .feature-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: visible;
+}
+
+.guests-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+.guest-icons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  width: 30px;
+  height: 30px;
+  margin: 5px auto;
+}
+
+.guest-icon {
+  opacity: 0;
+  transform: scale(0);
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.guest-icon.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.guest-avatar {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-radius: 50%;
+  animation: avatarFloat 2s ease-in-out infinite;
+}
+
+@keyframes counterPulse {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes numberChange {
+  0% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes avatarFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* ANIMACIÓN DE BÚSQUEDA */
+.search-feature .feature-icon {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  overflow: hidden;
+}
+
+.search-animation {
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.search-circle {
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  animation: searchPulse 2s ease-in-out infinite;
+}
+
+.search-handle {
+  width: 8px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  animation: handleMove 2s ease-in-out infinite;
+}
+
+.search-particles {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+}
+
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  animation: particleFloat 3s linear infinite;
+}
+
+.particle:nth-child(1) {
+  top: 5px;
+  left: 10px;
+  animation-delay: 0s;
+}
+.particle:nth-child(2) {
+  top: 15px;
+  left: 5px;
+  animation-delay: 0.6s;
+}
+.particle:nth-child(3) {
+  top: 10px;
+  left: 20px;
+  animation-delay: 1.2s;
+}
+.particle:nth-child(4) {
+  top: 20px;
+  left: 15px;
+  animation-delay: 1.8s;
+}
+.particle:nth-child(5) {
+  top: 8px;
+  left: 12px;
+  animation-delay: 2.4s;
+}
+
+@keyframes searchPulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+}
+
+@keyframes handleMove {
+  0%,
+  100% {
+    transform: rotate(45deg) translateX(0);
+  }
+  50% {
+    transform: rotate(45deg) translateX(2px);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0);
+  }
+  20% {
+    opacity: 1;
+    transform: translateY(-5px) scale(1);
+  }
+  80% {
+    opacity: 1;
+    transform: translateY(-15px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0);
+  }
+}
+
+/* Estilo para el highlight en el texto */
+.highlight {
+  color: #667eea;
+  font-weight: bold;
+  animation: highlightPulse 2s ease-in-out infinite;
+}
+
+@keyframes highlightPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* Hover effects específicos */
+.feature-item:hover .calendar-selected {
+  animation-duration: 0.8s;
+}
+
+.feature-item:hover .guest-counter {
+  animation: counterPulse 0.3s ease-out;
+}
+
+.feature-item:hover .search-circle {
+  animation-duration: 1s;
+}
+
+/* Variante para tema oscuro automático */
+@media (prefers-color-scheme: dark) {
+  .carousel-btn {
+    background: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+  }
+
+  .carousel-btn:hover {
+    background: rgba(0, 0, 0, 0.5);
+    border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 3.5rem;
+    margin-bottom: 60px;
+  }
+
+  .booking-form {
+    padding: 40px 30px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .header {
+    padding: 20px 25px;
+  }
+
+  .main-content {
+    padding: 30px 20px;
+  }
+
+  /* Responsive para controles del carousel */
+  .carousel-controls {
+    padding: 0 20px;
+  }
+
+  .carousel-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .carousel-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .carousel-indicators {
+    bottom: 30px;
+    padding: 10px 16px;
+    gap: 12px;
+  }
+
+  .indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Responsive para la nueva sección */
+  .finca-info-section {
+    padding: 80px 0;
+  }
+
+  .container {
+    padding: 0 25px;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .section-description {
+    font-size: 16px;
+  }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    margin-top: 60px;
+  }
+
+  .feature-item {
+    padding: 30px 15px;
+  }
+
+  /* Responsive para animaciones */
+  .calendar-animation,
+  .guests-animation,
+  .search-animation {
+    width: 32px;
+    height: 32px;
+  }
+
+  .guest-counter {
+    width: 16px;
+    height: 16px;
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2.8rem;
+    margin-bottom: 40px;
+  }
+
+  .booking-form {
+    margin: 0 15px;
+    padding: 30px 20px;
+  }
+
+  .date-input,
+  .guests-select {
+    font-size: 16px;
+    padding: 14px 16px;
+  }
+
+  .reserve-btn {
+    font-size: 16px;
+    padding: 16px 32px;
+  }
+
+  .nav-link {
+    font-size: 16px;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+  }
+
+  .feature-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .feature-icon svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .feature-title {
+    font-size: 20px;
+  }
+
+  .carousel-btn {
+    width: 44px;
+    height: 44px;
+  }
+
+  .carousel-btn svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .carousel-indicators {
+    bottom: 20px;
+    padding: 8px 12px;
+    gap: 10px;
+  }
+
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+}

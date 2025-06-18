@@ -1,0 +1,7 @@
+import { Routes } from '@angular/router';
+import { LandingComponent } from './components/landing/landing.component';
+
+export const routes: Routes = [
+    {path: '', redirectTo: 'bienvenida', pathMatch: 'full'},
+    {path:'bienvenida', component: LandingComponent},
+];
