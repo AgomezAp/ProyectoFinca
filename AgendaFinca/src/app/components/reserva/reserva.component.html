@@ -1,1 +1,78 @@
-<p>reserva works!</p>
+<header class="header">
+    <div class="navbar-line"></div>
+    <nav class="nav">
+        <a href="#" class="nav-link">Inicio</a>
+        <a href="#" class="nav-link">Acerca</a>
+        <a href="#" class="nav-link">Contacto</a>
+    </nav>
+</header>
+<h1>DATOS PARA RESERVA</h1>
+<form action="">
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" required>
+    </div>
+    <div class="form-group">
+        <label for="CC">CC</label>
+        <input type="text" id="CC" name="CC" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Correo electrónico</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="telefono">Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required>
+    </div>
+    <div class="form-row">
+        <div class="form-group">
+            <label class="form-label">Fecha de llegada</label>
+            <input type="date" class="date-input" [(ngModel)]="fechaInicio" name="Inicio" readonly>
+        </div>
+        <div class="form-group">
+            <label class="form-label">Fecha de salida</label>
+            <input type="date" class="date-input" [(ngModel)]="fechaFin" name="Fin" readonly>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="form-label">Huéspedes</label>
+        <select class="guests-select" [(ngModel)]="personas" name="personas" >
+            <option *ngFor="let n of [].constructor(15); let i = index" [value]="i+2">{{i+2}} personas</option>
+        </select>
+        <!-- <label >
+        <input type="checkbox">
+        ¿Hay menores de edad?
+        </label> -->
+    </div>
+    <div class="form-group">
+        <label for="scanDocumentoFrente">Escanear documento - Frontal:</label>
+        <input type="file" id="scanDocumentoFrente" name="scanDocumentoFrente" accept="image/*,.pdf" capture="environment" (change)="mostrarVistaPrevia($event, 'frente')" required>
+        <img id="vistaPreviaFrente" style="max-width: 200px; display: none; margin-top: 10px;" />
+        <label for="scanDocumentoAtras"> Escanear documento - Posterior:</label>
+        <input type="file" id="scanDocumentoAtras" name="scanDocumentoAtras" accept="image/*,.pdf" capture="environment" (change)="mostrarVistaPrevia($event, 'frente')" required>
+        <img id="vistaPreviaAtras" style="max-width: 200px; display: none; margin-top: 10px;" /> 
+    </div>
+    <div class="form-group">
+        <label for="uploadDocumento">Rostro con documento:</label>
+        <input type="file" id="uploadDocumento" name="uploadDocumento" accept="image/*,.pdf" required>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" required>
+            Acepto los términos y condiciones del servicio y me comprometo a cumplirlos durante mi estadía.
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" required>
+            Autorizo el manejo y tratamiento de mis datos personales conforme a la política de privacidad establecida por la finca.
+        </label>
+    </div>
+    <div class="form-group">
+        <label>
+            <input type="checkbox" required>
+            Confirmo que toda la información proporcionada en este formulario es verídica, actual y completa.
+        </label>
+    </div>
+    <button type="submit">Enviar</button>
+</form>

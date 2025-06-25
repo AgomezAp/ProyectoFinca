@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
-
+import { AgendaService } from '../../services/agenda.service';
 @Component({
   selector: 'app-landing',
   imports: [CommonModule],
@@ -15,6 +15,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   guestArray = Array(15).fill(0);
   private observer!: IntersectionObserver;
   
+  constructor(
+    private reservaServices: AgendaService,
+  ) {}
+
   @ViewChild('infoSection', { static: false }) infoSection!: ElementRef;
   
   images = [
@@ -98,11 +102,11 @@ startGuestCountAnimation() {
       const pattern = patterns[currentPatternIndex];
       let count = pattern.start;
       
-      console.log(`🎯 Starting pattern ${currentPatternIndex + 1}: ${pattern.start} to ${pattern.end}`);
+      // console.log(`🎯 Starting pattern ${currentPatternIndex + 1}: ${pattern.start} to ${pattern.end}`);
       
       const countInterval = setInterval(() => {
         this.animatedGuestCount = count;
-        console.log(`👥 Pattern ${currentPatternIndex + 1} - Count: ${count}`);
+        // console.log(`👥 Pattern ${currentPatternIndex + 1} - Count: ${count}`);
         
         // Efecto visual
         const guestCounter = document.querySelector('.guest-counter');
@@ -170,5 +174,28 @@ startGuestCountAnimation() {
     setTimeout(() => {
       this.startAutoPlay();
     }, 10000);
+  }
+
+  redirectToReserva() {
+    // Obtener los datos del formulario (ejemplo usando template-driven forms)
+    const fechaInicio = (document.getElementById('llegada') as HTMLInputElement)?.value || '';
+    const fechaFin = (document.getElementById('salida') as HTMLInputElement)?.value || '';
+    const huespedes = (document.getElementById('huesped') as HTMLInputElement)?.value || '';
+    const huespedesCantidad = parseInt(huespedes)
+    
+    const formData = {
+      FechaInicio: fechaInicio,
+      FechaFin: fechaFin,
+      Personas: huespedesCantidad
+    };
+
+    this.reservaServices.Disponibilidad({FechaInicio: `${fechaInicio}T10:00:00.000Z`, FechaFin: `${fechaFin}T10:00:00.000Z`}).subscribe((response) => {
+      if(response.disponible) {
+      localStorage.setItem('reservaFormData', JSON.stringify(formData));
+      window.location.href = '/reserva'
+      } else {
+      alert(response.mensaje)
+      }
+    })
   }
 }
