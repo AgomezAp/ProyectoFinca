@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { AgendaService } from '../../services/agenda.service';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule],
+  imports: [CommonModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule ,MatInputModule, MatSelectModule], 
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
 })
@@ -14,7 +19,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   animatedGuestCount = 2;
   guestArray = Array(15).fill(0);
   private observer!: IntersectionObserver;
-  
+  fechasOcupadas: any = []
+  errorMessage: string = '';
+  huespedesSeleccionados: number = 2;
+  numeroHuespedes: number[] = Array.from({length: 14}, (_, i) => i + 2);
   constructor(
     private reservaServices: AgendaService,
   ) {}
@@ -29,6 +37,10 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
 
   ngOnInit() {
     this.startAutoPlay();
+    this.reservaServices.fechas().subscribe((resp) => {
+    this.fechasOcupadas = resp.fechasOcupadas || []; 
+    console.log("Ocuapadas" + this.fechasOcupadas)
+  });
     console.log('Component initialized');
   }
 
@@ -42,6 +54,11 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
       this.observer.disconnect();
     }
   }
+  filtrarFechas = (d: Date | null): boolean => {
+    if (!d) return true;
+    const fecha = d.toISOString().split('T')[0];
+    return !this.fechasOcupadas.includes(fecha);
+  };
 
   setupIntersectionObserver() {
     const options = {
@@ -181,21 +198,53 @@ startGuestCountAnimation() {
     const fechaInicio = (document.getElementById('llegada') as HTMLInputElement)?.value || '';
     const fechaFin = (document.getElementById('salida') as HTMLInputElement)?.value || '';
     const huespedes = (document.getElementById('huesped') as HTMLInputElement)?.value || '';
-    const huespedesCantidad = parseInt(huespedes)
-    
+
+    if (!fechaInicio || !fechaFin) {
+    this.errorMessage = 'Debes seleccionar la fecha de llegada y la fecha de salida.';
+    return;
+    }
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+    const inicioDate = new Date(fechaInicio);
+    const finDate = new Date(fechaFin);
+    if (inicioDate < hoy || finDate < hoy) {
+      this.errorMessage = 'Las fechas no pueden ser anteriores a hoy.';
+      return;
+    }
+    if (inicioDate >= finDate) {
+      this.errorMessage = 'La fecha de llegada debe ser anterior a la fecha de salida.';
+      return;
+    }
     const formData = {
       FechaInicio: fechaInicio,
       FechaFin: fechaFin,
-      Personas: huespedesCantidad
+      Personas: this.huespedesSeleccionados
     };
+    const formatDate = (dateStr: string) => {
+      if (!dateStr) return '';
+      let [month, day, year] = dateStr.split('/');
+      month = month.padStart(2, '0');
+      day = day.padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
+    const inicio = fechaInicio ? `${formatDate(fechaInicio)}T10:00:00.000Z` : '';
+    const fin = fechaFin ? `${formatDate(fechaFin)}T10:00:00.000Z` : '';
 
-    this.reservaServices.Disponibilidad({FechaInicio: `${fechaInicio}T10:00:00.000Z`, FechaFin: `${fechaFin}T10:00:00.000Z`}).subscribe((response) => {
+    console.log(formData)
+
+    this.reservaServices.Disponibilidad({FechaInicio: inicio, FechaFin: fin}).subscribe((response) => {
       if(response.disponible) {
       localStorage.setItem('reservaFormData', JSON.stringify(formData));
       window.location.href = '/reserva'
       } else {
-      alert(response.mensaje)
+      this.errorMessage = response.mensaje;
       }
-    })
+    }
+  )
   }
+  onHuespedesChange(): void {
+    console.log('Huéspedes seleccionados:', this.huespedesSeleccionados);
+  }
+
+
 }

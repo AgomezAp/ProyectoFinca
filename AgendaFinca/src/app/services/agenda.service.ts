@@ -19,6 +19,10 @@ export class AgendaService {
 
     Disponibilidad(body: any): Observable<any> {
         return this.http.post(`${this.appUrl}${this.apiUrl}/disponibilidad`, body)
-    } 
+    }
+
+    fechas(): Observable<any> {
+        return this.http.get(`${this.appUrl}${this.apiUrl}/fechas`)
+    }
 
 }

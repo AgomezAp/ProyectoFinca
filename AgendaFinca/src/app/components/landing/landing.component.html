@@ -99,36 +99,36 @@
             <div class="form-row">
                 <div class="form-group">
                     <label class="form-label">Fecha de llegada</label>
-                    <input type="date" class="date-input" id="llegada">
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="pickerLlegada" [matDatepickerFilter]="filtrarFechas" id="llegada" placeholder="Fecha de llegada" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="pickerLlegada"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerLlegada></mat-datepicker>
+                    </mat-form-field>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Fecha de salida</label>
-                    <input type="date" class="date-input" id="salida">
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="pickerSalida" [matDatepickerFilter]="filtrarFechas" id="salida" placeholder="Fecha de salida" readonly>
+                      <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+                      <mat-datepicker #pickerSalida></mat-datepicker>
+                    </mat-form-field>
                 </div>
             </div>
             <div class="form-row">
               <div class="form-group">
-                <label class="form-label">Huéspedes</label>
-                <select class="guests-select" id="huesped">
-                  <option>2 personas</option>
-                  <option>3 personas</option>
-                  <option>4 personas</option>
-                  <option>5 personas</option>
-                  <option>6 personas</option>
-                  <option>7 personas</option>
-                  <option>8 personas</option>
-                  <option>9 personas</option>
-                  <option>10 personas</option>
-                  <option>11 personas</option>
-                  <option>12 personas</option>
-                  <option>13 personas</option>
-                  <option>14 personas</option>
-                  <option>15 personas</option>
-                </select>
+                <mat-form-field appearance="outline">
+                  <mat-label>Huéspedes</mat-label>
+                  <mat-select id="huesped" [(value)]="huespedesSeleccionados" (selectionChange)="onHuespedesChange()">
+                    <mat-option *ngFor="let num of numeroHuespedes" [value]="num">{{num}} {{ num === 1 ? 'persona' : 'personas' }}</mat-option>
+                  </mat-select>
+                </mat-form-field>
               </div>
-                <div class="form-group">
-                    <button type="button" class="reserve-btn" (click)="redirectToReserva()">RESERVAR</button>
-                </div>
+              <div class="form-group">
+                <button type="button" class="reserve-btn" (click)="redirectToReserva()">RESERVAR</button>
+              </div>
+            </div>
+            <div *ngIf="errorMessage" class="error-message">
+              {{ errorMessage }}
             </div>
         </form>
     </div>
