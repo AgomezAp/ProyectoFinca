@@ -96,7 +96,7 @@ const ReservaSchema = new Schema<IReserva>({
   },
   confirmado: {
     type: Boolean,
-    default: false
+    default: null
   }
 }, );
 

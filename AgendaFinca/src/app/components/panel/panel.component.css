@@ -1,0 +1,144 @@
+h2 {
+  color: #2d5f3f;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 24px 0 16px 0;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Encabezado */
+thead th {
+  background: #2d5f3f;
+  color: #fff;
+  padding: 14px 10px;
+  font-weight: 600;
+  text-align: left;
+  letter-spacing: 0.5px;
+}
+
+/* Filas y celdas */
+tbody td {
+  padding: 12px 10px;
+  border-bottom: 1px solid #eaeaea;
+  vertical-align: middle;
+  font-size: 15px;
+}
+
+/* Última fila sin borde */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover en filas */
+tbody tr:hover {
+  background: #f6f8fa;
+}
+
+/* Imágenes en celdas */
+td img {
+  display: block;
+  margin: 0 auto;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
+  transition: transform 0.2s;
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+td img:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
+}
+
+/* Botones */
+td button {
+  margin-right: 6px;
+  padding: 6px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2d5f3f;
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+td button[disabled] {
+  background: #b2bec3;
+  cursor: not-allowed;
+}
+td button:not([disabled]):hover {
+  background: #1e4129;
+}
+
+.modal-imagen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+.imagen-grande {
+  max-width: 90vw;
+  max-height: 90vh;
+  border-radius: 12px;
+  box-shadow: 0 0 20px #000;
+}
+
+@media (max-width: 900px) {
+  table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+  }
+  thead, tbody, th, td, tr {
+    display: revert;
+    width: revert;
+    min-width: revert;
+    box-sizing: border-box;
+  }
+  table thead {
+    display: table-header-group;
+  }
+  table tbody {
+    display: table-row-group;
+  }
+  table tr {
+    display: table-row;
+  }
+  table th, table td {
+    white-space: nowrap;
+    min-width: 90px;
+    padding: 10px 8px;
+  }
+  td img {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* Ajuste para pantallas muy pequeñas */
+@media (max-width: 600px) {
+  table th, table td {
+    min-width: 70px;
+    padding: 8px 4px;
+    font-size: 13px;
+  }
+  td img {
+    width: 22px;
+    height: 22px;
+  }
+}

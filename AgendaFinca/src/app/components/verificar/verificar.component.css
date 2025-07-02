@@ -1,0 +1,115 @@
+/* Contenedor principal */
+.main-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+  width: 100%;
+  padding: 40px 0;
+}
+
+/* Sección hero */
+.hero-section {
+  text-align: center;
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Título */
+.title {
+  font-size: 2.2rem;
+  color: #2d5f3f;
+  margin-bottom: 36px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  text-shadow: 1px 1px 8px rgba(44,62,80,0.07);
+  font-family: "Playfair Display", "Georgia", serif;
+}
+
+/* Formulario */
+.booking-form {
+  background: rgba(255,255,255,0.97);
+  padding: 36px 28px;
+  border-radius: 18px;
+  box-shadow: 0 10px 32px rgba(44,62,80,0.10);
+  border: 1px solid rgba(45,95,63,0.08);
+  margin: 0 auto;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  margin-bottom: 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+/* Material form field */
+mat-form-field.full-width {
+  width: 100%;
+}
+
+/* Label */
+mat-label {
+  font-size: 16px;
+  color: #2c3e50;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Input */
+input[matInput] {
+  font-size: 17px;
+  padding: 14px 12px;
+  background: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* Botón */
+.reserve-btn {
+  background: #2d5f3f;
+  color: white;
+  border: none;
+  padding: 15px 0;
+  border-radius: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-top: 8px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  min-width: 140px;
+}
+.reserve-btn:hover {
+  background: #1e4129;
+  box-shadow: 0 6px 18px rgba(45,95,63,0.18);
+  transform: translateY(-2px);
+}
+.reserve-btn:active {
+  transform: translateY(0);
+}
+
+/* Mensaje de error */
+.error-message {
+  color: #c0392b;
+  margin-top: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .booking-form {
+    padding: 18px 8px;
+  }
+  .title {
+    font-size: 1.4rem;
+    margin-bottom: 22px;
+  }
+}

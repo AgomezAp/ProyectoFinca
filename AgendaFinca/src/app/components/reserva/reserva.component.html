@@ -1,78 +1,103 @@
-<header class="header">
+<!-- <header class="header">
     <div class="navbar-line"></div>
     <nav class="nav">
         <a href="#" class="nav-link">Inicio</a>
         <a href="#" class="nav-link">Acerca</a>
         <a href="#" class="nav-link">Contacto</a>
     </nav>
-</header>
+</header> -->
 <h1>DATOS PARA RESERVA</h1>
-<form action="">
-    <div class="form-group">
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" required>
-    </div>
-    <div class="form-group">
-        <label for="CC">CC</label>
-        <input type="text" id="CC" name="CC" required>
-    </div>
-    <div class="form-group">
-        <label for="email">Correo electrónico</label>
-        <input type="email" id="email" name="email" required>
-    </div>
-    <div class="form-group">
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" name="telefono" required>
-    </div>
+<form #formulario="ngForm">
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Nombre</mat-label>
+        <input matInput type="text" name="nombre" [(ngModel)]="nombre" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>CC</mat-label>
+        <input matInput type="text" name="cc" [(ngModel)]="cc" required>
+    </mat-form-field>
+    
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Correo electrónico</mat-label>
+        <input matInput type="email" name="email" [(ngModel)]="email" required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Teléfono</mat-label>
+        <input matInput type="tel" name="telefono" [(ngModel)]="telefono" required>
+    </mat-form-field>
+
     <div class="form-row">
-        <div class="form-group">
-            <label class="form-label">Fecha de llegada</label>
-            <input type="date" class="date-input" [(ngModel)]="fechaInicio" name="Inicio" readonly>
-        </div>
-        <div class="form-group">
-            <label class="form-label">Fecha de salida</label>
-            <input type="date" class="date-input" [(ngModel)]="fechaFin" name="Fin" readonly>
-        </div>
+        <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Fecha de llegada</mat-label>
+            <input matInput type="date" name="Inicio" [(ngModel)]="fechaInicio" readonly>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="half-width">
+            <mat-label>Fecha de salida</mat-label>
+            <input matInput type="date" name="Fin" [(ngModel)]="fechaFin" readonly>
+        </mat-form-field>
     </div>
-    <div class="form-group">
-        <label class="form-label">Huéspedes</label>
-        <select class="guests-select" [(ngModel)]="personas" name="personas" >
-            <option *ngFor="let n of [].constructor(15); let i = index" [value]="i+2">{{i+2}} personas</option>
-        </select>
+    
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Huéspedes</mat-label>
+        <mat-select [(ngModel)]="personas" name="personas">
+            <mat-option *ngFor="let i of huespedes" [value]="i">{{i}} personas</mat-option>
+        </mat-select>
+    </mat-form-field>
         <!-- <label >
         <input type="checkbox">
         ¿Hay menores de edad?
         </label> -->
-    </div>
     <div class="form-group">
-        <label for="scanDocumentoFrente">Escanear documento - Frontal:</label>
-        <input type="file" id="scanDocumentoFrente" name="scanDocumentoFrente" accept="image/*,.pdf" capture="environment" (change)="mostrarVistaPrevia($event, 'frente')" required>
-        <img id="vistaPreviaFrente" style="max-width: 200px; display: none; margin-top: 10px;" />
-        <label for="scanDocumentoAtras"> Escanear documento - Posterior:</label>
-        <input type="file" id="scanDocumentoAtras" name="scanDocumentoAtras" accept="image/*,.pdf" capture="environment" (change)="mostrarVistaPrevia($event, 'frente')" required>
-        <img id="vistaPreviaAtras" style="max-width: 200px; display: none; margin-top: 10px;" /> 
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Escanear documento - Frontal</mat-label>
+            <input type="text" matInput [value]="Frontal" placeholder="Selecciona una imagen" disabled>
+            <button mat-icon-button matSuffix (click)="fileFrente.click()" aria-label="Subir archivo">
+                <mat-icon>upload</mat-icon>
+            </button>
+        </mat-form-field>
+        <input type="file" accept="image/*,.pdf" hidden #fileFrente (change)="mostrarVistaPrevia($event, 'frente')">
+        <img id="vistaPreviaFrente" style="max-width: 200px; margin-top: 10px; display: block;">
+
+        <mat-form-field appearance="outline" class="full-width">
+            <mat-label>Escanear documento - Posterior</mat-label>
+            <input type="text" matInput [value]="Atras" placeholder="Selecciona una imagen" disabled>
+            <button mat-icon-button matSuffix (click)="fileAtras.click()" aria-label="Subir archivo">
+                <mat-icon>upload</mat-icon>
+            </button>
+        </mat-form-field>
+        <input type="file" accept="image/*,.pdf" hidden #fileAtras (change)="mostrarVistaPrevia($event, 'atras')">
+        <img id="vistaPreviaAtras" style="max-width: 200px; margin-top: 10px; display: block;">
+
+    <mat-form-field appearance="outline" class="full-width">
+        <mat-label>Rostro con documento</mat-label>
+        <input type="text" matInput [value]="Rostro" placeholder="Selecciona una imagen" disabled>
+        <button mat-icon-button matSuffix (click)="fileRostro.click()" aria-label="Subir archivo">
+            <mat-icon>upload</mat-icon>
+        </button>
+    </mat-form-field>
+    <input type="file" accept="image/*,.pdf" hidden #fileRostro (change)="mostrarVistaPrevia($event, 'rostro')">
+    <img id="vistaPreviaRostro" style="max-width: 200px; margin-top: 10px; display: block;">
     </div>
-    <div class="form-group">
-        <label for="uploadDocumento">Rostro con documento:</label>
-        <input type="file" id="uploadDocumento" name="uploadDocumento" accept="image/*,.pdf" required>
+
+    <mat-checkbox [(ngModel)]="terminos" name="terminos" required>
+        Acepto los términos y condiciones del servicio.
+    </mat-checkbox>
+
+    <mat-checkbox [(ngModel)]="datos" name="datos" required>
+        Autorizo el manejo y tratamiento de mis datos personales.
+    </mat-checkbox>
+    
+    <mat-checkbox [(ngModel)]="veridica" name="veridica" required>
+        Confirmo que toda la información proporcionada es verídica.
+    </mat-checkbox>
+    <div style="display: flex; gap: 16px; margin-top: 16px;">
+        <button mat-raised-button color="primary" type="submit" (click)="enviarData()">Enviar</button>
+        <button mat-raised-button color="accent" type="button" (click)="volver()" style="background: #fff; color: #2d5f3f; border: 1px solid #2d5f3f;">
+            Volver
+        </button>
     </div>
-    <div class="form-group">
-        <label>
-            <input type="checkbox" required>
-            Acepto los términos y condiciones del servicio y me comprometo a cumplirlos durante mi estadía.
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            <input type="checkbox" required>
-            Autorizo el manejo y tratamiento de mis datos personales conforme a la política de privacidad establecida por la finca.
-        </label>
-    </div>
-    <div class="form-group">
-        <label>
-            <input type="checkbox" required>
-            Confirmo que toda la información proporcionada en este formulario es verídica, actual y completa.
-        </label>
-    </div>
-    <button type="submit">Enviar</button>
+
 </form>

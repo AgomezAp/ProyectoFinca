@@ -1,0 +1,40 @@
+<h2>Panel de Reservas</h2>
+<table>
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Fecha Llegada</th>
+            <th>Fecha Salida</th>
+            <th>Cantidad</th>
+            <th>Rostro</th>
+            <th>Frontal</th>
+            <th>Posterior</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let reserva of reservas">
+            <td>{{ reserva.nombre }}</td>
+            <td>{{ reserva.fechaLlegada }}</td>
+            <td>{{ reserva.fechaSalida }}</td>
+            <td>{{ reserva.cantidad }}</td>
+            <td>
+                <img *ngIf="reserva.rostro" [src]="getImagenUrl(reserva.rostro)" alt="rostro" width="60" height="60" style="object-fit:cover; border-radius: 8px; cursor: pointer;" (click)="abrirImagen(getImagenUrl(reserva.rostro))" >
+            </td>
+            <td>
+                <img *ngIf="reserva.documento_f" [src]="getImagenUrl(reserva.documento_f)" alt="documento_f" width="60" height="60" style="object-fit:cover; border-radius: 8px; cursor: pointer;" (click)="abrirImagen(getImagenUrl(reserva.documento_f))" >
+            </td>
+            <td>
+                <img *ngIf="reserva.documento_p" [src]="getImagenUrl(reserva.documento_p)" alt="documento_p" width="60" height="60" style="object-fit:cover; border-radius: 8px; cursor: pointer;" (click)="abrirImagen(getImagenUrl(reserva.documento_p))">
+            </td>
+            <td>
+                <button  [disabled]="reserva.estado === 'Aceptada'">Aceptar</button>
+                <button  [disabled]="reserva.estado === 'Rechazada'">Rechazar</button>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="imagenSeleccionada" class="modal-imagen" (click)="cerrarImagen()">
+    <img [src]="imagenSeleccionada" alt="Vista ampliada" class="imagen-grande">
+</div>

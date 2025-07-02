@@ -25,4 +25,16 @@ export class AgendaService {
         return this.http.get(`${this.appUrl}${this.apiUrl}/fechas`)
     }
 
+    reservas(): Observable<any> {
+        return this.http.get(`${this.appUrl}${this.apiUrl}/obtenerReservas`)
+    }
+
+    crearReserva(body: any): Observable<any> {
+        return this.http.post(`${this.appUrl}${this.apiUrl}/crearReserva`, body)
+    }
+
+    reserva(correo: string): Observable<any> {
+        return this.http.get(`${this.appUrl}${this.apiUrl}/email/:${correo}`)
+    }
+
 }

@@ -215,11 +215,7 @@ startGuestCountAnimation() {
       this.errorMessage = 'La fecha de llegada debe ser anterior a la fecha de salida.';
       return;
     }
-    const formData = {
-      FechaInicio: fechaInicio,
-      FechaFin: fechaFin,
-      Personas: this.huespedesSeleccionados
-    };
+    
     const formatDate = (dateStr: string) => {
       if (!dateStr) return '';
       let [month, day, year] = dateStr.split('/');
@@ -230,6 +226,11 @@ startGuestCountAnimation() {
     const inicio = fechaInicio ? `${formatDate(fechaInicio)}T10:00:00.000Z` : '';
     const fin = fechaFin ? `${formatDate(fechaFin)}T10:00:00.000Z` : '';
 
+    const formData = {
+      FechaInicio: formatDate(fechaInicio),
+      FechaFin: formatDate(fechaFin),
+      Personas: this.huespedesSeleccionados
+    };
     console.log(formData)
 
     this.reservaServices.Disponibilidad({FechaInicio: inicio, FechaFin: fin}).subscribe((response) => {

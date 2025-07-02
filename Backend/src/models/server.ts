@@ -4,6 +4,7 @@ import express, { Application } from 'express';
 import mongoose from 'mongoose';
 import rReserva from '../routes/reserva'
 import bodyParser from 'body-parser'
+import imagenesRouter from '../routes/images';
 class Server {
     private app: Application;
     private port?: string;
@@ -36,6 +37,7 @@ class Server {
     
     router() {
         this.app.use(rReserva);
+        this.app.use(imagenesRouter);
     }
     async DBconnect() {
         try {
