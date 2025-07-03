@@ -9,23 +9,33 @@
 <h1>DATOS PARA RESERVA</h1>
 <form #formulario="ngForm">
     <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nombre</mat-label>
-        <input matInput type="text" name="nombre" [(ngModel)]="nombre" required>
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput type="text" name="nombre" [(ngModel)]="nombre" required #nombreCtrl="ngModel">
+        <mat-error *ngIf="nombreCtrl.invalid && nombreCtrl.touched">El nombre es obligatorio.</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>CC</mat-label>
-        <input matInput type="text" name="cc" [(ngModel)]="cc" required>
+        <input matInput type="text" name="cc" [(ngModel)]="cc" required pattern="^[0-9]+$" #ccCtrl="ngModel">
+        <mat-error *ngIf="ccCtrl.invalid && ccCtrl.touched">
+          La cédula es obligatoria y debe contener solo números.
+        </mat-error>
     </mat-form-field>
     
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" name="email" [(ngModel)]="email" required>
+        <input matInput type="email" name="email" [(ngModel)]="email" required email #emailCtrl="ngModel">
+        <mat-error *ngIf="emailCtrl.invalid && emailCtrl.touched">
+          Ingresa un correo electrónico válido.
+        </mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Teléfono</mat-label>
-        <input matInput type="tel" name="telefono" [(ngModel)]="telefono" required>
+        <input matInput type="tel" name="telefono" [(ngModel)]="telefono" required pattern="^[0-9]+$" #telCtrl="ngModel">
+        <mat-error *ngIf="telCtrl.invalid && telCtrl.touched">
+          El teléfono es obligatorio y debe contener solo números.
+        </mat-error>
     </mat-form-field>
 
     <div class="form-row">
@@ -53,32 +63,32 @@
     <div class="form-group">
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Escanear documento - Frontal</mat-label>
-            <input type="text" matInput [value]="Frontal" placeholder="Selecciona una imagen" disabled>
+            <input type="text" matInput [value]="Frontal" required placeholder="Selecciona una imagen" disabled>
             <button mat-icon-button matSuffix (click)="fileFrente.click()" aria-label="Subir archivo">
                 <mat-icon>upload</mat-icon>
             </button>
         </mat-form-field>
-        <input type="file" accept="image/*,.pdf" hidden #fileFrente (change)="mostrarVistaPrevia($event, 'frente')">
+        <input type="file" name="documento_f" accept="image/*,.pdf" hidden #fileFrente (change)="mostrarVistaPrevia($event, 'frente')">
         <img id="vistaPreviaFrente" style="max-width: 200px; margin-top: 10px; display: block;">
 
         <mat-form-field appearance="outline" class="full-width">
             <mat-label>Escanear documento - Posterior</mat-label>
-            <input type="text" matInput [value]="Atras" placeholder="Selecciona una imagen" disabled>
+            <input type="text" matInput [value]="Atras" required placeholder="Selecciona una imagen" disabled>
             <button mat-icon-button matSuffix (click)="fileAtras.click()" aria-label="Subir archivo">
                 <mat-icon>upload</mat-icon>
             </button>
         </mat-form-field>
-        <input type="file" accept="image/*,.pdf" hidden #fileAtras (change)="mostrarVistaPrevia($event, 'atras')">
+        <input type="file" name="documento_p" accept="image/*,.pdf" hidden #fileAtras (change)="mostrarVistaPrevia($event, 'atras')">
         <img id="vistaPreviaAtras" style="max-width: 200px; margin-top: 10px; display: block;">
 
     <mat-form-field appearance="outline" class="full-width">
         <mat-label>Rostro con documento</mat-label>
-        <input type="text" matInput [value]="Rostro" placeholder="Selecciona una imagen" disabled>
+        <input type="text" matInput [value]="Rostro" required placeholder="Selecciona una imagen" disabled>
         <button mat-icon-button matSuffix (click)="fileRostro.click()" aria-label="Subir archivo">
             <mat-icon>upload</mat-icon>
         </button>
     </mat-form-field>
-    <input type="file" accept="image/*,.pdf" hidden #fileRostro (change)="mostrarVistaPrevia($event, 'rostro')">
+    <input type="file" name="rostro" accept="image/*,.pdf" hidden #fileRostro (change)="mostrarVistaPrevia($event, 'rostro')">
     <img id="vistaPreviaRostro" style="max-width: 200px; margin-top: 10px; display: block;">
     </div>
 
@@ -94,7 +104,7 @@
         Confirmo que toda la información proporcionada es verídica.
     </mat-checkbox>
     <div style="display: flex; gap: 16px; margin-top: 16px;">
-        <button mat-raised-button color="primary" type="submit" (click)="enviarData()">Enviar</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid" (click)="enviarData()">Enviar</button>
         <button mat-raised-button color="accent" type="button" (click)="volver()" style="background: #fff; color: #2d5f3f; border: 1px solid #2d5f3f;">
             Volver
         </button>

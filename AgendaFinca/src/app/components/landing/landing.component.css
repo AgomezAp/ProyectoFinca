@@ -218,51 +218,9 @@ body {
 }
 
 /* Línea blanca del navbar */
-.navbar-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.3);
-  z-index: 99;
-}
 
-/* Header y navegación */
-.header {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  padding: 25px 40px;
-  z-index: 900;
-  background: rgba(255, 255, 255, 1);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  opacity: 0.7;
-}
 
-.nav {
-  display: flex;
-  justify-content: flex-end;
-  gap: 40px;
-}
 
-.nav-link {
-  color: #2c3e50;
-  text-decoration: none;
-  font-size: 18px;
-  font-weight: 500;
-  transition: all 0.3s ease;
-  padding: 8px 16px;
-  border-radius: 6px;
-}
-
-.nav-link:hover {
-  color: #f1c40f; /* Amarillo dorado al hover */
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
-}
 /* Contenido principal */
 .main-content {
   position: relative;

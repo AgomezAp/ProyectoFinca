@@ -113,3 +113,43 @@ input[matInput] {
     margin-bottom: 22px;
   }
 }
+
+.reserva-info {
+  background: #f7faf8;
+  border-radius: 14px;
+  box-shadow: 0 1px 6px rgba(44, 62, 80, 0.04);
+  margin: 32px auto 28px auto;
+  padding: 28px 24px;
+  max-width: 480px;
+  text-align: center;
+}
+
+.reserva-titulo {
+  color: #2d5f3f;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.reserva-mensaje {
+  color: #46605a;
+  font-size: 1.08rem;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+.reserva-detalle {
+  color: #2c3e50;
+  font-size: 1.01rem;
+  margin-bottom: 18px;
+}
+
+.reserva-datos {
+  background: #fff;
+  border-radius: 10px;
+  padding: 12px 10px;
+  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.06);
+  display: inline-block;
+  font-size: 0.98rem;
+  color: #2d5f3f;
+}

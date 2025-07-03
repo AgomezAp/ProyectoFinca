@@ -22,9 +22,9 @@ export class ReservaComponent {
   fechaInicio: string = '';
   fechaFin: string = ''; 
   personas: number = 0; 
-  Frontal: string = '';
-  Atras: string = '';
-  Rostro: string = '';
+  Frontal: File | null = null;
+  Atras: File | null = null;
+  Rostro: File | null = null;
 
   nombre: string = '';
   cc: string = ''; 
@@ -98,20 +98,24 @@ export class ReservaComponent {
 
   enviarData() {
     this.terminosResumen = this.terminos && this.datos && this.veridica
-    const reservaData = {
-      nombre: this.nombre,
-      cc: this.cc,
-      email: this.email,
-      telefono: this.telefono,
-      fechaLlegada: this.fechaInicio,
-      fechaSalida: this.fechaFin,
-      cantidad: this.personas,
-      documento_f: this.Frontal,
-      documento_p: this.Atras,
-      rostro: this.Rostro,
-      terminos: this.terminosResumen,
-    };
+
+    const reservaData = new FormData();
+    reservaData.append('nombre', this.nombre);
+    reservaData.append('cc', this.cc);
+    reservaData.append('email', this.email);
+    reservaData.append('telefono', this.telefono);
+    reservaData.append('fechaLlegada', this.fechaInicio);
+    reservaData.append('fechaSalida', this.fechaFin);
+    reservaData.append('cantidad', this.personas.toString());
+    reservaData.append('terminos', this.terminosResumen.toString());
+    if (this.Frontal) reservaData.append('documento_f', this.Frontal)
+    if (this.Atras) reservaData.append('documento_p', this.Atras)
+    if (this.Rostro) reservaData.append('rostro', this.Rostro)
+
+
+    console.log(reservaData)
     this.reservaService.crearReserva(reservaData).subscribe({
+      
       next: (response) => {
         console.log('Reserva enviada correctamente', response);
         window.location.href = '/miReserva'

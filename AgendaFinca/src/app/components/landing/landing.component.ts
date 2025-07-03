@@ -17,12 +17,12 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   autoPlayInterval: any;
   isInView = false;
   animatedGuestCount = 2;
-  guestArray = Array(15).fill(0);
+  guestArray = Array(40).fill(0);
   private observer!: IntersectionObserver;
   fechasOcupadas: any = []
   errorMessage: string = '';
   huespedesSeleccionados: number = 2;
-  numeroHuespedes: number[] = Array.from({length: 14}, (_, i) => i + 2);
+  numeroHuespedes: number[] = Array.from({length: 39}, (_, i) => i + 2);
   constructor(
     private reservaServices: AgendaService,
   ) {}
@@ -198,6 +198,13 @@ startGuestCountAnimation() {
     const fechaInicio = (document.getElementById('llegada') as HTMLInputElement)?.value || '';
     const fechaFin = (document.getElementById('salida') as HTMLInputElement)?.value || '';
     const huespedes = (document.getElementById('huesped') as HTMLInputElement)?.value || '';
+    const formatDate = (dateStr: string) => {
+      if (!dateStr) return '';
+      let [day, month, year] = dateStr.split('/');
+      month = month.padStart(2, '0');
+      day = day.padStart(2, '0');
+      return `${year}-${month}-${day}`;
+    };
 
     if (!fechaInicio || !fechaFin) {
     this.errorMessage = 'Debes seleccionar la fecha de llegada y la fecha de salida.';
@@ -205,8 +212,13 @@ startGuestCountAnimation() {
     }
     const hoy = new Date();
     hoy.setHours(0, 0, 0, 0);
-    const inicioDate = new Date(fechaInicio);
-    const finDate = new Date(fechaFin);
+    console.log('hoy ' ,hoy)
+    console.log('inicio ' + fechaInicio + ' fin ' + fechaFin)
+    console.log('inicioFD ' + formatDate(fechaInicio) + ' finFD ' + formatDate(fechaFin))
+
+    const inicioDate = new Date(formatDate(fechaInicio));
+    const finDate = new Date(formatDate(fechaFin));
+    console.log('inicio ' + inicioDate + ' fin ' + finDate)
     if (inicioDate < hoy || finDate < hoy) {
       this.errorMessage = 'Las fechas no pueden ser anteriores a hoy.';
       return;
@@ -216,13 +228,7 @@ startGuestCountAnimation() {
       return;
     }
     
-    const formatDate = (dateStr: string) => {
-      if (!dateStr) return '';
-      let [month, day, year] = dateStr.split('/');
-      month = month.padStart(2, '0');
-      day = day.padStart(2, '0');
-      return `${year}-${month}-${day}`;
-    };
+    
     const inicio = fechaInicio ? `${formatDate(fechaInicio)}T10:00:00.000Z` : '';
     const fin = fechaFin ? `${formatDate(fechaFin)}T10:00:00.000Z` : '';
 

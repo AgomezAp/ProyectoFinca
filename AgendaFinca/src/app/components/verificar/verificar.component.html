@@ -5,17 +5,34 @@
       <div class="form-row">
         <div class="form-group">
           <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Correo electrónico</mat-label>
-            <input matInput type="email" name="email" [(ngModel)]="email" required placeholder="Ingresa tu correo">
+            <mat-label>Correo electrónico o Cedula</mat-label>
+            <input matInput type="text" name="data" [(ngModel)]="data" required placeholder="Ingresa tu correo o cedula">
           </mat-form-field>
         </div>
         <div class="form-group">
-          <button type="submit" class="reserve-btn" [disabled]="formCorreo.invalid">VERIFICAR</button>
+          <button type="submit" class="reserve-btn" [disabled]="formCorreo.invalid" (click)="buscar()">VERIFICAR</button>
         </div>
       </div>
       <div *ngIf="errorMessage" class="error-message">
         {{ errorMessage }}
       </div>
     </form>
+  </div>
+</div>
+<div *ngIf="reserva && reserva.length > 0" class="reserva-info">
+  <h2 class="reserva-titulo">¡Hola {{ reserva[0].nombre }}!</h2>
+  <p class="reserva-mensaje">
+    Recuerda que tienes una reserva para disfrutar entre los días 
+    <strong>{{ reserva[0].fechaLlegada | date:'longDate' }}</strong> y 
+    <strong>{{ reserva[0].fechaSalida | date:'longDate' }}</strong>.
+  </p>
+  <p class="reserva-detalle">
+    Te esperamos en <strong>[Nombre de la Finca]</strong> para que vivas una experiencia inolvidable.<br>
+    Si tienes alguna duda, contáctanos.<br>
+    ¡Gracias por elegirnos!
+  </p>
+  <div class="reserva-datos">
+    <span><strong>Correo:</strong> {{ reserva[0].email }}</span><br>
+    <span><strong>Personas:</strong> {{ reserva[0].cantidad }}</span>
   </div>
 </div>

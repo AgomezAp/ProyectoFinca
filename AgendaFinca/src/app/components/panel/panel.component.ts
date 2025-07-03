@@ -15,6 +15,8 @@ export class PanelComponent {
   constructor(private agendaService: AgendaService, private imagenService: ImagenService) {}
 
   ngOnInit() {
+    console.log(localStorage)
+    localStorage.clear()
     this.agendaService.reservas().subscribe((data: any[]) => {
       this.reservas = data.map(reserva => ({
         ...reserva,
