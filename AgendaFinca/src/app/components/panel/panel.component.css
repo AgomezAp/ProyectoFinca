@@ -1,38 +1,182 @@
-h2 {
-  color: #2d5f3f;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 24px 0 16px 0;
-  letter-spacing: 1px;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+/* Contenedor principal */
+body {
+  font-family: "Montserrat", sans-serif;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Título principal mejorado */
+h2 {
+  color: #2d5f3f;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin: 40px 0 30px 0;
+  letter-spacing: -1px;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  border-radius: 2px;
+}
+
+/* Contenedor de tabla mejorado */
+.table-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 0 auto 40px auto;
+  max-width: 1400px;
+  overflow: hidden;
+  position: relative;
+}
+
+.table-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Tabla principal */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin: 24px 0;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
-  border-radius: 10px;
-  overflow: hidden;
+  margin: 0;
+  background: transparent;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
-/* Encabezado */
+/* Encabezado mejorado con mejores títulos */
 thead th {
-  background: #2d5f3f;
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
   color: #fff;
-  padding: 14px 10px;
+  padding: 18px 12px;
   font-weight: 600;
-  text-align: left;
+  text-align: center;
   letter-spacing: 0.5px;
+  font-size: 13px;
+  text-transform: uppercase;
+  border: none;
+  position: relative;
+  vertical-align: middle;
+  white-space: nowrap;
 }
 
-/* Filas y celdas */
+/* Títulos específicos mejorados */
+thead th:nth-child(1) { /* Nombre */
+  text-align: left;
+  padding-left: 20px;
+}
+
+thead th:nth-child(2)::before { /* Llegada */
+  content: "📅 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(3)::before { /* Salida */
+  content: "📅 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(4)::before { /* Personas */
+  content: "👥 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(5)::before { /* Rostro */
+  content: "👤 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(6)::before { /* Frontal */
+  content: "🆔 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(7)::before { /* Posterior */
+  content: "🆔 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(8)::before { /* Estado */
+  content: "📋 ";
+  margin-right: 4px;
+}
+
+thead th:nth-child(9)::before { /* Acciones */
+  content: "⚡ ";
+  margin-right: 4px;
+}
+
+thead th:first-child {
+  border-top-left-radius: 0;
+}
+
+thead th:last-child {
+  border-top-right-radius: 0;
+}
+
+/* Separadores sutiles entre columnas del header */
+thead th:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Filas y celdas mejoradas */
 tbody td {
-  padding: 12px 10px;
-  border-bottom: 1px solid #eaeaea;
+  padding: 16px 12px;
+  border-bottom: 1px solid #f1f3f4;
   vertical-align: middle;
-  font-size: 15px;
+  font-size: 14px;
+  color: #2c3e50;
+  font-weight: 500;
+  background: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+tbody td:first-child {
+  text-align: left;
+  padding-left: 20px;
+  font-weight: 600;
+  color: #2d5f3f;
 }
 
 /* Última fila sin borde */
@@ -40,105 +184,522 @@ tbody tr:last-child td {
   border-bottom: none;
 }
 
-/* Hover en filas */
-tbody tr:hover {
-  background: #f6f8fa;
+tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 20px;
 }
 
-/* Imágenes en celdas */
+tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 20px;
+}
+
+/* Hover en filas más elegante */
+tbody tr:hover {
+  background: rgba(45, 95, 63, 0.02);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+tbody tr:hover td {
+  background: rgba(45, 95, 63, 0.02);
+}
+
+/* Imágenes mejoradas */
 td img {
   display: block;
   margin: 0 auto;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
-  transition: transform 0.2s;
-  width: 48px;
-  height: 48px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
-  border-radius: 8px;
-}
-td img:hover {
-  transform: scale(1.15);
-  box-shadow: 0 4px 16px rgba(44, 62, 80, 0.18);
-}
-
-/* Botones */
-td button {
-  margin-right: 6px;
-  padding: 6px 16px;
-  border: none;
-  border-radius: 6px;
-  background: #2d5f3f;
-  color: #fff;
-  font-weight: 500;
+  border-radius: 12px;
   cursor: pointer;
-  transition: background 0.2s;
-}
-td button[disabled] {
-  background: #b2bec3;
-  cursor: not-allowed;
-}
-td button:not([disabled]):hover {
-  background: #1e4129;
+  border: 2px solid #f8f9fa;
 }
 
+td img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: #2d5f3f;
+}
+
+/* Estados de reserva con colores */
+.estado-confirmado {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.estado-confirmado::before {
+  content: "✅ ";
+  margin-right: 4px;
+}
+
+.estado-rechazado {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.estado-rechazado::before {
+  content: "❌ ";
+  margin-right: 4px;
+}
+
+.estado-pendiente {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: inline-block;
+}
+
+.estado-pendiente::before {
+  content: "⏳ ";
+  margin-right: 4px;
+}
+
+/* Botones mejorados */
+td button {
+  margin: 2px 4px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 80px;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Botón Aceptar */
+.btn-aceptar {
+  background: #27ae60;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.btn-aceptar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-aceptar:hover {
+  background: #229954;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(39, 174, 96, 0.4);
+}
+
+.btn-aceptar:hover::before {
+  left: 100%;
+}
+
+/* Botón Rechazar */
+.btn-rechazar {
+  background: #e74c3c;
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
+}
+
+.btn-rechazar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-rechazar:hover {
+  background: #c0392b;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.4);
+}
+
+.btn-rechazar:hover::before {
+  left: 100%;
+}
+
+/* Botones deshabilitados */
+td button[disabled] {
+  background: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+td button[disabled]::before {
+  display: none;
+}
+
+/* Modal de imagen mejorado */
 .modal-imagen {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.7);
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  backdrop-filter: blur(10px);
+  animation: fadeIn 0.3s ease;
 }
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 .imagen-grande {
   max-width: 90vw;
   max-height: 90vh;
   border-radius: 12px;
-  box-shadow: 0 0 20px #000;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: zoomIn 0.3s ease;
 }
 
-@media (max-width: 900px) {
-  table {
-    display: block;
-    width: 100%;
-    overflow-x: auto;
-    border-radius: 10px;
+@keyframes zoomIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
   }
-  thead, tbody, th, td, tr {
-    display: revert;
-    width: revert;
-    min-width: revert;
-    box-sizing: border-box;
-  }
-  table thead {
-    display: table-header-group;
-  }
-  table tbody {
-    display: table-row-group;
-  }
-  table tr {
-    display: table-row;
-  }
-  table th, table td {
-    white-space: nowrap;
-    min-width: 90px;
-    padding: 10px 8px;
-  }
-  td img {
-    width: 28px;
-    height: 28px;
+  100% {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
-/* Ajuste para pantallas muy pequeñas */
-@media (max-width: 600px) {
-  table th, table td {
-    min-width: 70px;
-    padding: 8px 4px;
+/* Responsive design mejorado - Tablet */
+@media (max-width: 1024px) {
+  .table-container {
+    margin: 0 10px 30px 10px;
+  }
+  
+  h2 {
+    font-size: 2rem;
+    margin: 30px 0 20px 0;
+  }
+  
+  thead th {
+    padding: 14px 8px;
+    font-size: 12px;
+  }
+  
+  tbody td {
+    padding: 12px 8px;
     font-size: 13px;
   }
+  
   td img {
-    width: 22px;
-    height: 22px;
+    width: 45px;
+    height: 45px;
+  }
+  
+  td button {
+    padding: 6px 12px;
+    font-size: 11px;
+    min-width: 70px;
+    margin: 1px 2px;
+  }
+}
+
+/* Responsive design - Móvil mejorado */
+@media (max-width: 900px) {
+  /* Vista de cards para móvil en lugar de tabla horizontal */
+  .table-container {
+    overflow: visible;
+    padding: 20px;
+  }
+  
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  
+  /* Ocultar encabezado original */
+  thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  
+  /* Cada fila como una card */
+  tbody tr {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    position: relative;
+    transform: none;
+  }
+  
+  tbody tr:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Cada celda con su etiqueta */
+  tbody td {
+    border: none;
+    padding: 8px 0;
+    text-align: left;
+    padding-left: 0;
+    position: relative;
+    padding-left: 140px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Etiquetas para cada campo */
+  tbody td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 130px;
+    padding-right: 10px;
+    white-space: nowrap;
+    font-weight: 600;
+    color: #2d5f3f;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  
+  /* Específico para el nombre */
+  tbody td:first-child {
+    font-size: 16px;
+    font-weight: 700;
+    color: #2d5f3f;
+    margin-bottom: 10px;
+    padding-left: 0;
+    border-bottom: 2px solid #f1f3f4;
+    padding-bottom: 10px;
+  }
+  
+  tbody td:first-child:before {
+    display: none;
+  }
+  
+  /* Contenedor de botones en móvil */
+  tbody td:last-child {
+    padding-left: 0;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #f1f3f4;
+  }
+  
+  tbody td:last-child:before {
+    display: none;
+  }
+  
+  tbody td:last-child button {
+    display: inline-block;
+    width: calc(50% - 5px);
+    margin: 2px;
+    text-align: center;
+    padding: 10px 8px;
+    font-size: 11px;
+  }
+  
+  /* Imágenes en móvil */
+  tbody td img {
+    width: 60px;
+    height: 60px;
+    margin: 0;
+  }
+  
+  /* Estados en móvil */
+  .estado-confirmado,
+  .estado-rechazado,
+  .estado-pendiente {
+    padding: 8px 12px;
+    font-size: 11px;
+    margin: 0;
+  }
+}
+
+/* Responsive design - Móvil pequeño */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+  }
+  
+  h2 {
+    font-size: 1.6rem;
+    margin: 20px 0 15px 0;
+  }
+  
+  .table-container {
+    margin: 0 5px 20px 5px;
+    border-radius: 15px;
+    padding: 15px;
+  }
+  
+  tbody tr {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+  
+  tbody td {
+    padding-left: 120px;
+    font-size: 13px;
+  }
+  
+  tbody td:before {
+    width: 110px;
+    font-size: 12px;
+  }
+  
+  tbody td:first-child {
+    font-size: 15px;
+  }
+  
+  tbody td img {
+    width: 50px;
+    height: 50px;
+  }
+  
+  tbody td:last-child button {
+    padding: 8px 6px;
+    font-size: 10px;
+  }
+}
+
+/* Títulos de datos para móvil - usando atributos data */
+@media (max-width: 900px) {
+  tbody td:nth-child(2):before { content: "📅 Llegada"; }
+  tbody td:nth-child(3):before { content: "📅 Salida"; }
+  tbody td:nth-child(4):before { content: "👥 Personas"; }
+  tbody td:nth-child(5):before { content: "👤 Rostro"; }
+  tbody td:nth-child(6):before { content: "🆔 Doc. Frontal"; }
+  tbody td:nth-child(7):before { content: "🆔 Doc. Posterior"; }
+  tbody td:nth-child(8):before { content: "📋 Estado"; }
+}
+
+/* Scrollbar personalizado */
+.table-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: #f1f3f4;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: #2d5f3f;
+  border-radius: 4px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: #1e4129;
+}
+
+/* Estados de carga */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #2d5f3f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mejoras de accesibilidad */
+button:focus-visible {
+  outline: 2px solid rgba(45, 95, 63, 0.5);
+  outline-offset: 2px;
+}
+
+img:focus-visible {
+  outline: 2px solid rgba(45, 95, 63, 0.5);
+  outline-offset: 2px;
+}
+
+/* Animaciones de entrada */
+.table-container {
+  animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación para cards en móvil */
+@media (max-width: 900px) {
+  tbody tr {
+    animation: slideInUp 0.4s ease-out;
+  }
+  
+  tbody tr:nth-child(1) { animation-delay: 0.1s; }
+  tbody tr:nth-child(2) { animation-delay: 0.2s; }
+  tbody tr:nth-child(3) { animation-delay: 0.3s; }
+  tbody tr:nth-child(4) { animation-delay: 0.4s; }
+  tbody tr:nth-child(5) { animation-delay: 0.5s; }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }

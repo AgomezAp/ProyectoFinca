@@ -1,10 +1,35 @@
 <header class="header">
     <div class="navbar-line"></div>
-    <nav class="nav">
-        <a routerLink="/bienvenida" class="nav-link">Inicio</a>
-        <a routerLink="/about" class="nav-link">Acerca</a>
-        <a routerLink="/miReserva" class="nav-link">Mi Reserva</a>
-
+    
+    <!-- Menú hamburguesa para móvil -->
+    <div class="menu-toggle" (click)="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    
+    <!-- Navegación -->
+    <nav class="nav" [class.mobile-menu-open]="isMobileMenuOpen">
+        <a routerLink="/bienvenida" 
+           class="nav-link" 
+           routerLinkActive="active"
+           (click)="closeMobileMenu()">Inicio</a>
+        <a routerLink="/about" 
+           class="nav-link" 
+           routerLinkActive="active"
+           (click)="closeMobileMenu()">Acerca</a>
+        <a routerLink="/miReserva" 
+           class="nav-link" 
+           routerLinkActive="active"
+           (click)="closeMobileMenu()">Mi Reserva</a>
     </nav>
+    
+    <!-- Overlay para cerrar menú en móvil -->
+    <div class="mobile-overlay" 
+         [class.active]="isMobileMenuOpen" 
+         (click)="closeMobileMenu()"></div>
 </header>
-<router-outlet></router-outlet>
+
+<main class="main-content">
+    <router-outlet></router-outlet>
+</main>

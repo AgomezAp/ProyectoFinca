@@ -41,4 +41,8 @@ export class AgendaService {
         return this.http.get(`${this.appUrl}${this.apiUrl}/obtenerReserva/cc/${cc}`)
     }
 
+    estado(body: any): Observable<any> {
+        return this.http.put(`${this.appUrl}${this.apiUrl}/updateEstado`, body)
+    }
+
 }

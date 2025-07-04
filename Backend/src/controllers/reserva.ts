@@ -109,7 +109,7 @@ export const obtenerReservas = async (req: Request, res: Response): Promise<any>
 
 export const actualizarEstado = async (req: Request, res: Response): Promise<any> => {
     try {
-        const { email, fechallegada } = req.body;
+        const { email, fechallegada, estado } = req.body;
         if (typeof email !== 'string' || !fechallegada) {
             return res.status(400).json({ error: 'Email, fecha son requeridos' });
         }
@@ -119,8 +119,7 @@ export const actualizarEstado = async (req: Request, res: Response): Promise<any
         if (!reservaActualizada) {
             return res.status(404).json({ error: 'Reserva no encontrada' });
         }
-        const nuevoEstado = !reservaActualizada.confirmado;
-        reservaActualizada.confirmado = nuevoEstado;
+        reservaActualizada.confirmado = estado;
         await reservaActualizada.save();
         res.status(200).json({ ok: true, reserva: reservaActualizada });
     } catch (error) {

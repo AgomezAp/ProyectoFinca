@@ -16,7 +16,7 @@ export class PanelComponent {
 
   ngOnInit() {
     console.log(localStorage)
-    localStorage.clear()
+    // localStorage.clear()
     this.agendaService.reservas().subscribe((data: any[]) => {
       this.reservas = data.map(reserva => ({
         ...reserva,
@@ -39,6 +39,15 @@ export class PanelComponent {
 
   cerrarImagen() {
     this.imagenSeleccionada = null;
+  }
+
+  actualizar(reserva: any, nuevoEstado: boolean) {
+    this.agendaService.estado({
+      email: reserva.email,
+      fechallegada: reserva.fechaLlegada,
+      estado: nuevoEstado}).subscribe(() => {
+        reserva.confirmado = nuevoEstado;
+    })
   }
 
 

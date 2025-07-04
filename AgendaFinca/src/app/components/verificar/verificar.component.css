@@ -1,3 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* Reset y configuración base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+  min-height: 100vh;
+}
+
 /* Contenedor principal */
 .main-content {
   display: flex;
@@ -5,151 +20,496 @@
   justify-content: center;
   min-height: 80vh;
   width: 100%;
-  padding: 40px 0;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
 }
 
-/* Sección hero */
+/* Sección hero mejorada */
 .hero-section {
   text-align: center;
-  max-width: 420px;
+  max-width: 500px;
   width: 100%;
+  animation: fadeInUp 0.8s ease-out;
 }
 
-/* Título */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Título principal */
 .title {
-  font-size: 2.2rem;
   color: #2d5f3f;
-  margin-bottom: 36px;
-  font-weight: 700;
+  font-size: 3rem;
+  font-weight: 400;
+  margin-bottom: 40px;
   letter-spacing: -1px;
-  text-shadow: 1px 1px 8px rgba(44,62,80,0.07);
-  font-family: "Playfair Display", "Georgia", serif;
+  font-family: "Playfair Display", serif;
+  position: relative;
 }
 
-/* Formulario */
+.title::after {
+  content: "";
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  border-radius: 2px;
+}
+
+/* Formulario mejorado */
 .booking-form {
-  background: rgba(255,255,255,0.97);
-  padding: 36px 28px;
-  border-radius: 18px;
-  box-shadow: 0 10px 32px rgba(44,62,80,0.10);
-  border: 1px solid rgba(45,95,63,0.08);
+  background: rgba(255, 255, 255, 0.98);
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.8s ease-out 0.2s both;
+}
+
+.booking-form::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .form-row {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 25px;
   margin-bottom: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .form-group {
   display: flex;
   flex-direction: column;
   align-items: stretch;
+  position: relative;
 }
 
-/* Material form field */
-mat-form-field.full-width {
+/* Material form field mejorado */
+::ng-deep .mat-form-field {
   width: 100%;
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Label */
-mat-label {
-  font-size: 16px;
-  color: #2c3e50;
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 12px;
+  border-width: 2px;
+  border-color: #e1e8ed;
+  transition: all 0.3s ease;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  border-width: 2px;
+  border-color: #2d5f3f;
+}
+
+::ng-deep .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+  border-color: #2d5f3f;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-outline-thick {
+  border-color: #2d5f3f;
+}
+
+/* Label mejorado */
+::ng-deep .mat-form-field-label {
+  color: #5a6c7d !important;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.3px;
+  font-size: 16px;
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Input */
-input[matInput] {
-  font-size: 17px;
-  padding: 14px 12px;
-  background: #f9f9f9;
-  border-radius: 8px;
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #2d5f3f !important;
 }
 
-/* Botón */
+/* Input mejorado */
+::ng-deep .mat-input-element {
+  font-size: 16px;
+  padding: 16px 20px;
+  font-weight: 500;
+  color: #2c3e50 !important;
+  font-family: "Montserrat", sans-serif;
+  background: #ffffff;
+}
+
+::ng-deep .mat-form-field.mat-focused {
+  transform: translateY(-1px);
+  transition: transform 0.3s ease;
+}
+
+/* Botón mejorado */
 .reserve-btn {
   background: #2d5f3f;
   color: white;
   border: none;
-  padding: 15px 0;
-  border-radius: 10px;
-  font-size: 17px;
-  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   margin-top: 8px;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   min-width: 140px;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.25);
 }
+
+.reserve-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
 .reserve-btn:hover {
   background: #1e4129;
-  box-shadow: 0 6px 18px rgba(45,95,63,0.18);
+  box-shadow: 0 8px 25px rgba(45, 95, 63, 0.35);
   transform: translateY(-2px);
 }
+
+.reserve-btn:hover::before {
+  left: 100%;
+}
+
 .reserve-btn:active {
   transform: translateY(0);
 }
 
-/* Mensaje de error */
+.reserve-btn:disabled {
+  background: #e9ecef;
+  color: #6c757d;
+  box-shadow: none;
+  transform: none;
+  cursor: not-allowed;
+}
+
+.reserve-btn:disabled::before {
+  display: none;
+}
+
+/* Mensaje de error mejorado */
 .error-message {
-  color: #c0392b;
-  margin-top: 16px;
-  font-weight: 600;
+  color: #e74c3c;
+  margin-top: 20px;
+  font-weight: 500;
   text-align: center;
+  padding: 16px;
+  background: rgba(231, 76, 60, 0.05);
+  border-radius: 12px;
+  border-left: 4px solid #e74c3c;
+  font-size: 15px;
+  font-family: "Montserrat", sans-serif;
 }
 
-/* Responsive */
-@media (max-width: 600px) {
-  .booking-form {
-    padding: 18px 8px;
-  }
-  .title {
-    font-size: 1.4rem;
-    margin-bottom: 22px;
-  }
-}
-
+/* Información de reserva mejorada */
 .reserva-info {
-  background: #f7faf8;
-  border-radius: 14px;
-  box-shadow: 0 1px 6px rgba(44, 62, 80, 0.04);
-  margin: 32px auto 28px auto;
-  padding: 28px 24px;
-  max-width: 480px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  margin: 40px auto 30px auto;
+  padding: 40px 35px;
+  max-width: 600px;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.8s ease-out 0.4s both;
+}
+
+.reserva-info::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 .reserva-titulo {
   color: #2d5f3f;
-  font-size: 1.5rem;
-  font-weight: 700;
-  margin-bottom: 12px;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .reserva-mensaje {
-  color: #46605a;
-  font-size: 1.08rem;
-  margin-bottom: 14px;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  margin-bottom: 20px;
   line-height: 1.6;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .reserva-detalle {
-  color: #2c3e50;
-  font-size: 1.01rem;
-  margin-bottom: 18px;
+  color: #5a6c7d;
+  font-size: 1rem;
+  margin-bottom: 25px;
+  line-height: 1.6;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .reserva-datos {
-  background: #fff;
-  border-radius: 10px;
-  padding: 12px 10px;
-  box-shadow: 0 1px 4px rgba(44, 62, 80, 0.06);
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 12px;
+  padding: 20px 25px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.3);
   display: inline-block;
-  font-size: 0.98rem;
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.reserva-datos:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.reserva-datos strong {
   color: #2d5f3f;
+  font-weight: 600;
+}
+
+.reserva-datos span {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.reserva-datos span:last-child {
+  margin-bottom: 0;
+}
+
+/* Efectos de focus mejorados */
+::ng-deep .mat-form-field:focus-within {
+  outline: 2px solid rgba(45, 95, 63, 0.2);
+  outline-offset: 2px;
+  border-radius: 12px;
+}
+
+/* Responsive mejorado */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 30px 15px;
+  }
+  
+  .title {
+    font-size: 2.2rem;
+    margin-bottom: 30px;
+  }
+  
+  .booking-form {
+    padding: 30px 25px;
+  }
+  
+  .reserva-info {
+    margin: 30px 15px 20px 15px;
+    padding: 30px 25px;
+  }
+  
+  .reserva-titulo {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  
+  .reserva-mensaje {
+    font-size: 1rem;
+    margin-bottom: 15px;
+  }
+  
+  .reserva-detalle {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+  }
+  
+  .reserva-datos {
+    padding: 16px 20px;
+    font-size: 14px;
+  }
+  
+  .reserve-btn {
+    width: 100%;
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+  }
+  
+  .booking-form {
+    padding: 25px 20px;
+  }
+  
+  .reserva-info {
+    margin: 25px 10px 15px 10px;
+    padding: 25px 20px;
+  }
+  
+  .reserva-titulo {
+    font-size: 1.3rem;
+  }
+  
+  .reserva-mensaje {
+    font-size: 0.95rem;
+  }
+  
+  .reserva-detalle {
+    font-size: 0.9rem;
+  }
+  
+  .reserva-datos {
+    padding: 14px 18px;
+    font-size: 13px;
+  }
+  
+  .form-row {
+    gap: 20px;
+  }
+}
+
+/* Estados de validación */
+::ng-deep .mat-form-field.ng-invalid.ng-touched .mat-form-field-outline-thick {
+  border-color: #e74c3c;
+}
+
+::ng-deep .mat-form-field.ng-valid.ng-touched .mat-form-field-outline-thick {
+  border-color: #27ae60;
+}
+
+/* Efectos de entrada para la información de reserva */
+.reserva-titulo {
+  animation: fadeInDown 0.6s ease-out 0.1s both;
+}
+
+.reserva-mensaje {
+  animation: fadeInDown 0.6s ease-out 0.2s both;
+}
+
+.reserva-detalle {
+  animation: fadeInDown 0.6s ease-out 0.3s both;
+}
+
+.reserva-datos {
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mejoras de accesibilidad */
+.reserve-btn:focus-visible {
+  outline: 2px solid rgba(45, 95, 63, 0.5);
+  outline-offset: 4px;
+}
+
+/* Indicador de carga */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #2d5f3f;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

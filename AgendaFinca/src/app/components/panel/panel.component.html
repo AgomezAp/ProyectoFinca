@@ -3,12 +3,13 @@
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>Fecha Llegada</th>
-            <th>Fecha Salida</th>
-            <th>Cantidad</th>
+            <th>Llegada</th>
+            <th>Salida</th>
+            <th>Personas</th>
             <th>Rostro</th>
             <th>Frontal</th>
             <th>Posterior</th>
+            <th>ESTADO</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -28,8 +29,11 @@
                 <img *ngIf="reserva.documento_p" [src]="getImagenUrl(reserva.documento_p)" alt="documento_p" width="60" height="60" style="object-fit:cover; border-radius: 8px; cursor: pointer;" (click)="abrirImagen(getImagenUrl(reserva.documento_p))">
             </td>
             <td>
-                <button  [disabled]="reserva.estado === 'Aceptada'">Aceptar</button>
-                <button  [disabled]="reserva.estado === 'Rechazada'">Rechazar</button>
+                {{ reserva.confirmado === true ? 'Confirmado' : (reserva.confirmado === false ? 'Rechazado' : 'Pendiente') }}
+            </td>
+            <td>
+                <button  (click)="actualizar(reserva, true)">Aceptar</button>
+                <button  (click)="actualizar(reserva, false)" >Rechazar</button>
             </td>
         </tr>
     </tbody>

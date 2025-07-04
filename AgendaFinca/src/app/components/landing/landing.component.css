@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
 * {
   margin: 0;
@@ -41,6 +41,19 @@ body {
   background-repeat: no-repeat;
   opacity: 0;
   transition: opacity 1s ease-in-out;
+  /* Mejora: Añadir overlay para mejor contraste del texto */
+  background-blend-mode: overlay;
+}
+
+.carousel-slide::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
 }
 
 .carousel-slide.active {
@@ -77,6 +90,13 @@ body {
   position: relative;
   z-index: 1001;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  /* Mejora: Mejor accesibilidad */
+  outline: none;
+}
+
+.carousel-btn:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 4px;
 }
 
 .carousel-btn::before {
@@ -168,6 +188,13 @@ body {
   pointer-events: auto;
   position: relative;
   z-index: 1001;
+  /* Mejora: Mejor accesibilidad */
+  outline: none;
+}
+
+.indicator:focus-visible {
+  outline: 2px solid white;
+  outline-offset: 2px;
 }
 
 .indicator::before {
@@ -217,10 +244,6 @@ body {
   }
 }
 
-/* Línea blanca del navbar */
-
-
-
 /* Contenido principal */
 .main-content {
   position: relative;
@@ -239,18 +262,37 @@ body {
   max-width: 700px;
   width: 100%;
   pointer-events: auto;
+  /* Mejora: Animación de entrada */
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Título principal */
 .title {
   font-size: 5rem;
-  color: #ffffff; /* Cambiar a blanco para mejor contraste */
+  color: #ffffff;
   margin-bottom: 100px;
   font-weight: 700;
-  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4); /* Sombra más fuerte para legibilidad */
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
   letter-spacing: -2px;
   line-height: 1.1;
-  font-family: "Playfair Display", "Georgia", serif; /* Tipografía más elegante */
+  font-family: "Playfair Display", "Georgia", serif;
+  /* Mejora: Gradiente sutil en el texto */
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  /* Fallback para navegadores que no soporten gradientes en texto */
 }
 
 /* Formulario de reserva */
@@ -262,11 +304,18 @@ body {
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.3);
   transform: translateY(0);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Mejora: Sombra más elegante */
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.15),
+    0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
 .booking-form:hover {
   transform: translateY(-5px);
+  box-shadow: 
+    0 25px 70px rgba(0, 0, 0, 0.2),
+    0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .form-row {
@@ -295,7 +344,43 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* Inputs de fecha */
+/* Mejora: Estilos para mat-form-field */
+::ng-deep .mat-form-field {
+  width: 100%;
+  font-family: "Montserrat", sans-serif;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  border-radius: 12px;
+  border-width: 2px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
+  border-width: 2px;
+}
+
+::ng-deep .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
+  border-color: #3498db;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-outline-thick {
+  border-color: #3498db;
+}
+
+::ng-deep .mat-input-element {
+  padding: 16px 20px;
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+::ng-deep .mat-select-value {
+  font-size: 18px;
+  font-weight: 500;
+  color: #2c3e50;
+}
+
+/* Inputs de fecha - mantenidos para compatibilidad */
 .date-input {
   padding: 16px 20px;
   border: 2px solid #e1e8ed;
@@ -305,7 +390,7 @@ body {
   background: white;
   transition: all 0.3s ease;
   cursor: pointer;
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
 }
 
@@ -323,7 +408,7 @@ body {
   height: 20px;
 }
 
-/* Select de huéspedes */
+/* Select de huéspedes - mantenido para compatibilidad */
 .guests-select {
   padding: 16px 20px;
   border: 2px solid #e1e8ed;
@@ -334,7 +419,7 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   appearance: none;
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 500;
   background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
   background-repeat: no-repeat;
@@ -361,10 +446,23 @@ body {
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1px;
-  font-family: "Inter", sans-serif;
+  font-family: "Montserrat", sans-serif;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   min-width: 160px;
+  position: relative;
+  overflow: hidden;
+}
+
+.reserve-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
 }
 
 .reserve-btn:hover {
@@ -373,23 +471,49 @@ body {
   box-shadow: 0 10px 25px rgba(45, 95, 63, 0.3);
 }
 
+.reserve-btn:hover::before {
+  left: 100%;
+}
+
 .reserve-btn:active {
   transform: translateY(-1px);
 }
 
+.reserve-btn:focus {
+  outline: 3px solid rgba(45, 95, 63, 0.3);
+  outline-offset: 2px;
+}
+
 /* SECCIÓN DE INFORMACIÓN DE LA FINCA CON ANIMACIONES */
 .finca-info-section {
-  background: white;
+  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
   padding: 120px 0;
   position: relative;
   z-index: 10;
   overflow: hidden;
 }
 
+/* Mejora: Patrón decorativo de fondo */
+.finca-info-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(102, 126, 234, 0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 40px;
+  position: relative;
+  z-index: 1;
 }
 
 .section-header {
@@ -409,6 +533,7 @@ body {
   line-height: 1.2;
   margin-bottom: 30px;
   letter-spacing: -1px;
+  font-family: "Playfair Display", serif;
 }
 
 .section-description {
@@ -432,6 +557,26 @@ body {
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.3s ease;
+  border-radius: 20px;
+  position: relative;
+}
+
+/* Mejora: Efecto hover más elegante */
+.feature-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  border-radius: 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.feature-item:hover::before {
+  opacity: 1;
 }
 
 .feature-icon {
@@ -447,6 +592,7 @@ body {
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
 
 .feature-icon:hover {
@@ -465,6 +611,8 @@ body {
   font-weight: 600;
   margin-bottom: 15px;
   letter-spacing: 0.5px;
+  position: relative;
+  z-index: 1;
 }
 
 .feature-description {
@@ -472,6 +620,8 @@ body {
   color: #5a6c7d;
   line-height: 1.5;
   font-weight: 400;
+  position: relative;
+  z-index: 1;
 }
 
 /* ANIMACIONES DE ENTRADA */
@@ -615,6 +765,7 @@ body {
   width: 40px;
   height: 40px;
 }
+
 .guest-icons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -822,11 +973,49 @@ body {
 .feature-item:hover .search-circle {
   animation-duration: 1s;
 }
+
 .error-message {
-  color: #c0392b;
+  color: #e74c3c;
   margin-top: 16px;
   font-weight: 600;
   text-align: center;
+  padding: 12px;
+  background: rgba(231, 76, 60, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #e74c3c;
+}
+
+/* Mejora: Indicador de carga */
+.loading {
+  opacity: 0.6;
+  pointer-events: none;
+  position: relative;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Mejora: Estados de focus mejorados */
+.date-input:focus-visible,
+.guests-select:focus-visible {
+  outline: 2px solid #3498db;
+  outline-offset: 2px;
 }
 
 /* Variante para tema oscuro automático */
@@ -839,6 +1028,19 @@ body {
   .carousel-btn:hover {
     background: rgba(0, 0, 0, 0.5);
     border-color: rgba(255, 255, 255, 0.4);
+  }
+}
+
+/* Mejora: Reducir movimiento para usuarios que lo prefieran */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .carousel-slide {
+    transition: none;
   }
 }
 
@@ -858,21 +1060,10 @@ body {
     gap: 20px;
   }
 
-  .nav {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .header {
-    padding: 20px 25px;
-  }
-
   .main-content {
     padding: 30px 20px;
   }
 
-  /* Responsive para controles del carousel */
   .carousel-controls {
     padding: 0 20px;
   }
@@ -898,7 +1089,6 @@ body {
     height: 10px;
   }
 
-  /* Responsive para la nueva sección */
   .finca-info-section {
     padding: 80px 0;
   }
@@ -925,18 +1115,11 @@ body {
     padding: 30px 15px;
   }
 
-  /* Responsive para animaciones */
   .calendar-animation,
   .guests-animation,
   .search-animation {
     width: 32px;
     height: 32px;
-  }
-
-  .guest-counter {
-    width: 16px;
-    height: 16px;
-    font-size: 8px;
   }
 }
 
@@ -960,10 +1143,6 @@ body {
   .reserve-btn {
     font-size: 16px;
     padding: 16px 32px;
-  }
-
-  .nav-link {
-    font-size: 16px;
   }
 
   .section-title {
