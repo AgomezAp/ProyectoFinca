@@ -462,10 +462,10 @@ a:hover::before {
 .contacto-finca a[target="_blank"] {
   background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
   color: white;
-  padding: 12px 24px;
+  padding: 6px 12px;
   border-radius: 8px;
   display: inline-block;
-  margin-top: 10px;
+  margin-top: 5px;
   box-shadow: 0 4px 15px rgba(45, 95, 63, 0.3);
   border-bottom: none;
 }
@@ -605,7 +605,7 @@ a:hover::before {
 
 /* Efectos de focus mejorados */
 a:focus-visible {
-  outline: 2px solid rgba(45, 95, 63, 0.5);
+  outline: 1px solid rgba(45, 95, 63, 0.5);
   outline-offset: 4px;
   border-radius: 4px;
 }
