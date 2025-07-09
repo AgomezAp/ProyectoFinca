@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
@@ -13,9 +13,9 @@ import { AgendaService } from '../../services/agenda.service';
 })
 export class VerificarComponent {
   data: string = '';
+  reserva: any[] = [];
   errorMessage: string = '';
   listaBlanca: any[] = ['admin@example.com'];
-  reserva: any[] = []
 
   constructor (private reservaService: AgendaService) {}
 
@@ -48,5 +48,17 @@ export class VerificarComponent {
       })
     }
   }
-    
+
+  cerrarModal() {
+    this.reserva = [];
+    // También puedes limpiar otros datos si es necesario
+    this.data = '';
+    this.errorMessage = '';
+  }
+
+  // Cerrar modal con tecla Escape
+  @HostListener('document:keydown.escape', ['$event'])
+  onEscapeKey(event: KeyboardEvent) {
+    this.cerrarModal();
+  }
 }

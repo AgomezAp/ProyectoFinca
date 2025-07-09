@@ -19,20 +19,56 @@
     </form>
   </div>
 </div>
-<div *ngIf="reserva && reserva.length > 0" class="reserva-info">
-  <h2 class="reserva-titulo">¡Hola {{ reserva[0].nombre }}!</h2>
-  <p class="reserva-mensaje">
-    Recuerda que tienes una reserva para disfrutar entre los días 
-    <strong>{{ reserva[0].fechaLlegada | date:'longDate' }}</strong> y 
-    <strong>{{ reserva[0].fechaSalida | date:'longDate' }}</strong>.
-  </p>
-  <p class="reserva-detalle">
-    Te esperamos en <strong>[Nombre de la Finca]</strong> para que vivas una experiencia inolvidable.<br>
-    Si tienes alguna duda, contáctanos.<br>
-    ¡Gracias por elegirnos!
-  </p>
-  <div class="reserva-datos">
-    <span><strong>Correo:</strong> {{ reserva[0].email }}</span><br>
-    <span><strong>Tu reserva {{ reserva[0].cantidad }} Personas</strong></span>
+
+<!-- Modal de información de reserva -->
+<div *ngIf="reserva && reserva.length > 0" class="modal-overlay" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <!-- Botón de cerrar -->
+    <button class="modal-close" (click)="cerrarModal()" title="Cerrar">
+      <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+    
+    <!-- Contenido del modal -->
+    <div class="reserva-info">
+      <div class="modal-header">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h2 class="reserva-titulo">¡Hola {{ reserva[0].nombre }}!</h2>
+      </div>
+      
+      <div class="modal-body">
+        <p class="reserva-mensaje">
+          Recuerda que tienes una reserva para disfrutar entre los días 
+          <strong>{{ reserva[0].fechaLlegada | date:'longDate' }}</strong> y 
+          <strong>{{ reserva[0].fechaSalida | date:'longDate' }}</strong>.
+        </p>
+        
+        <p class="reserva-detalle">
+          Te esperamos en <strong>El Progreso</strong> para que vivas una experiencia inolvidable.<br>
+          Si tienes alguna duda, contáctanos.<br>
+          ¡Gracias por elegirnos!
+        </p>
+        
+        <div class="reserva-datos">
+          <div class="dato-item">
+            <span class="dato-label">📧 Correo:</span>
+            <span class="dato-valor">{{ reserva[0].email }}</span>
+          </div>
+          <div class="dato-item">
+            <span class="dato-label">👥 Personas:</span>
+            <span class="dato-valor">{{ reserva[0].cantidad }} personas</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="modal-footer">
+        <button class="btn-cerrar" (click)="cerrarModal()">Entendido</button>
+      </div>
+    </div>
   </div>
 </div>
