@@ -1,0 +1,854 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
+
+/* Contenedor principal */
+.calendario-container {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.08),
+    0 8px 20px rgba(0, 0, 0, 0.04);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  animation: slideInUp 0.6s ease-out;
+}
+
+.calendario-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Header del calendario */
+.calendario-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.navegacion-mes {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-nav {
+  background: rgba(45, 95, 63, 0.1);
+  border: 2px solid rgba(45, 95, 63, 0.2);
+  border-radius: 12px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.btn-nav:hover {
+  background: rgba(45, 95, 63, 0.15);
+  border-color: #2d5f3f;
+  transform: scale(1.05);
+}
+
+.btn-nav svg {
+  width: 20px;
+  height: 20px;
+  color: #2d5f3f;
+}
+
+.fecha-actual {
+  text-align: center;
+  min-width: 250px;
+}
+
+.fecha-actual h2 {
+  color: #2d5f3f;
+  font-size: 2rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  font-family: "Playfair Display", serif;
+}
+
+.fecha-info {
+  color: #5a6c7d;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+.acciones-calendario {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.btn-hoy {
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-hoy:hover {
+  background: linear-gradient(135deg, #1e4129 0%, #2d5f3f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.3);
+}
+
+/* Estadísticas en header */
+.estadisticas {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.estadistica-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(45, 95, 63, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(45, 95, 63, 0.1);
+}
+
+.estadistica-numero {
+  font-size: 20px;
+  font-weight: 700;
+  color: #2d5f3f;
+  font-family: "Montserrat", sans-serif;
+}
+
+.estadistica-label {
+  font-size: 11px;
+  color: #5a6c7d;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Leyenda */
+.leyenda {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+
+.leyenda-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #5a6c7d;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+.color-indicator {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.color-indicator.disponible { background: #95a5a6; }
+.color-indicator.reservado { background: #27ae60; }
+.color-indicator.pendiente { background: #f39c12; }
+.color-indicator.bloqueado { background: #e74c3c; }
+
+/* Grid del calendario */
+.calendario-grid {
+  position: relative;
+  z-index: 1;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(45, 95, 63, 0.1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.dias-semana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: rgba(45, 95, 63, 0.1);
+}
+
+.dia-semana {
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  padding: 15px 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.dia-semana::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.dia-semana:hover::before {
+  left: 100%;
+}
+
+.dias-mes {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background: rgba(45, 95, 63, 0.1);
+}
+
+.dia-mes {
+  background: rgba(255, 255, 255, 0.95);
+  min-height: 120px;
+  padding: 12px 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid transparent;
+}
+
+.dia-mes:hover {
+  background: rgba(45, 95, 63, 0.03);
+  transform: scale(1.02);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-color: rgba(45, 95, 63, 0.2);
+  z-index: 2;
+}
+
+.dia-mes.otro-mes {
+  background: rgba(248, 249, 250, 0.5);
+  opacity: 0.4;
+}
+
+.dia-mes.otro-mes:hover {
+  opacity: 0.6;
+}
+
+.dia-mes.hoy {
+  background: rgba(45, 95, 63, 0.08);
+  border-color: rgba(45, 95, 63, 0.4);
+  box-shadow: 0 2px 10px rgba(45, 95, 63, 0.2);
+}
+
+.dia-mes.seleccionado {
+  background: rgba(45, 95, 63, 0.15);
+  border-color: #2d5f3f;
+  box-shadow: 0 4px 20px rgba(45, 95, 63, 0.3);
+  z-index: 3;
+}
+
+.dia-mes.ocupado {
+  background: rgba(39, 174, 96, 0.05);
+  border-color: rgba(39, 174, 96, 0.3);
+}
+
+.numero-dia {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2c3e50;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  margin-bottom: 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.dia-mes.hoy .numero-dia {
+  color: #2d5f3f;
+  font-weight: 700;
+  background: rgba(45, 95, 63, 0.1);
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 8px;
+}
+
+.dia-mes.otro-mes .numero-dia {
+  color: #bdc3c7;
+}
+
+/* Estado del día */
+.estado-dia {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.estado-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #95a5a6;
+  border: 2px solid white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.estado-indicator.confirmada {
+  background: #27ae60;
+  box-shadow: 0 0 8px rgba(39, 174, 96, 0.4);
+}
+
+.estado-indicator.pendiente {
+  background: #f39c12;
+  box-shadow: 0 0 8px rgba(243, 156, 18, 0.4);
+}
+
+.estado-indicator.rechazada {
+  background: #e74c3c;
+  box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
+}
+
+.reservas-count {
+  font-size: 10px;
+  font-weight: 600;
+  color: #5a6c7d;
+  font-family: "Montserrat", sans-serif;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(45, 95, 63, 0.1);
+}
+
+/* Preview de reservas */
+.reservas-preview {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+.reserva-mini {
+  background: rgba(45, 95, 63, 0.1);
+  color: #2d5f3f;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  text-align: center;
+  min-width: 24px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid rgba(45, 95, 63, 0.2);
+}
+
+.reserva-mini:hover {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-mini.confirmada {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  border-color: rgba(39, 174, 96, 0.3);
+}
+
+.reserva-mini.pendiente {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+  border-color: rgba(243, 156, 18, 0.3);
+}
+
+.reserva-mini.rechazada {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border-color: rgba(231, 76, 60, 0.3);
+}
+
+.mas-reservas {
+  background: rgba(189, 195, 199, 0.2);
+  color: #7f8c8d;
+  padding: 3px 6px;
+  border-radius: 6px;
+  font-size: 8px;
+  font-weight: 600;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  border: 1px solid rgba(127, 140, 141, 0.3);
+}
+
+/* Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease-out;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  max-width: 700px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  animation: slideInModal 0.4s ease-out;
+}
+
+.modal-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid rgba(231, 76, 60, 0.2);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.modal-close:hover {
+  background: rgba(231, 76, 60, 0.1);
+  border-color: #e74c3c;
+  transform: scale(1.1);
+}
+
+.modal-close svg {
+  width: 16px;
+  height: 16px;
+  color: #e74c3c;
+}
+
+.modal-header {
+  padding: 30px 30px 20px;
+  border-bottom: 1px solid rgba(45, 95, 63, 0.1);
+  background: rgba(248, 249, 250, 0.3);
+}
+
+.modal-header h3 {
+  color: #2d5f3f;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  font-family: "Playfair Display", serif;
+}
+
+.modal-body {
+  padding: 20px 30px 30px;
+}
+
+.no-reservas {
+  text-align: center;
+  padding: 40px 20px;
+  color: #5a6c7d;
+}
+
+.no-reservas-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 20px;
+  background: rgba(189, 195, 199, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.no-reservas-icon svg {
+  width: 30px;
+  height: 30px;
+  color: #bdc3c7;
+}
+
+.reservas-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.reserva-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 12px;
+  border: 1px solid rgba(45, 95, 63, 0.1);
+  transition: all 0.3s ease;
+}
+
+.reserva-item:hover {
+  background: rgba(45, 95, 63, 0.03);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.reserva-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 18px;
+  font-family: "Montserrat", sans-serif;
+  flex-shrink: 0;
+  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.3);
+}
+
+.reserva-info {
+  flex: 1;
+}
+
+.reserva-nombre {
+  font-size: 16px;
+  font-weight: 600;
+  color: #2d5f3f;
+  margin-bottom: 4px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.reserva-email {
+  font-size: 14px;
+  color: #5a6c7d;
+  margin-bottom: 8px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.reserva-fechas,
+.reserva-personas,
+.reserva-cedula {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #5a6c7d;
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 4px;
+}
+
+.reserva-fechas svg,
+.reserva-personas svg,
+.reserva-cedula svg {
+  width: 14px;
+  height: 14px;
+  color: #2d5f3f;
+  flex-shrink: 0;
+}
+
+.reserva-estado {
+  flex-shrink: 0;
+}
+
+.estado-badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.estado-badge.confirmado {
+  background: rgba(39, 174, 96, 0.1);
+  color: #27ae60;
+  border: 1px solid rgba(39, 174, 96, 0.3);
+}
+
+.estado-badge.pendiente {
+  background: rgba(243, 156, 18, 0.1);
+  color: #f39c12;
+  border: 1px solid rgba(243, 156, 18, 0.3);
+}
+
+.estado-badge.rechazado {
+  background: rgba(231, 76, 60, 0.1);
+  color: #e74c3c;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+}
+
+/* Footer del modal */
+.modal-footer {
+  padding: 20px 30px;
+  border-top: 1px solid rgba(45, 95, 63, 0.1);
+  background: rgba(248, 249, 250, 0.5);
+  display: flex;
+  justify-content: center;
+}
+
+.btn-gestion {
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-gestion:hover {
+  background: linear-gradient(135deg, #1e4129 0%, #2d5f3f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.3);
+}
+
+.btn-gestion svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .calendario-container {
+    padding: 20px;
+  }
+  
+  .calendario-header {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .fecha-actual {
+    min-width: auto;
+  }
+  
+  .fecha-actual h2 {
+    font-size: 1.5rem;
+  }
+  
+  .estadisticas {
+    gap: 10px;
+  }
+  
+  .estadistica-item {
+    padding: 6px 8px;
+  }
+  
+  .estadistica-numero {
+    font-size: 16px;
+  }
+  
+  .estadistica-label {
+    font-size: 10px;
+  }
+  
+  .leyenda {
+    gap: 15px;
+  }
+  
+  .dia-mes {
+    min-height: 80px;
+    padding: 8px 6px;
+  }
+  
+  .numero-dia {
+    font-size: 14px;
+  }
+  
+  .reserva-mini {
+    font-size: 8px;
+    padding: 2px 4px;
+    height: 16px;
+    min-width: 20px;
+  }
+  
+  .reserva-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .reserva-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .modal-content {
+    margin: 10px;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .calendario-container {
+    padding: 15px;
+  }
+  
+  .navegacion-mes {
+    gap: 10px;
+  }
+  
+  .btn-nav {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .fecha-actual h2 {
+    font-size: 1.3rem;
+  }
+  
+  .dia-mes {
+    min-height: 60px;
+    padding: 6px 4px;
+  }
+  
+  .numero-dia {
+    font-size: 12px;
+  }
+  
+  .reserva-mini {
+    font-size: 7px;
+    padding: 1px 3px;
+    height: 14px;
+    min-width: 18px;
+  }
+  
+  .estado-indicator {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .reservas-count {
+    font-size: 8px;
+    padding: 1px 4px;
+  }
+}
+
+/* Animaciones */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes slideInModal {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reducir movimiento para usuarios sensibles */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar personalizado */
+.modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: rgba(248, 249, 250, 0.8);
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background: #2d5f3f;
+  border-radius: 3px;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background: #1e4129;
+}

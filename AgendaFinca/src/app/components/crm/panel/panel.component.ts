@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AgendaService } from '../../services/agenda.service';
-import { ImagenService } from '../../services/imagen.service';
+import { AgendaService } from '../../../services/agenda.service';
+import { ImagenService } from '../../../services/imagen.service';
 @Component({
   selector: 'app-panel',
   imports: [CommonModule],
@@ -16,7 +16,7 @@ export class PanelComponent {
 
   ngOnInit() {
     console.log(localStorage)
-    localStorage.clear()
+    // localStorage.clear()
     this.agendaService.reservas().subscribe((data: any[]) => {
       this.reservas = data.map(reserva => ({
         ...reserva,

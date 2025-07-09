@@ -106,6 +106,27 @@ export const obtenerReservas = async (req: Request, res: Response): Promise<any>
     }
 };
 
+export const obtenerReservasCalendario = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const reserva = await Reserva.find();
+        const reservasCalendario = reserva.map(rs => {
+            const {
+                _id, terminos, rostro, documento_f, documento_p, __v, telefono,
+                ...rest
+            } = rs.toObject ? rs.toObject() : rs;
+            return {
+                ...rest,
+                fechaLlegada: rs.fechaLlegada ? rs.fechaLlegada.toISOString().split('T')[0] : '',
+                fechaSalida: rs.fechaSalida ? rs.fechaSalida.toISOString().split('T')[0] : ''
+            };
+        });
+        return res.status(200).json(reservasCalendario);
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({ error: 'Error al obtener reserva' });
+    }
+};
+
 
 export const actualizarEstado = async (req: Request, res: Response): Promise<any> => {
     try {
