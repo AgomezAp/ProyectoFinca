@@ -24,12 +24,14 @@
     "mongoose": "^8.16.0",
     "multer": "^2.0.1",
     "mysql2": "^3.14.1",
+    "pdfmake": "^0.2.20",
     "sequelize": "^6.37.7"
   },
   "devDependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/multer": "^1.4.13",
+    "@types/pdfmake": "^0.2.11",
     "nodemon": "^3.1.10",
     "typescript": "^5.8.3"
   }

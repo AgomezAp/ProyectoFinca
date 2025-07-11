@@ -8,9 +8,11 @@ import { DatosPersonalesComponent } from './components/politicas/datos-personale
 import { TerminosycondicionesComponent } from './components/politicas/terminosycondiciones/terminosycondiciones.component';
 import { CalendarioComponent } from './components/crm/calendario/calendario.component';
 import { correoGuard } from './core/correo.guard';
+import { InicioComponent } from './components/inicio/inicio.component';
 
 export const routes: Routes = [
-    {path: '', redirectTo: 'bienvenida', pathMatch: 'full'},
+    {path: '', redirectTo: 'inicio', pathMatch: 'full'},
+    {path: 'inicio', component: InicioComponent},
     {path: 'bienvenida', component: LandingComponent},
     {path: 'reserva', component: ReservaComponent},
     {path: 'miReserva', component: VerificarComponent},

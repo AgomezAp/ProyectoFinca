@@ -7,7 +7,8 @@ import {crearReserva,
     obtenerReservas,
     buscarDisponibilidad,
     fechasDisponibles,
-    obtenerReservasCalendario} from '../controllers/reserva';
+    obtenerReservasCalendario,
+    facturacion} from '../controllers/reserva';
 import multer from 'multer';
 
 const storage = multer.memoryStorage(); // porque luego subirás a R2 desde buffer
@@ -20,6 +21,9 @@ router.post("/api/reserva/crearReserva", upload.fields([
     {name: 'documento_p', maxCount: 1},
     {name: 'rostro', maxCount: 1}
 ]), crearReserva);
+router.post("/api/reserva/disponibilidad", buscarDisponibilidad);
+router.post("/api/reserva/CrearFactura", facturacion)
+
 
 router.get("/api/reserva/obtenerReserva/cc/:cc", obtenerReserva);
 router.get("/api/reserva/obtenerReserva/email/:email", obtenerReserva);
@@ -27,11 +31,12 @@ router.get("/api/reserva/obtenerReservas", obtenerReservas);
 router.get("/api/reserva/obtenerReservasCalendario", obtenerReservasCalendario);
 router.get("/api/reserva/fechas", fechasDisponibles)
 
-router.post("/api/reserva/disponibilidad", buscarDisponibilidad)
 
 router.put("/api/reserva/updateEstado", actualizarEstado);
 
 router.delete("/api/reserva/eliminarReserva", eliminarReserva);
+
+
 
 //LISTO 
 router.put("/api/reserva/updateReserva", actualizarReserva);

@@ -10,6 +10,16 @@
     
     <!-- Navegación -->
     <nav class="nav" [class.mobile-menu-open]="isMobileMenuOpen">
+        <a *ngIf="shouldShowCalendario()"
+           routerLink="/calendario" 
+           class="nav-link" 
+           routerLinkActive="active"
+           (click)="closeMobileMenu()">Calendario</a>
+        <a *ngIf="shouldShowPanel()"
+           routerLink="/panel" 
+           class="nav-link" 
+           routerLinkActive="active"
+           (click)="closeMobileMenu()">Panel</a>
         <a routerLink="/bienvenida" 
            class="nav-link" 
            routerLinkActive="active"

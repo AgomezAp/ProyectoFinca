@@ -4,7 +4,7 @@ import { uploadToR2 } from '../services/storage'
 import { gridFSService } from '../services/gridfs'
 import mongoose from 'mongoose'
 import { GridFSBucket } from 'mongodb'
-
+import { crearPDF } from '../services/facturacion'
 export const crearReserva = async (req: Request, res: Response): Promise<any> => {
     try {
         const files = req.files as {
@@ -189,7 +189,12 @@ export const buscarDisponibilidad = async (req: Request, res: Response): Promise
         // Busca reservas que se solapen con el rango dado
         const reservas = await Reserva.find({
             fechaLlegada: { $lt: new Date(FechaFin) },
-            fechaSalida: { $gt: new Date(FechaInicio) } 
+            fechaSalida: { $gt: new Date(FechaInicio) },
+            $or: [
+                { confirmado: { $ne: false } },
+                { confirmado: { $exists: false } },
+                { confirmado: null}
+            ]
         });
         if (reservas.length > 0) {
             console.log('No hay disponibilidad para las fechas seleccionadas');
@@ -213,7 +218,7 @@ export const buscarDisponibilidad = async (req: Request, res: Response): Promise
 export const fechasDisponibles = async (req: Request, res: Response): Promise<any> => {
     try {
         // Obtener todas las reservas de la base de datos
-        const reservas = await Reserva.find();
+        const reservas = await Reserva.find({ $or: [ { confirmado: true }, { confirmado: null } ] });
         console.log('Total reservas encontradas:', reservas.length);
         console.log('Primera reserva:', reservas[0]);
         
@@ -268,5 +273,28 @@ export const fechasDisponibles = async (req: Request, res: Response): Promise<an
     } catch (error) {
         console.error('Error en fechasDisponibles:', error);
         res.status(500).json({error: 'Error al encontrar fechas disponibles'});
+    }
+}
+
+export const facturacion = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const { email, fechallegada} = req.body;
+        if (typeof email !== 'string' || !fechallegada) {
+            return res.status(400).json({ error: 'Email, fecha son requeridos' });
+        }
+        const reservaActualizada = await Reserva.findOne({
+            email,
+            fechaLlegada: new Date(fechallegada)});
+        if (!reservaActualizada) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+        const pdfBuffer = await crearPDF(reservaActualizada);
+        res.setHeader('Content-Type', 'application/pdf');
+        res.setHeader('Content-Disposition', `attachment; filename="Factura-${reservaActualizada.nombre}.pdf"`);
+        res.send(pdfBuffer);
+        
+    } catch (error) {
+        console.error(error)
+        res.status(500).json({error: 'Error al actualizar la reserva' });
     }
 }

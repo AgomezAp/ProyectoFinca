@@ -49,4 +49,10 @@ export class AgendaService {
         return this.http.put(`${this.appUrl}${this.apiUrl}/updateEstado`, body)
     }
 
+    factura(body: any): Observable<any> {
+        return this.http.post(`${this.appUrl}${this.apiUrl}/CrearFactura`, body, {
+            responseType: 'blob' as 'json'
+        })
+    }
+
 }
