@@ -12,6 +12,8 @@ import { application, response } from 'express';
 export class PanelComponent {
   reservas: any[] = [];
   imagenSeleccionada: string | null = null;
+  actual: boolean = true;
+  todasReservas: any[] = [];
 
   constructor(private agendaService: AgendaService, private imagenService: ImagenService) {}
 
@@ -29,15 +31,52 @@ export class PanelComponent {
       }
     }, 1000);
     this.agendaService.reservas().subscribe((data: any[]) => {
-      this.reservas = data.map(reserva => ({
+      this.todasReservas = data.map(reserva => ({
         ...reserva,
         fechaLlegada: reserva.fechaLlegada ? reserva.fechaLlegada.split('T')[0] : '',
         // Si tienes más fechas, puedes hacer lo mismo:
         fechaSalida: reserva.fechaSalida ? reserva.fechaSalida.split('T')[0] : ''
       }));
-      console.log(this.reservas)
+      this.filtrarReservas();
+      console.log(this.todasReservas)
     });
 
+  }
+
+  filtrarReservas() {
+    const hoy = new Date();
+    hoy.setHours(0, 0, 0, 0);
+
+    if (this.actual) {
+      this.reservas = this.todasReservas.filter(reserva => {
+        let fechaSalida = new Date(reserva.fechaSalida);
+        return fechaSalida >= hoy
+      });
+    } else {
+      this.reservas = this.todasReservas.filter(reserva => {
+        let fechaSalida = new Date(reserva.fechaSalida);
+        return fechaSalida < hoy;
+      });
+    }
+  }
+
+  toggleReservas() {
+    this.actual = !this.actual;
+    this.filtrarReservas();
+  }
+
+  getTextoBoton(): string {
+    return this.actual ? 'Ver Reservas Pasadas' : 'Ver Reservas Futuras';
+  }
+
+  getTituloSeccion(): string {
+    return this.actual ? 'Reservas Futuras' : 'Reservas Pasadas';
+  }
+
+  getInfoReservas(): string {
+    const total = this.reservas.length;
+    const tipo = this.actual ? 'futuras' : 'pasadas';
+    return `${total} reserva${total !== 1 ? 's' : ''} ${tipo}`;
   }
 
   getImagenUrl(nombre: string): string {
@@ -58,7 +97,15 @@ export class PanelComponent {
       fechallegada: reserva.fechaLlegada,
       estado: nuevoEstado}).subscribe(() => {
         reserva.confirmado = nuevoEstado;
-    })
+        
+        // Actualizar también en todasLasReservas
+        const index = this.todasReservas.findIndex(r => 
+          r.email === reserva.email && r.fechaLlegada === reserva.fechaLlegada
+        );
+        if (index !== -1) {
+          this.todasReservas[index].confirmado = nuevoEstado;
+        }
+    });
   }
 
   facturar(reserva: any) {
@@ -79,5 +126,21 @@ export class PanelComponent {
         console.error('Error al crear la factura', err)
       }
     })
+  };
+
+  enviarFactura(reserva: any) {
+    this.agendaService.facturaCorreo({
+        email: reserva.email,
+        fechallegada: reserva.fechaLlegada,
+    }).subscribe({
+        next: (response) => {
+            console.log('Factura enviada exitosamente');
+            // Mostrar mensaje de éxito
+        },
+        error: (err) => {
+            console.error('Error al enviar factura:', err);
+            // Mostrar mensaje de error
+        }
+    });
   }
 }

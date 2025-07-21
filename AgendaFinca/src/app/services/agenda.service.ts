@@ -54,5 +54,8 @@ export class AgendaService {
             responseType: 'blob' as 'json'
         })
     }
+    facturaCorreo(body: any): Observable<any> {
+        return this.http.post(`${this.appUrl}${this.apiUrl}/facturaCorreo`, body)
+    }
 
 }

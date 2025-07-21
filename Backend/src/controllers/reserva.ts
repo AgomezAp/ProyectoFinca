@@ -4,7 +4,8 @@ import { uploadToR2 } from '../services/storage'
 import { gridFSService } from '../services/gridfs'
 import mongoose from 'mongoose'
 import { GridFSBucket } from 'mongodb'
-import { crearPDF } from '../services/facturacion'
+import { crearPDF, crearYEnviarPDF } from '../services/facturacion'
+
 export const crearReserva = async (req: Request, res: Response): Promise<any> => {
     try {
         const files = req.files as {
@@ -296,5 +297,41 @@ export const facturacion = async (req: Request, res: Response): Promise<any> => 
     } catch (error) {
         console.error(error)
         res.status(500).json({error: 'Error al actualizar la reserva' });
+    }
+}
+
+export const enviarFactura = async (req: Request, res: Response): Promise<any> => {
+    try {
+        const {email, fechallegada} = req.body;
+
+        if (typeof email !== 'string' || !fechallegada) {
+            return res.status(400).json({ error: 'Email, fecha son requeridos' });
+        }
+        
+        const reservaActualizada = await Reserva.findOne({
+            email,
+            fechaLlegada: new Date(fechallegada)});
+        if (!reservaActualizada) {
+            return res.status(404).json({ error: 'Reserva no encontrada' });
+        }
+
+        const resultado = await crearYEnviarPDF(reservaActualizada);
+
+        if (resultado.succes) {
+            res.status(200).json({ 
+                ok: true, 
+                message: resultado.message,
+                reserva: reservaActualizada 
+            });
+        } else {
+            res.status(500).json({ 
+                error: resultado.message 
+            });
+        }
+
+
+    } catch (error) {
+        console.error('Error al enviar la factura:', error);
+        res.status(500).json({error: 'Error al enviar la factura por correo'})
     }
 }

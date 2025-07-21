@@ -39,6 +39,80 @@ h2::after {
   border-radius: 2px;
 }
 
+/* Header del panel */
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.titulo-seccion {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.titulo-seccion h2 {
+  color: #2d5f3f;
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+  font-family: "Playfair Display", serif;
+}
+
+.info-reservas {
+  color: #5a6c7d;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: "Montserrat", sans-serif;
+}
+
+/* Botón para cambiar vista */
+.btn-toggle-reservas {
+  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.3);
+}
+
+.btn-toggle-reservas:hover {
+  background: linear-gradient(135deg, #1e4129 0%, #2d5f3f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(45, 95, 63, 0.4);
+}
+
+.btn-toggle-reservas:active {
+  transform: translateY(0);
+}
+
+.btn-toggle-reservas svg {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.3s ease;
+}
+
+.btn-toggle-reservas:hover svg {
+  transform: rotate(180deg);
+}
+
 /* Contenedor de tabla mejorado */
 .table-container {
   background: rgba(255, 255, 255, 0.98);
