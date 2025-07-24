@@ -1,8 +1,40 @@
-<div style="background: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-    <img src="assets/logo.png" alt="Logo" style="width: 120px; margin-bottom: 32px;">
-    <div style="display: flex; gap: 20px;">
-        <button>Reservar</button>
-        <button>Ver mas</button>
-        <button>Contactar</button>
+<div class="hero-container">
+    <!-- Logo -->
+    <div class="logo-container">
+        <img src="/assets/logo.png" alt="Logo Finca El Progreso" class="logo-image">
+        <h1 class="main-title">Bienvenido</h1>
+        <p class="subtitle">Tu refugio natural en las montañas</p>
+    </div>
+
+        <!-- Botones principales -->
+    <div class="buttons-container">
+        <a class="main-button agendar-btn" (click)="irABienvenida()">
+            <span class="button-icon">📅</span>
+            <span class="button-text">
+                <span class="button-title">Agendar</span>
+                <span class="button-subtitle">Reserva tu estadía</span>
+            </span>
+        </a>
+
+        <a href="https://wa.me/573003918651?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20la%20Finca%20El%20Progreso" class="main-button contactar-btn" target="_blank">
+            <div class="button-icon">💬</div>
+            <div class="button-text">
+                <span class="button-title">Contactar</span>
+                <span class="button-subtitle">Escríbenos por WhatsApp</span>
+            </div>
+        </a>
+
+        <a class="main-button conocer-btn" (click)="irAAbout()">
+            <div class="button-icon">�</div>
+            <div class="button-text">
+                <span class="button-title">Conocer Más</span>
+                <span class="button-subtitle">Descubre nuestra finca</span>
+            </div>
+        </a>
+    </div>
+
+        <!-- Información adicional -->
+    <div class="info-container">
+        <p class="info-text">Disfruta de la tranquilidad del campo en un entorno natural privilegiado</p>
     </div>
 </div>

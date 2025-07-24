@@ -30,7 +30,7 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('infoSection', { static: false }) infoSection!: ElementRef;
   
   images = [
-    'fondo.png',
+    'fondo1.png',
     'fondo2.png', 
     'fondo3.png'
   ];
