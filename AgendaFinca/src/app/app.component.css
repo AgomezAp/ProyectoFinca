@@ -137,6 +137,17 @@
   min-height: calc(100vh - 80px);
 }
 
+/* Contenido principal sin navbar */
+.main-content.no-navbar {
+  margin-top: 0; /* Elimina el margen superior */
+  min-height: 100vh; /* Ocupa toda la altura de la ventana */
+}
+
+/* Asegurar que no haya espacios adicionales */
+.no-navbar {
+  padding-top: 0 !important;
+}
+
 /* Responsive design - Tablet */
 @media (max-width: 1024px) {
   .header {

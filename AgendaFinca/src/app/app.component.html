@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" *ngIf="shouldShowNavbar()">
     <div class="navbar-line"></div>
     
     <!-- Menú hamburguesa para móvil -->
@@ -20,7 +20,7 @@
            class="nav-link" 
            routerLinkActive="active"
            (click)="closeMobileMenu()">Panel</a>
-        <a routerLink="/bienvenida" 
+        <a routerLink="/inicio" 
            class="nav-link" 
            routerLinkActive="active"
            (click)="closeMobileMenu()">Inicio</a>
@@ -40,6 +40,6 @@
          (click)="closeMobileMenu()"></div>
 </header>
 
-<main class="main-content">
+<main class="main-content" [class.no-navbar]="!shouldShowNavbar()" >
     <router-outlet></router-outlet>
 </main>

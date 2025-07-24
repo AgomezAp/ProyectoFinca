@@ -55,6 +55,13 @@ export class AppComponent implements OnInit, OnDestroy {
     return this.currentRoute === '/calendario';
   }
 
+  shouldShowNavbar(): boolean {
+    const currentUrl = this.router.url;
+
+    const routesWithOutNav = '/inicio';
+    return !routesWithOutNav.includes(currentUrl);
+  }
+
   // Cerrar menú al redimensionar ventana
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
