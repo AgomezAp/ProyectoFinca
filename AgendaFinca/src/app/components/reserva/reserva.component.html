@@ -6,108 +6,244 @@
         <a href="#" class="nav-link">Contacto</a>
     </nav>
 </header> -->
-<h1>DATOS PARA RESERVA</h1>
+<div class="hero-container">
+<div class="logo-container">
+    <img src="/assets/logo.png" alt="Logo Finca" class="logo-image">
+    <h1 class="main-title">Reservar Tu Estadia</h1>
+    <p class="subtitle">Completa los datos para tu reserva en Finca El Progreso</p>
+</div>
 <form #formulario="ngForm">
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Nombre Completo</mat-label>
-        <input matInput type="text" name="nombre" [(ngModel)]="nombre" required #nombreCtrl="ngModel">
-        <mat-error *ngIf="nombreCtrl.invalid && nombreCtrl.touched">El nombre es obligatorio.</mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>CC</mat-label>
-        <input matInput type="text" name="cc" [(ngModel)]="cc" required pattern="^[0-9]+$" #ccCtrl="ngModel">
-        <mat-error *ngIf="ccCtrl.invalid && ccCtrl.touched">
-          La cédula es obligatoria y debe contener solo números.
-        </mat-error>
-    </mat-form-field>
-    
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Correo electrónico</mat-label>
-        <input matInput type="email" name="email" [(ngModel)]="email" required email #emailCtrl="ngModel">
-        <mat-error *ngIf="emailCtrl.invalid && emailCtrl.touched">
-          Ingresa un correo electrónico válido.
-        </mat-error>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Teléfono</mat-label>
-        <input matInput type="tel" name="telefono" [(ngModel)]="telefono" required pattern="^[0-9]+$" #telCtrl="ngModel">
-        <mat-error *ngIf="telCtrl.invalid && telCtrl.touched">
-          El teléfono es obligatorio y debe contener solo números.
-        </mat-error>
-    </mat-form-field>
-
+    <!-- Fechas (ya están bien) -->
     <div class="form-row">
-        <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Fecha de llegada</mat-label>
-            <input matInput type="date" name="Inicio" [(ngModel)]="fechaInicio" readonly>
-        </mat-form-field>
+        <div class="custom-date-field half-width">
+            <label for="fechaInicio">Fecha de llegada</label>
+            <div class="date-input-wrapper">
+                <input type="date" 
+                       id="fechaInicio"
+                       name="Inicio" 
+                       [(ngModel)]="fechaInicio" 
+                       readonly
+                       class="custom-date-input">
+                <mat-icon class="calendar-icon">calendar_today</mat-icon>
+            </div>
+        </div>
 
-        <mat-form-field appearance="outline" class="half-width">
-            <mat-label>Fecha de salida</mat-label>
-            <input matInput type="date" name="Fin" [(ngModel)]="fechaFin" readonly>
-        </mat-form-field>
+        <div class="custom-date-field half-width">
+            <label for="fechaFin">Fecha de salida</label>
+            <div class="date-input-wrapper">
+                <input type="date" 
+                       id="fechaFin"
+                       name="Fin" 
+                       [(ngModel)]="fechaFin" 
+                       readonly
+                       class="custom-date-input">
+                <mat-icon class="calendar-icon">calendar_today</mat-icon>
+            </div>
+        </div>
     </div>
-    
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Huéspedes</mat-label>
-        <mat-select [(ngModel)]="personas" name="personas">
-            <mat-option *ngFor="let i of huespedes" [value]="i">{{i}} personas</mat-option>
-        </mat-select>
-    </mat-form-field>
-        <!-- <label >
-        <input type="checkbox">
-        ¿Hay menores de edad?
-        </label> -->
+
+    <!-- Huéspedes personalizado -->
+    <div class="custom-field full-width">
+        <label for="personas">Huéspedes</label>
+        <div class="select-wrapper">
+            <select id="personas" 
+                    name="personas" 
+                    [(ngModel)]="personas" 
+                    class="custom-select">
+                <option value="" disabled>Selecciona número de huéspedes</option>
+                <option *ngFor="let i of huespedes" [value]="i">{{i}} personas</option>
+            </select>
+            <mat-icon class="select-icon">expand_more</mat-icon>
+        </div>
+    </div>
+
+    <!-- Nombre Completo -->
+    <div class="custom-field full-width">
+        <label for="nombre">Nombre Completo</label>
+        <div class="input-wrapper">
+            <input type="text" 
+                   id="nombre"
+                   name="nombre" 
+                   [(ngModel)]="nombre" 
+                   required 
+                   #nombreCtrl="ngModel"
+                   class="custom-input">
+            <mat-icon class="input-icon">person</mat-icon>
+        </div>
+        <div class="error-message" *ngIf="nombreCtrl.invalid && nombreCtrl.touched">
+            El nombre es obligatorio.
+        </div>
+    </div>
+
+    <!-- Cédula -->
+    <div class="custom-field full-width">
+        <label for="cc">Cédula de Ciudadanía</label>
+        <div class="input-wrapper">
+            <input type="text" 
+                   id="cc"
+                   name="cc" 
+                   [(ngModel)]="cc" 
+                   required 
+                   pattern="^[0-9]+$" 
+                   #ccCtrl="ngModel"
+                   class="custom-input">
+            <mat-icon class="input-icon">badge</mat-icon>
+        </div>
+        <div class="error-message" *ngIf="ccCtrl.invalid && ccCtrl.touched">
+            La cédula es obligatoria y debe contener solo números.
+        </div>
+    </div>
+
+    <!-- Teléfono -->
+    <div class="custom-field full-width">
+        <label for="telefono">Teléfono</label>
+        <div class="input-wrapper">
+            <input type="tel" 
+                   id="telefono"
+                   name="telefono" 
+                   [(ngModel)]="telefono" 
+                   required 
+                   pattern="^[0-9]+$" 
+                   #telCtrl="ngModel"
+                   class="custom-input">
+            <mat-icon class="input-icon">phone</mat-icon>
+        </div>
+        <div class="error-message" *ngIf="telCtrl.invalid && telCtrl.touched">
+            El teléfono es obligatorio y debe contener solo números.
+        </div>
+    </div>
+
+    <!-- Email -->
+    <div class="custom-field full-width">
+        <label for="email">Correo electrónico</label>
+        <div class="input-wrapper">
+            <input type="email" 
+                   id="email"
+                   name="email" 
+                   [(ngModel)]="email" 
+                   required 
+                   email 
+                   #emailCtrl="ngModel"
+                   class="custom-input">
+            <mat-icon class="input-icon">email</mat-icon>
+        </div>
+        <div class="error-message" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+            Ingresa un correo electrónico válido.
+        </div>
+    </div>
+
+    <!-- Documentos -->
     <div class="form-group">
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Escanear documento - Frontal</mat-label>
-            <input type="text" matInput [value]="Frontal" required placeholder="Selecciona una imagen" disabled>
-            <button mat-icon-button matSuffix (click)="fileFrente.click()" aria-label="Subir archivo">
-                <mat-icon>upload</mat-icon>
-            </button>
-        </mat-form-field>
-        <input type="file" name="documento_f" accept="image/*,.pdf" hidden #fileFrente (change)="mostrarVistaPrevia($event, 'frente')">
-        <img id="vistaPreviaFrente" style="max-width: 200px; margin-top: 10px; display: block;">
+        <!-- Documento Frontal -->
+        <div class="custom-field full-width">
+            <label for="documento_f">Escanear documento - Frontal</label>
+            <div class="file-input-wrapper">
+                <input type="text" 
+                       id="documento_f"
+                       [value]="Frontal" 
+                       required 
+                       placeholder="Selecciona una imagen" 
+                       readonly
+                       class="custom-input">
+                <button type="button" class="file-button" (click)="fileFrente.click()">
+                    <mat-icon>upload</mat-icon>
+                </button>
+            </div>
+            <input type="file" 
+                   name="documento_f" 
+                   accept="image/*,.pdf" 
+                   hidden 
+                   #fileFrente 
+                   (change)="mostrarVistaPrevia($event, 'frente')">
+            <img id="vistaPreviaFrente" class="preview-image">
+        </div>
 
-        <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Escanear documento - Posterior</mat-label>
-            <input type="text" matInput [value]="Atras" required placeholder="Selecciona una imagen" disabled>
-            <button mat-icon-button matSuffix (click)="fileAtras.click()" aria-label="Subir archivo">
-                <mat-icon>upload</mat-icon>
-            </button>
-        </mat-form-field>
-        <input type="file" name="documento_p" accept="image/*,.pdf" hidden #fileAtras (change)="mostrarVistaPrevia($event, 'atras')">
-        <img id="vistaPreviaAtras" style="max-width: 200px; margin-top: 10px; display: block;">
+        <!-- Documento Posterior -->
+        <div class="custom-field full-width">
+            <label for="documento_p">Escanear documento - Posterior</label>
+            <div class="file-input-wrapper">
+                <input type="text" 
+                       id="documento_p"
+                       [value]="Atras" 
+                       required 
+                       placeholder="Selecciona una imagen" 
+                       readonly
+                       class="custom-input">
+                <button type="button" class="file-button" (click)="fileAtras.click()">
+                    <mat-icon>upload</mat-icon>
+                </button>
+            </div>
+            <input type="file" 
+                   name="documento_p" 
+                   accept="image/*,.pdf" 
+                   hidden 
+                   #fileAtras 
+                   (change)="mostrarVistaPrevia($event, 'atras')">
+            <img id="vistaPreviaAtras" class="preview-image">
+        </div>
 
-    <mat-form-field appearance="outline" class="full-width">
-        <mat-label>Rostro con documento</mat-label>
-        <input type="text" matInput [value]="Rostro" required placeholder="Selecciona una imagen" disabled>
-        <button mat-icon-button matSuffix (click)="fileRostro.click()" aria-label="Subir archivo">
-            <mat-icon>upload</mat-icon>
-        </button>
-    </mat-form-field>
-    <input type="file" name="rostro" accept="image/*,.pdf" hidden #fileRostro (change)="mostrarVistaPrevia($event, 'rostro')">
-    <img id="vistaPreviaRostro" style="max-width: 200px; margin-top: 10px; display: block;">
+        <!-- Rostro con documento -->
+        <div class="custom-field full-width">
+            <label for="rostro">Rostro con documento</label>
+            <div class="file-input-wrapper">
+                <input type="text" 
+                       id="rostro"
+                       [value]="Rostro" 
+                       required 
+                       placeholder="Selecciona una imagen" 
+                       readonly
+                       class="custom-input">
+                <button type="button" class="file-button" (click)="fileRostro.click()">
+                    <mat-icon>upload</mat-icon>
+                </button>
+            </div>
+            <input type="file" 
+                   name="rostro" 
+                   accept="image/*,.pdf" 
+                   hidden 
+                   #fileRostro 
+                   (change)="mostrarVistaPrevia($event, 'rostro')">
+            <img id="vistaPreviaRostro" class="preview-image">
+        </div>
     </div>
 
-    <mat-checkbox [(ngModel)]="terminos" name="terminos" required>
-        Acepto los <a href="/terminos">términos y condiciones</a> del servicio.
-    </mat-checkbox>
+    <!-- Checkboxes personalizados -->
+    <div class="checkbox-group">
+        <label class="custom-checkbox">
+            <input type="checkbox" [(ngModel)]="terminos" name="terminos" required>
+            <span class="checkmark"></span>
+            <span class="checkbox-text">Acepto los <a href="/terminos">términos y condiciones</a> del servicio.</span>
+        </label>
 
-    <mat-checkbox [(ngModel)]="datos" name="datos" required>
-        Autorizo el <a href="/manejodatos">manejo y tratamiento de mis datos personales.</a> 
-    </mat-checkbox>
-    
-    <mat-checkbox [(ngModel)]="veridica" name="veridica" required>
-        Confirmo que toda la información proporcionada es verídica.
-    </mat-checkbox>
-    <div style="display: flex; gap: 16px; margin-top: 16px;">
-        <button mat-raised-button color="primary" type="submit" [disabled]="formulario.invalid" (click)="enviarData()">Enviar</button>
-        <button mat-raised-button color="accent" type="button" (click)="volver()" style="background: #fff; color: #2d5f3f; border: 1px solid #2d5f3f;">
+        <label class="custom-checkbox">
+            <input type="checkbox" [(ngModel)]="datos" name="datos" required>
+            <span class="checkmark"></span>
+            <span class="checkbox-text">Autorizo el <a href="/manejodatos">manejo y tratamiento de mis datos personales.</a></span>
+        </label>
+
+        <label class="custom-checkbox">
+            <input type="checkbox" [(ngModel)]="veridica" name="veridica" required>
+            <span class="checkmark"></span>
+            <span class="checkbox-text">Confirmo que toda la información proporcionada es verídica.</span>
+        </label>
+        <span class="checkbox-text">Al marcar estas casillas, confirmas que has leído y aceptas todas las condiciones del contrato de alquiler de la Finca El Progreso.</span>
+    </div>
+
+    <!-- Botones -->
+    <div class="button-group">
+        <button type="submit" 
+                [disabled]="formulario.invalid" 
+                (click)="enviarData()"
+                class="custom-button primary">
+            <mat-icon>send</mat-icon>
+            Enviar Reserva
+        </button>
+        <button type="button" 
+                (click)="volver()"
+                class="custom-button secondary">
+            <mat-icon>arrow_back</mat-icon>
             Volver
         </button>
     </div>
-
 </form>
+</div>

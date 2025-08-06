@@ -1,24 +1,26 @@
-<div class="main-content">
-  <div class="hero-section">
-    <h1 class="title">Verificar Reserva</h1>
-    <form class="booking-form" #formCorreo="ngForm">
-      <div class="form-row">
-        <div class="form-group">
-          <mat-form-field appearance="outline" class="full-width">
-            <mat-label>Correo electrónico o Cedula</mat-label>
-            <input matInput type="text" name="data" [(ngModel)]="data" required placeholder="Ingresa tu correo o cedula">
-          </mat-form-field>
+<div class="hero-container">
+  <div class="main-content">
+    <div class="hero-section">
+        <img src="/assets/logo.png" alt="Logo Finca" class="logo-image">
+        <h1 class="main-title">Verificar Reserva</h1>
+      <form class="booking-form" #formCorreo="ngForm">
+        <div class="form-row">
+          <div class="form-group">
+            <mat-form-field appearance="outline" class="full-width">
+              <mat-label>Correo electrónico o Cedula</mat-label>
+              <input matInput type="text" name="data" [(ngModel)]="data" required placeholder="Ingresa tu correo o cedula">
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="reserve-btn" [disabled]="formCorreo.invalid" (click)="buscar()">VERIFICAR</button>
+          </div>
         </div>
-        <div class="form-group">
-          <button type="submit" class="reserve-btn" [disabled]="formCorreo.invalid" (click)="buscar()">VERIFICAR</button>
+        <div *ngIf="errorMessage" class="error-message">
+          {{ errorMessage }}
         </div>
-      </div>
-      <div *ngIf="errorMessage" class="error-message">
-        {{ errorMessage }}
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
-</div>
 
 <!-- Modal de información de reserva -->
 <div *ngIf="reserva && reserva.length > 0" class="modal-overlay" (click)="cerrarModal()">
@@ -71,4 +73,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

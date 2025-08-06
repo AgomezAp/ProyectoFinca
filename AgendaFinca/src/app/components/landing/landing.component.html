@@ -7,10 +7,8 @@
   </head>
   <body>  
 
-    <!-- Sección Hero con Carousel -->
     <section class="hero-carousel-section">
-      <!-- Carousel de fondo -->
-      <div class="carousel-container">
+      <!-- <div class="carousel-container">
         <div
           *ngFor="let image of images; let i = index"
           class="carousel-slide"
@@ -18,7 +16,6 @@
           [style.background-image]="'url(' + image + ')'"
         ></div>
 
-        <!-- Controles del carousel -->
         <div class="carousel-controls">
           <button
             class="carousel-btn prev-btn"
@@ -64,7 +61,6 @@
           </button>
         </div>
 
-        <!-- Indicadores del carousel -->
         <div class="carousel-indicators">
           <span
             *ngFor="let image of images; let i = index"
@@ -74,14 +70,15 @@
           >
           </span>
         </div>
-      </div>
+      </div> -->
 
       <!-- Contenido principal -->
   <div class="main-content">
     <div class="hero-section">
         <!-- NUEVO TÍTULO -->
-        <h1 class="title">Finca El Progreso</h1>
-        
+        <img src="/assets/logo.png" alt="Logo Finca" class="logo-image">
+        <h1 class="main-title">Finca El Progreso</h1>
+        <p class="subtitle">Encuentra las fechas disponible para disfrutar en la Finca el Progreso</p>      
         <!-- Formulario actualizado con textos en español -->
         <form class="booking-form">
             <div class="form-row">

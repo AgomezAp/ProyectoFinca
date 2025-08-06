@@ -83,7 +83,12 @@
                [class.pendiente]="!tieneReservaConfirmada(dia) && tieneReservaPendiente(dia)"
                [class.rechazada]="!tieneReservaConfirmada(dia) && !tieneReservaPendiente(dia)">
           </div>
-          <span class="reservas-count">{{ dia.reservas.length }}</span>
+           <span class="reservas-estado-text">
+            {{
+              tieneReservaConfirmada(dia) ? 'Confirmada' :
+              (tieneReservaPendiente(dia) ? 'Pendiente' : 'Rechazada')
+            }}
+            </span>
         </div>
         
         <!-- Información rápida de reservas -->

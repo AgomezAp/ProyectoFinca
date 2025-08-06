@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -81,20 +81,7 @@ export class ReservaComponent {
   volver() {
     window.location.href = '/bienvenida'
   }
-  
 
-  probarDastos() {
-    console.log('Datos del formulario', {
-      nombre: this.nombre,
-      email: this.email,
-      cc: this.cc,
-      telefono: this.telefono,
-      fechaLlegada: this.fechaInicio,
-      fechaSalida: this.fechaFin,
-      cantidad: this.personas,
-      rostro: this.Rostro
-    });
-  }
 
   enviarData() {
     this.terminosResumen = this.terminos && this.datos && this.veridica

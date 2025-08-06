@@ -348,7 +348,7 @@
   box-shadow: 0 0 8px rgba(231, 76, 60, 0.4);
 }
 
-.reservas-count {
+.reservas-estado-text {
   font-size: 10px;
   font-weight: 600;
   color: #5a6c7d;
@@ -791,7 +791,7 @@
     height: 6px;
   }
   
-  .reservas-count {
+  .reservas-estado-text {
     font-size: 8px;
     padding: 1px 4px;
   }
