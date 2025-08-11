@@ -5,6 +5,7 @@ import { gridFSService } from '../services/gridfs'
 import mongoose from 'mongoose'
 import { GridFSBucket } from 'mongodb'
 import { crearPDF, crearYEnviarPDF } from '../services/facturacion'
+import { reservaPDF } from '../services/notificacion'
 
 export const crearReserva = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -29,6 +30,7 @@ export const crearReserva = async (req: Request, res: Response): Promise<any> =>
             ok: true,
             reserva: nuevaReserva
         });
+        await reservaPDF(nuevaReserva)
     } catch (error) {
         console.error(error)
         res.status(400).json({ error: error instanceof Error ? error.message : String(error) });

@@ -32,7 +32,6 @@ const ReservaSchema = new Schema<IReserva>({
   email: {
     type: String,
     required: [true, 'El email es obligatorio'],
-    unique: true,
     trim: true,
     lowercase: true,
     match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Por favor ingrese un email válido']

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -25,6 +25,9 @@ export class ReservaComponent {
   Frontal: File | null = null;
   Atras: File | null = null;
   Rostro: File | null = null;
+  FrontalName: string = '';
+  AtrasName: string = '';
+  RostroName: string = '';
 
   nombre: string = '';
   cc: string = ''; 
@@ -33,6 +36,9 @@ export class ReservaComponent {
   terminos: boolean = false;
   datos: boolean = false;
   veridica: boolean = false;
+  @ViewChild('fileFrente') fileFrente!: ElementRef<HTMLInputElement>;
+  @ViewChild('fileAtras') fileAtras!: ElementRef<HTMLInputElement>;
+  @ViewChild('fileRostro') fileRostro!: ElementRef<HTMLInputElement>;
   terminosResumen: boolean = false
 
   huespedes = Array.from({ length: 14 }, (_, i) => i + 2);
@@ -53,11 +59,14 @@ export class ReservaComponent {
     const archivo = event.target.files[0];
     if (archivo) {
       if (lado === 'atras') {
-        this.Atras = archivo.name;
+        this.Atras = archivo;
+        this.AtrasName = archivo.name
       } else if (lado === 'frente') {
-        this.Frontal = archivo.name;
+        this.Frontal = archivo;
+        this.FrontalName = archivo.name
       } else if (lado === 'rostro') {
-        this.Rostro = archivo.name;
+        this.Rostro = archivo;
+        this.RostroName = archivo.name
       }
 
       if (archivo.type.startsWith('image/')) {
@@ -100,7 +109,10 @@ export class ReservaComponent {
     if (this.Rostro) reservaData.append('rostro', this.Rostro)
 
 
-    console.log(reservaData)
+    console.log('=== CONTENIDO DEL FORMDATA ===');
+    for (let pair of reservaData.entries()) {
+      console.log(pair[0] + ': ', pair[1]);
+    }
     this.reservaService.crearReserva(reservaData).subscribe({
       
       next: (response) => {
