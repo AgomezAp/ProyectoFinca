@@ -9,133 +9,164 @@
 
 	<div class="hero-content">
 		<div class="logo-section">
-			<img src="/assets/logo.png" alt="Logo Finca El Progreso" class="hero-logo">
+			<img src="/assets/logos/ISOTIPO.svg" alt="Logo Finca El Progreso" class="hero-logo">
 		</div>
-		<h1 class="hero-title">Finca El Progreso</h1>
+		<h1 class="hero-title">
+			<span class="finca-text">FINCA</span>
+			<span class="main-title">El Progreso</span>
+		</h1>
 		<p class="hero-subtitle">Tu refugio natural en las montañas</p>
-		<p class="hero-description">Vive una experiencia única en contacto con la naturaleza, donde cada momento se
-			convierte en un recuerdo inolvidable</p>
+		<p class="hero-description">Vive una experiencia única en contacto con la naturaleza,<br>
+			donde cada momento se convierte en un recuerdo inolvidable</p>
 		<div class="hero-buttons">
-			<a href="#galeria" class="cta-button primary">Ver Galería</a>
-			<a href="#contacto" class="cta-button secondary">Contactar</a>
+			<a href="#contacto" class="cta-button primary">Contactar</a>
+			<a href="#galeria" class="cta-button secondary">Ver Galería</a>
 		</div>
 	</div>
 </section>
 
 
 <section class="about-section" id="sobre-nosotros">
+	<img src="assets/images/HojasBloque1I.webp" alt="" class="palm-decoration palm-left">
+	<img src="assets/images/HojasBloque1D.webp" alt="" class="palm-decoration palm-right">
 	<div class="container">
-		<div class="about-content">
-			<div class="about-text">
-				<h2 class="section-title">Sobre Nuestra Finca</h2>
-				<p class="about-description">
-					Finca El Progreso es un oasis de tranquilidad ubicado en el corazón de las montañas.
-					Ofrecemos una experiencia auténtica de vida rural, donde puedes desconectarte del estrés
-					de la ciudad y reconectarte con la naturaleza.
-				</p>
-				<div class="features-grid">
-					<div class="feature">
-						<span class="feature-icon">🏔️</span>
-						<h3>Vista a las Montañas</h3>
-						<p>Paisajes espectaculares que te dejarán sin aliento</p>
-					</div>
-					<div class="feature">
-						<span class="feature-icon">🌿</span>
-						<h3>Naturaleza Pura</h3>
-						<p>Aire puro y entorno natural preservado</p>
-					</div>
-					<div class="feature">
-						<span class="feature-icon">🏡</span>
-						<h3>Comodidad Rural</h3>
-						<p>Instalaciones cómodas con encanto campestre</p>
-					</div>
-					<div class="feature">
-						<span class="feature-icon">🌅</span>
-						<h3>Experiencias Únicas</h3>
-						<p>Actividades al aire libre y momentos especiales</p>
-					</div>
+		<div class="about-header">
+			<div class="about-label">Nosotros</div>
+				<h2 class="about-main-title">Sobre Nuestra Finca</h2>
+				<div class="about-subtitle-line"></div>
+		</div>
+		<p class="about-main-description">
+			Finca El Progreso es un oasis de tranquilidad ubicado en el corazón de las montañas.
+			Ofrecemos una experiencia auténtica de vida rural, donde puedes desconectarte del estrés
+			de la ciudad y reconectarte con la naturaleza.
+		</p>
+		<div class="features-elegant-grid">
+			<div class="feature-elegant">
+				<div class="feature-image-placeholder">
+					<img src="assets/logos/Montaña.svg" class="feature-img">
 				</div>
+				<h3>Vista a las Montañas</h3>
+				<p>Paisajes espectaculares que te dejarán sin aliento</p>
 			</div>
-			<div class="about-image">
-				<!-- 📸 IMAGEN PRINCIPAL DE LA FINCA -->
-				<img src="/assets/IMG_1647.png" alt="Vista principal de la finca" class="main-about-img">
-				<!-- ☝️ Reemplaza con tu imagen principal de la finca -->
+			<div class="feature-elegant">
+				<div class="feature-image-placeholder">
+					<img src="assets/logos/Naturaleza.svg" class="feature-img">
+				</div>
+				<h3>Naturaleza Pura</h3>
+				<p>Aire puro y entorno natural preservado</p>
 			</div>
+			<div class="feature-elegant">
+				<div class="feature-image-placeholder">
+					<img src="assets/logos/Rural.svg" class="feature-img">
+				</div>
+				<h3>Comodidad Rural</h3>
+				<p>Instalaciones cómodas con encanto campestre</p>
+			</div>
+			<div class="feature-elegant">
+				<div class="feature-image-placeholder">
+					<img src="assets/logos/Experiencia.svg" class="feature-img">
+				</div>
+				<h3>Experiencias Únicas</h3>
+				<p>Actividades al aire libre y momentos especiales</p>
+			</div>
+					
 		</div>
 	</div>
 </section>
 
 <!-- Galería de Imágenes - Carrusel -->
 <section class="gallery-section" id="galeria">
-	<div class="container">
-		<h2 class="section-title">Galería de Imágenes</h2>
-		<p class="section-subtitle">Descubre la belleza de nuestros espacios</p>
+	<div class="gallery-background">
+		<img src="assets/images/Jardines.webp" alt="" class="gallery-bg-image">
+		<div class="gallery-overlay-green"></div>
+	</div>
+	<div class="container-full">
+		<div class="gallery-header">
+			<div class="gallery-label">Espacios</div>
+			<h2 class="gallery-main-title">Galería de Imágenes</h2>
+			<div class="gallery-subtitle-line"></div>
+		</div>
+		<p class="gallery-description">Descubre la belleza de nuestros espacios</p>
 
-		<div class="carousel-container">
-			<div #carouselTrack class="carousel-track">
-				<div *ngFor="let item of carouselItems" class="carousel-slide">
-					<div class="gallery-item">
-						<img [src]="item.src" [alt]="item.alt">
-						<div class="gallery-overlay">
-							<h3>{{item.titulo}}</h3>
-							<p>{{item.descripcion}}</p>
-						</div>
-					</div>
+		<div class="gallery-grid-custom">
+			<div *ngFor="let item of galleryItems" class="gallery-item">
+				<img [src]="item.src" [alt]="item.alt">
+				<div class="gallery-overlay">
+					<h3>{{item.titulo}}</h3>
+					<p>{{item.descripcion}}</p>
 				</div>
 			</div>
-
-			<button #prevBtn class="carousel-btn prev">‹</button>
-			<button #nextBtn class="carousel-btn next">›</button>
-
-			<div class="carousel-indicators">
-				<span *ngFor="let item of carouselItems; let i = index" class="indicator" [class.active]="i === currentSlide"></span>
-			</div>
+			
 		</div>
 	</div>
 </section>
 
 <!-- Servicios y Amenidades -->
 <section class="services-section" id="servicios">
+	<div class="services-background">
+		<img src="assets/images/Jardines.webp" alt="" class="services-bg-image">
+		<div class="services-overlay-white"></div>
+	</div>
 	<div class="container">
-		<h2 class="section-title">Servicios y Amenidades</h2>
-		<div class="services-grid">
-			<div class="service-card">
-				<div class="service-icon">🛏️</div>
+		<div class="services-header">
+			<div class="services-label">Comodidades</div>
+			<h2 class="services-main-title">Servicios y Amenidades</h2>
+			<div class="services-subtitle-line"></div>
+		</div>
+		<div class="services-elegant-grid">
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Alojamiento.svg" class="service-img">
+				</div>
 				<h3>Alojamiento</h3>
 				<p>Habitaciones cómodas con vista panorámica</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🍽️</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Alimentación.svg" class="service-img">
+				</div>
 				<h3>Alimentación</h3>
 				<p>Cocina equipada y desayunos campestres</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🚿</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Baño.svg" class="service-img">
+				</div>
 				<h3>Baños Completos</h3>
 				<p>Agua caliente y todas las comodidades</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🔥</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Fogata.svg" class="service-img">
+				</div>
 				<h3>Fogata</h3>
 				<p>Noches mágicas alrededor del fuego</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🅿️</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Parqueadero.svg" class="service-img">
+				</div>
 				<h3>Parqueadero</h3>
 				<p>Espacio seguro para tu vehículo</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🎯</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Actividades.svg" class="service-img">
+				</div>
 				<h3>Actividades</h3>
 				<p>Senderismo, observación de aves y más</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">🚴‍♂️</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Ciclismo.svg" class="service-img">
+				</div>
 				<h3>Ciclismo</h3>
 				<p>Rutas para bicicleta en medio de la naturaleza</p>
 			</div>
-			<div class="service-card">
-				<div class="service-icon">👨‍👩‍👧‍👦</div>
+			<div class="service-elegant">
+				<div class="service-image-placeholder">
+					<img src="assets/logos/Familiar.svg" class="service-img">
+				</div>
 				<h3>Zona Familiar</h3>
 				<p>Espacios seguros y juegos para niños</p>
 			</div>
@@ -145,94 +176,96 @@
 
 <!-- Ubicación -->
 <section class="location-section" id="ubicacion">
-	<div class="container">
-		<div class="location-content">
-			<div class="location-info">
-				<h2 class="section-title">Nuestra Ubicación</h2>
-				<p class="location-description">
-					Estratégicamente ubicada en las montañas, nuestra finca ofrece fácil acceso
-					desde la ciudad pero con la tranquilidad del campo.
-				</p>
-				<div class="location-details">
-					<div class="detail-item">
-						<span class="detail-icon">📍</span>
-						<div>
-							<strong>Dirección:</strong>
-							<p>Vereda El Progreso, Pereira - Risaralda</p>
-						</div>
+	<div class="location-left">
+		<div class="location-background">
+			<img src="assets/images/Juegos.webp" alt="" class="location-bg-image">
+			<div class="gallery-overlay-green"></div>
+		</div>
+		<div class="location-content-left">
+			<div class="location-header">
+				<div class="location-label">Lugar</div>
+				<h2 class="location-main-title">Nuestra Ubicación</h2>
+				<div class="location-subtitle-line"></div>
+			</div>
+			<p class="location-main-description">
+				Estratégicamente ubicada en las montañas, nuestra finca ofrece fácil acceso
+				desde la ciudad pero con la tranquilidad del campo.
+			</p>
+			<div class="location-details">
+				<div class="detail-item">
+					<img src="assets/logos/Dirección.svg" alt="Dirección" class="detail-icon-img">
+					<div class="detail-text">
+						<strong>Dirección:</strong>
+						<p>Vereda El Progreso, Pereira - Risaralda</p>
 					</div>
-					<div class="detail-item">
-						<span class="detail-icon">🚗</span>
-						<div>
-							<strong>Acceso:</strong>
-							<p>Carretera pavimentada hasta la finca</p>
-						</div>
+				</div>
+				<div class="detail-item">
+					<img src="assets/logos/Acceso.svg" alt="Acceso" class="detail-icon-img">
+					<div class="detail-text">
+						<strong>Acceso:</strong>
+						<p>Carretera pavimentada hasta la finca</p>
 					</div>
-					<div class="detail-item">
-						<span class="detail-icon">⏰</span>
-						<div>
-							<strong>Tiempo desde la ciudad:</strong>
-							<p>Aproximadamente 30-45 minutos desde el centro de Pereira</p>
-						</div>
+				</div>
+				<div class="detail-item">
+					<img src="assets/logos/Tiempo.svg" alt="Tiempo" class="detail-icon-img">
+					<div class="detail-text">
+						<strong>Tiempo desde la ciudad:</strong>
+						<p>Carretera pavimentada hasta la finca</p>
 					</div>
 				</div>
 			</div>
-			<div class="location-map">
-				<!-- 🗺️ MAPA DE GOOGLE MAPS - PEREIRA -->
-				<iframe
-					src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127243.55064962267!2d-75.7584047!3d4.8133597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38766ccb47ac2d%3A0x96c9a8915c169de1!2sPereira%2C%20Risaralda!5e0!3m2!1ses!2sco!4v1642567890123!5m2!1ses!2sco"
-					class="google-map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-					title="Ubicación Pereira - Finca El Progreso">
-				</iframe>
-				<!-- ☝️ Mapa interactivo de Google Maps centrado en Pereira -->
-			</div>
 		</div>
+	</div>
+	<div class="location-right">
+		<iframe
+			src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127243.55064962267!2d-75.7584047!3d4.8133597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e38766ccb47ac2d%3A0x96c9a8915c169de1!2sPereira%2C%20Risaralda!5e0!3m2!1ses!2sco!4v1642567890123!5m2!1ses!2sco"
+			class="google-map" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+			title="Ubicación Pereira - Finca El Progreso">
+		</iframe>
 	</div>
 </section>
 
 <!-- Contacto -->
 <section class="contact-section" id="contacto">
+	<img src="assets/images/HojasFooterI.png" class="palm-decoration palm-bottom-left">
+	<img src="assets/images/HojasFooterD.webp" class="palm-decoration palm-bottom-right">
 	<div class="container">
-		<h2 class="section-title">Contáctanos</h2>
-		<div class="contact-content">
-			<div class="contact-info">
-				<div class="contact-card">
-					<div class="contact-icon">📱</div>
+		<div class="contact-header">
+			<div class="contact-label">Información</div>
+			<h2 class="contact-main-title">Contáctanos</h2>
+			<div class="contact-subtitle-line"></div>
+		</div>
+		<div class="contact-grid">
+			<div class="contact-card-elegant">
+				<img src="assets/logos/Whatsapp.svg" alt="WhatsApp" class="contact-icon-img">
+				<div class="contact-card-content">
 					<h3>WhatsApp</h3>
-					<p>Escríbenos directamente</p>
+					<p class="contact-description">Escríbenos directamente</p>
 					<a href="https://wa.me/573003918651?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20la%20Finca%20El%20Progreso"
 						class="contact-link" target="_blank">
 						+57 300 391 8651
 					</a>
 				</div>
-				<div class="contact-card">
-					<div class="contact-icon">📧</div>
+			</div>
+			<div class="contact-card-elegant">
+				<img src="assets/logos/Email.svg" alt="Email" class="contact-icon-img">
+				<div class="contact-card-content">
 					<h3>Email</h3>
-					<p>Envíanos un correo</p>
+					<p class="contact-description">Envianos un correo</p>
 					<a href="mailto:info@fincaelprogreso.com" class="contact-link">
-						<p>info&#64;fincaelprogreso.com</p>
-
-					</a>
-				</div>
-				<div class="contact-card">
-					<div class="contact-icon">📅</div>
-					<h3>Reservas</h3>
-					<p>Agenda tu visita</p>
-					<a class="contact-link"
-						(click)="irABienvenida()">
-						Reservar Ahora
+						info&#64;fincaelprogreso.com
 					</a>
 				</div>
 			</div>
-
-			<div class="contact-actions">
-				<a href="https://wa.me/573003918651?text=Hola%2C%20quiero%20hacer%20una%20reserva%20en%20la%20Finca%20El%20Progreso"
-					class="cta-button primary large" target="_blank">
-					💬 Reservar por WhatsApp
-				</a>
-				<a class="cta-button secondary large" (click)="irAInicio()">
-					🏠 Volver al Inicio
-				</a>
+			<div class="contact-card-elegant">
+				<img src="assets/logos/Reservas.svg" alt="Reservas" class="contact-icon-img">
+				<div class="contact-card-content">
+					<h3>Reservas</h3>
+					<p class="contact-description">Agenda tu visita</p>
+					<a class="contact-link" (click)="irABienvenida()">
+						Reservar Ahora
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>

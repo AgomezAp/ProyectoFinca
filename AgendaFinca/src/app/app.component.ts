@@ -17,7 +17,7 @@ export class AppComponent implements OnInit, OnDestroy {
   currentRoute: string = ''
   private destroy$ = new Subject<void>();
 
-  constructor(private router: Router) {}
+  constructor(public router: Router) {}
   ngOnInit() {
     // Escuchar cambios de ruta
     this.router.events
@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
   shouldShowNavbar(): boolean {
     const currentUrl = this.router.url;
 
-    const routesWithOutNav = '/inicio';
+    const routesWithOutNav = ['/inicio', '/about'];
     return !routesWithOutNav.includes(currentUrl);
   }
 
