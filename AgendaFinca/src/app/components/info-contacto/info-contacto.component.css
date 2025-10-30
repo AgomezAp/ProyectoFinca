@@ -631,10 +631,10 @@
 }
 
 .services-subtitle-line {
-    width: 685px;
+    width: 835px;
     height: 1px;
     background: linear-gradient(90deg, transparent, #e98552, transparent);
-    margin: 2rem auto 2rem;
+    margin: 0 auto 2rem;
 }
 
 .services-elegant-grid {

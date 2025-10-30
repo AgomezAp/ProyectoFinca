@@ -1,40 +1,42 @@
-<div class="hero-container">
-    <!-- Logo -->
-    <div class="logo-container">
-        <img src="/assets/logo.png" alt="Logo Finca El Progreso" class="logo-image">
+<div class="hero-section"> 
+    <img src="/assets/images/Piscina.webp" alt="Fondo" class="main-background">
+    <div class="main-overlay"></div>
+    <div class="top-section">
+        <img src="/assets/logos/ISOTIPO.svg" alt="Logo Finca El Progreso" class="logo-flower">
+        <div class="divider-line"></div>
+        <h2 class="section-label">Enlaces</h2>
         <h1 class="main-title">Bienvenido</h1>
-        <p class="subtitle">Tu refugio natural en las montañas</p>
+        <div class="divider-line"></div>
+        <p class="subtitle">Disfruta de la tranquilidad del campo en un entorno natural privilegiado</p>
     </div>
-
-        <!-- Botones principales -->
-    <div class="buttons-container">
-        <a class="main-button agendar-btn" (click)="irABienvenida()">
-            <span class="button-icon">📅</span>
-            <span class="button-text">
-                <span class="button-title">Agendar</span>
-                <span class="button-subtitle">Reserva tu estadía</span>
-            </span>
-        </a>
-
-        <a href="https://wa.me/573003918651?text=Hola%2C%20me%20interesa%20conocer%20más%20sobre%20la%20Finca%20El%20Progreso" class="main-button contactar-btn" target="_blank">
-            <div class="button-icon">💬</div>
-            <div class="button-text">
-                <span class="button-title">Contactar</span>
-                <span class="button-subtitle">Escríbenos por WhatsApp</span>
+    <!-- Logo -->
+    <div class="sections-grid">
+        <div class="section-card agendar-section" (click)="irABienvenida()">
+            <img src="assets/images/Juegos.webp" alt="Agendar" class="background-image">
+            <div class="overlay"></div>
+            <div class="card-content">
+                <img src="/assets/logos/Email.svg" alt="Calendario" class="card-icon">
+                <h3 class="card-title">Agendar</h3>
+                <p class="card-subtitle">Reserva tu estadia</p>
             </div>
-        </a>
-
-        <a class="main-button conocer-btn" (click)="irAAbout()">
-            <div class="button-icon">�</div>
-            <div class="button-text">
-                <span class="button-title">Conocer Más</span>
-                <span class="button-subtitle">Descubre nuestra finca</span>
+        </div>
+        <div class="section-card contactar-section" (click)="whatsapp()">
+            <img src="assets/images/Piscina.webp" alt="Contactar" class="background-image">
+            <div class="overlay"></div>
+            <div class="card-content">
+                <img src="/assets/logos/Whatsapp.svg" alt="WhatsApp" class="card-icon">
+                <h3 class="card-title">Contactar</h3>
+                <p class="card-subtitle">Escríbenos por WhatsApp</p>
             </div>
-        </a>
-    </div>
-
-        <!-- Información adicional -->
-    <div class="info-container">
-        <p class="info-text">Disfruta de la tranquilidad del campo en un entorno natural privilegiado</p>
+        </div>
+        <div class="section-card agendar-section" (click)="irAAbout()">
+            <img src="assets/images/Baños.webp" alt="Conocer Más" class="background-image">
+            <div class="overlay"></div>
+            <div class="card-content">
+                <img src="/assets/logos/Experiencia.svg" alt="Información" class="card-icon">
+                <h3 class="card-title">Conocer Más</h3>
+                <p class="card-subtitle">Descubre nuestra finca</p>
+            </div>
+        </div>
     </div>
 </div>

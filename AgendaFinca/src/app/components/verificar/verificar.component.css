@@ -1,767 +1,504 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
+.verificar-hero-section {
+  position: relative;
   min-height: 100vh;
-}
-
-/* Contenedor principal */
-.main-content {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 80vh;
-  width: 100%;
-  padding: 40px 20px;
-  /* background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%); */
-}
-.main-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #faf8f3;
-    text-shadow: 3px 3px 6px rgba(45, 62, 45, 0.8);
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    line-height: 1.1;
-}
-
-.hero-container {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* 🖼️ AGREGAR TU IMAGEN DE FONDO AQUÍ */
-    background: linear-gradient(135deg, rgba(45, 74, 45, 0.7), rgba(74, 107, 58, 0.5)), 
-                url('/assets/fondo.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-    padding: 2rem;
-}
-/* Sección hero mejorada */
-.hero-section {
-  text-align: center;
-  max-width: 500px;
-  width: 100%;
-  animation: fadeInUp 0.8s ease-out;
-}
-
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* Título principal */
-.title {
-  color: #2d5f3f;
-  font-size: 3rem;
-  font-weight: 400;
-  margin-bottom: 40px;
-  letter-spacing: -1px;
-  font-family: "Playfair Display", serif;
-  position: relative;
-}
-
-.title::after {
-  content: "";
-  position: absolute;
-  bottom: -10px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 80px;
-  height: 3px;
-  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
-  border-radius: 2px;
-}
-
-/* Formulario mejorado */
-.booking-form {
-  background: rgba(255, 255, 255, 0.55);
-  padding: 40px 35px;
-  border-radius: 20px;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  margin: 0 auto;
-  position: relative;
   overflow: hidden;
-  animation: slideInUp 0.8s ease-out 0.2s both;
+  padding: 2rem
 }
 
-.booking-form::before {
-  content: "";
+.verificar-background {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
-  pointer-events: none;
-}
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+} 
 
-@keyframes slideInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-row {
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  margin-bottom: 0;
-  position: relative;
+.verificar-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(74, 107, 58, 0.88), rgba(58, 85, 48, 0.92));
   z-index: 1;
 }
 
-.form-group {
+.verificar-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  max-width: 700px;
+  width: 100%;
+  animation: fadeInUp 1s ease-out;
+}
+
+.verificar-logo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 1.5rem;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3))
+}
+
+.verificar-decorative-line {
+  width: 350px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 1.2rem auto;
+}
+.verificar-label {
+  font-family: 'Questrial', sans-serif;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.verificar-title {
+  font-family: 'Archane', serif;
+  font-size: 3.5rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 0.8rem 0;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.verificar-form-card {
+  background: rgba(242, 236, 228, 0.97);
+  backdrop-filter: blur(10px);
+  border-radius: 25px;
+  padding: 3rem 3rem 2.5rem 3rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+  margin-top: 2rem;
+}
+
+.verificar-form {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
+  gap: 1.5rem;
+}
+
+.verificar-instruction {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1rem;
+  color: #e98552;
+  font-weight: 500;
+  text-align: center;
+  margin: 0 0 0.5rem 0;
+}
+
+.verificar-input-wrapper {
   position: relative;
 }
 
-/* Material form field mejorado */
-::ng-deep .mat-form-field {
+.verificar-input {
   width: 100%;
-  font-family: "Montserrat", sans-serif;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-  border-radius: 12px;
-  border-width: 2px;
-  border-color: #e1e8ed;
+  padding: 1rem 1.5rem;
+  border: 2px solid rgba(233, 133, 82, 0.2);
+  border-radius: 50px;
+  font-family: 'Questrial' sans-serif;
+  font-size: 1rem;
+  background: #fff;
   transition: all 0.3s ease;
+  outline: none;
+  text-align: center;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  border-width: 2px;
-  border-color: #2d5f3f;
+.verificar-input:focus {
+  border-color: rgba(233, 133, 82, 0.6);
+  box-shadow: 0 0 0 4px rgba(233, 133, 82, 0.1);
 }
 
-::ng-deep .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
-  border-color: #2d5f3f;
+.verificar-input::placeholder {
+  color: #999;
 }
 
-::ng-deep .mat-form-field.mat-focused .mat-form-field-outline-thick {
-  border-color: #2d5f3f;
-}
-
-/* Label mejorado */
-::ng-deep .mat-form-field-label {
-  color: #5a6c7d !important;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-  font-size: 16px;
-  font-family: "Montserrat", sans-serif;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
-  color: #2d5f3f !important;
-}
-
-/* Input mejorado */
-::ng-deep .mat-input-element {
-  font-size: 16px;
-  padding: 16px 20px;
+.verificar-button {
+  font-family: 'Questrial', sans-serif;
+  background: linear-gradient(135deg, #e98552, rgba(233, 133, 82, 0.9));
+  color: #fff;
+  font-size: 1.1rem;
   font-weight: 500;
-  color: #2c3e50 !important;
-  font-family: "Montserrat", sans-serif;
-  background: #ffffff;
-}
-
-::ng-deep .mat-form-field.mat-focused {
-  transform: translateY(-1px);
-  transition: transform 0.3s ease;
-}
-
-/* Botón mejorado */
-.reserve-btn {
-  background: #2d5f3f;
-  color: white;
+  padding: 1rem 3rem;
   border: none;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 8px;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  min-width: 140px;
-  font-family: "Montserrat", sans-serif;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.25);
+  box-shadow: 0 8px 20px rgba(233, 133, 82, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0.5rem auto 0 auto;
 }
 
-.reserve-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
+.verificar-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(233, 133, 82, 0.6);
 }
 
-.reserve-btn:hover {
-  background: #1e4129;
-  box-shadow: 0 8px 25px rgba(45, 95, 63, 0.35);
-  transform: translateY(-2px);
-}
-
-.reserve-btn:hover::before {
-  left: 100%;
-}
-
-.reserve-btn:active {
-  transform: translateY(0);
-}
-
-.reserve-btn:disabled {
-  background: #e9ecef;
-  color: #6c757d;
-  box-shadow: none;
-  transform: none;
+.verificar-button:disabled {
+  opacity: 0.6;
   cursor: not-allowed;
 }
 
-.reserve-btn:disabled::before {
-  display: none;
-}
-
-/* Mensaje de error mejorado */
-.error-message {
-  color: #e74c3c;
-  margin-top: 20px;
-  font-weight: 500;
-  text-align: center;
-  padding: 16px;
-  background: rgba(231, 76, 60, 0.05);
+.error-message-verificar {
+  font-family: 'Questrial', sans-serif;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  padding: 1rem;
   border-radius: 12px;
-  border-left: 4px solid #e74c3c;
-  font-size: 15px;
-  font-family: "Montserrat", sans-serif;
-}
-
-/* Información de reserva mejorada */
-.reserva-info {
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 20px;
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.08),
-    0 8px 20px rgba(0, 0, 0, 0.04);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  margin: 40px auto 30px auto;
-  padding: 40px 35px;
-  max-width: 600px;
   text-align: center;
-  position: relative;
-  overflow: hidden;
-  animation: slideInUp 0.8s ease-out 0.4s both;
+  border: 1px solid rgba(220, 53, 69, 0.3);
 }
 
-.reserva-info::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
-  pointer-events: none;
-}
-.logo-image {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1.5rem auto;
-    display: block;
-    border-radius: 50%;
-    border: 4px solid rgba(212, 165, 116, 0.8);
-    box-shadow: 0 8px 25px rgba(45, 62, 45, 0.3);
-    transition: all 0.3s ease;
-}
-.logo-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 35px rgba(45, 62, 45, 0.4);
-    border-color: #d4a574;
-}
-/* Modal overlay */
-.modal-overlay {
+.modal-overlay-verificar {
   position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 2000;
-  backdrop-filter: blur(8px);
-  animation: fadeInModal 0.3s ease-out;
-  padding: 20px;
-  box-sizing: border-box;
+  z-index: 9999;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease-out;
 }
 
-@keyframes fadeInModal {
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-/* Contenedor del modal */
-.modal-content {
-  background: rgba(255, 255, 255, 0.98);
-  border-radius: 24px;
-  box-shadow: 
-    0 25px 70px rgba(0, 0, 0, 0.2),
-    0 10px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+.modal-card-verificar {
+  background: #fff;
+  border-radius: 25px;
   max-width: 600px;
   width: 100%;
-  max-height: 90vh;
-  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
   position: relative;
-  animation: slideInModal 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: scaleIn 0.3s ease-out;
+  overflow: hidden;
 }
 
-@keyframes slideInModal {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* Botón de cerrar */
-.modal-close {
+.modal-close-btn {
   position: absolute;
-  top: 20px;
-  right: 20px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid rgba(231, 76, 60, 0.2);
+  top: 1.5rem;
+  right: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border: none;
+  background: rgba(233, 133, 82, 0.1);
+  color: #e98552;
   border-radius: 50%;
-  width: 44px;
-  height: 44px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
   transition: all 0.3s ease;
   z-index: 10;
-  backdrop-filter: blur(10px);
 }
 
-.modal-close svg {
-  width: 20px;
-  height: 20px;
-  color: #e74c3c;
-  transition: transform 0.3s ease;
-}
-
-.modal-close:hover {
-  background: rgba(231, 76, 60, 0.1);
-  border-color: #e74c3c;
-  transform: scale(1.1);
-  box-shadow: 0 4px 15px rgba(231, 76, 60, 0.2);
-}
-
-.modal-close:hover svg {
+.modal-close-btn:hover {
+  background: rgba(233, 133, 82, 0.2);
   transform: rotate(90deg);
 }
 
-/* Información de reserva en modal */
-.reserva-info {
-  padding: 40px;
-  position: relative;
-}
-
-.reserva-info::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: 
-    radial-gradient(circle at 20% 20%, rgba(45, 95, 63, 0.02) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(45, 95, 63, 0.02) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-/* Header del modal */
-.modal-header {
+.modal-header-verificar {
+  background: linear-gradient(135deg, rgba(74, 107, 58, 0.95), rgba(58, 85, 48, 0.95));
+  padding: 3rem 2rem 2rem 2rem;
   text-align: center;
-  margin-bottom: 30px;
   position: relative;
-  z-index: 1;
 }
 
-.success-icon {
+.success-badge {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+  background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 20px auto;
-  box-shadow: 0 8px 25px rgba(39, 174, 96, 0.3);
-  animation: bounceIn 0.6s ease-out 0.2s both;
+  margin: 0 auto 1rem;
+  backdrop-filter: blur(10px);
+  border: 3px solid rgba(255, 255, 255, 0.3);
 }
 
-.success-icon svg {
-  width: 40px;
-  height: 40px;
-  color: white;
+.success-badge mat-icon{
+  font-size: 45px;
+  width: 45px;
+  height: 45px;
+  color: #fff;
 }
 
-@keyframes bounceIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.3);
-  }
-  50% {
-    transform: scale(1.05);
-  }
-  70% {
-    transform: scale(0.9);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-.reserva-titulo {
-  color: #2d5f3f;
-  font-size: 2rem;
-  font-weight: 600;
+.modal-title-verificar {
+  font-family: 'Archane', sans-serif;
+  font-size: 2.2rem;
+  color: #fff;
   margin: 0;
-  font-family: "Montserrat", sans-serif;
-  animation: slideInDown 0.6s ease-out 0.3s both;
+  font-weight: 100;
 }
 
-/* Body del modal */
-.modal-body {
-  position: relative;
-  z-index: 1;
+.modal-body-verificar {
+  padding: 2.5rem 2rem;
 }
 
-.reserva-mensaje {
-  color: #2c3e50;
-  font-size: 1.1rem;
-  margin-bottom: 20px;
-  line-height: 1.6;
-  font-weight: 500;
-  font-family: "Montserrat", sans-serif;
+.modal-message-primary {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1.05rem;
+  color: #333;
+  line-height: 1.7;
+  margin: 0 0 1.5rem 0;
   text-align: center;
-  animation: slideInUp 0.6s ease-out 0.4s both;
 }
 
-.reserva-detalle {
-  color: #5a6c7d;
+.modal-message-primary strong {
+  color: #e98552;
+  font-weight: 800;
+}
+
+.modal-message-secondary {
+  font-family: 'Questrial', sans-serif;
   font-size: 1rem;
-  margin-bottom: 30px;
+  color: #666;
   line-height: 1.6;
-  font-weight: 400;
-  font-family: "Montserrat", sans-serif;
+  margin: 0 0 2rem 0;
   text-align: center;
-  animation: slideInUp 0.6s ease-out 0.5s both;
 }
 
-/* Datos de reserva mejorados */
-.reserva-datos {
-  background: rgba(248, 249, 250, 0.8);
-  border-radius: 16px;
-  padding: 25px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  margin-bottom: 30px;
-  animation: slideInUp 0.6s ease-out 0.6s both;
+.modal-message-secondary strong {
+  color: #2d4a2d;
 }
 
-.dato-item {
+.reserva-details-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.detail-card {
+  background: rgba(233, 133, 82, 0.15);
+  border: 2px solid rgba(233, 133, 82, 0.2);
+  border-radius: 15px;
+  padding: 1.5rem;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(45, 95, 63, 0.1);
-}
-
-.dato-item:last-child {
-  margin-bottom: 0;
-  border-bottom: none;
-}
-
-.dato-label {
-  color: #2d5f3f;
-  font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  font-family: "Montserrat", sans-serif;
-}
-
-.dato-valor {
-  color: #2c3e50;
-  font-weight: 500;
-  font-size: 15px;
-  font-family: "Montserrat", sans-serif;
-}
-
-/* Footer del modal */
-.modal-footer {
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.btn-cerrar {
-  background: linear-gradient(135deg, #2d5f3f 0%, #1e4129 100%);
-  color: white;
-  border: none;
-  padding: 16px 32px;
-  border-radius: 12px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
+  gap: 1rem;
   transition: all 0.3s ease;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  min-width: 140px;
-  font-family: "Montserrat", sans-serif;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 15px rgba(45, 95, 63, 0.25);
-  animation: slideInUp 0.6s ease-out 0.7s both;
 }
 
-.btn-cerrar::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.btn-cerrar:hover {
-  background: linear-gradient(135deg, #1e4129 0%, #2d5f3f 100%);
-  box-shadow: 0 8px 25px rgba(45, 95, 63, 0.35);
+.detail-card:hover {
+  background: rgba(233, 133, 82, 0.25);
+  border-color: rgba(233, 133, 82, 0.3);
   transform: translateY(-2px);
 }
 
-.btn-cerrar:hover::before {
-  left: 100%;
+.detail-icon {
+  width: 50px;
+  height: 50px;
+  background: rgba(233, 133, 82, 0.25);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
 }
 
-.btn-cerrar:active {
-  transform: translateY(0);
+.detail-icon mat-icon {
+  color: #e98552;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
 }
 
-/* Responsive design para modal */
+.detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.detail-label {
+  font-family: 'Questrial', sans-serif;
+  font-size: 0.85rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+}
+
+.modal-footer-verificar {
+  padding: 0 2rem 2rem 2rem;
+  text-align: center;
+}
+
+.modal-action-btn {
+  font-family: 'Questrial', sans-serif;
+  background: linear-gradient(135deg, #e98552, rgba(233, 133, 82, 0.9));
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 500;
+  padding: 1rem 3rem;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(233, 133, 82, 0.3);
+}
+
+.modal-action-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(233, 133, 82, 0.5);
+}
+
 @media (max-width: 768px) {
-  .modal-overlay {
-    padding: 15px;
+  .verificar-logo {
+    width: 80px;
+    height: 80px;
   }
   
-  .modal-content {
-    border-radius: 20px;
-    max-height: 95vh;
+  .verificar-decorative-line {
+    width: 220px;
   }
   
-  .reserva-info {
-    padding: 30px 25px;
+  .verificar-title {
+    font-size: 2.5rem;
   }
   
-  .modal-close {
-    top: 15px;
-    right: 15px;
-    width: 40px;
-    height: 40px;
+  .verificar-form-card {
+    padding: 2rem 1.5rem;
   }
   
-  .modal-close svg {
-    width: 18px;
-    height: 18px;
-  }
-  
-  .success-icon {
-    width: 70px;
-    height: 70px;
-    margin-bottom: 15px;
-  }
-  
-  .success-icon svg {
-    width: 35px;
-    height: 35px;
-  }
-  
-  .reserva-titulo {
-    font-size: 1.6rem;
-  }
-  
-  .reserva-mensaje {
-    font-size: 1rem;
-  }
-  
-  .reserva-detalle {
+  .verificar-input {
     font-size: 0.95rem;
+    padding: 0.9rem 1.2rem;
   }
   
-  .reserva-datos {
-    padding: 20px;
+  .verificar-button {
+    font-size: 1rem;
+    padding: 0.9rem 2.5rem;
   }
   
-  .dato-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+  .modal-card-verificar {
+    max-width: 95%;
   }
   
-  .btn-cerrar {
-    padding: 14px 28px;
-    font-size: 14px;
+  .modal-title-verificar {
+    font-size: 1.8rem;
+  }
+  
+  .reserva-details-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
 @media (max-width: 480px) {
-  .modal-overlay {
-    padding: 10px;
+  .verificar-logo {
+    width: 70px;
+    height: 70px;
   }
   
-  .reserva-info {
-    padding: 25px 20px;
+  .verificar-decorative-line {
+    width: 180px;
   }
   
-  .success-icon {
-    width: 60px;
-    height: 60px;
+  .verificar-title {
+    font-size: 2rem;
   }
   
-  .success-icon svg {
-    width: 30px;
-    height: 30px;
+  .verificar-form-card {
+    padding: 1.5rem 1rem;
   }
   
-  .reserva-titulo {
-    font-size: 1.4rem;
+  .modal-header-verificar {
+    padding: 2rem 1.5rem 1.5rem 1.5rem;
   }
   
-  .reserva-mensaje {
+  .success-badge {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .success-badge mat-icon {
+    font-size: 38px;
+    width: 38px;
+    height: 38px;
+  }
+  
+  .modal-title-verificar {
+    font-size: 1.6rem;
+  }
+  
+  .modal-body-verificar {
+    padding: 2rem 1.5rem;
+  }
+  
+  .modal-message-primary {
     font-size: 0.95rem;
   }
   
-  .reserva-detalle {
+  .modal-message-secondary {
     font-size: 0.9rem;
   }
   
-  .reserva-datos {
-    padding: 18px;
+  .detail-card {
+    padding: 1.2rem;
   }
   
-  .dato-label {
-    font-size: 13px;
+  .detail-icon {
+    width: 45px;
+    height: 45px;
   }
   
-  .dato-valor {
-    font-size: 14px;
+  .detail-icon mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
   }
 }
 
-/* Animaciones de entrada escalonadas */
-@keyframes slideInDown {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInUp {
-  0% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
     transform: translateY(30px);
   }
-  100% {
+  to {
     opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Estados de focus para accesibilidad */
-.modal-close:focus-visible,
-.btn-cerrar:focus-visible {
-  outline: 2px solid rgba(45, 95, 63, 0.5);
-  outline-offset: 4px;
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Scroll suave en el modal */
-.modal-content {
-  scrollbar-width: thin;
-  scrollbar-color: #2d5f3f rgba(248, 249, 250, 0.8);
-}
-
-.modal-content::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modal-content::-webkit-scrollbar-track {
-  background: rgba(248, 249, 250, 0.8);
-  border-radius: 3px;
-}
-
-.modal-content::-webkit-scrollbar-thumb {
-  background: #2d5f3f;
-  border-radius: 3px;
-}
-
-.modal-content::-webkit-scrollbar-thumb:hover {
-  background: #1e4129;
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }

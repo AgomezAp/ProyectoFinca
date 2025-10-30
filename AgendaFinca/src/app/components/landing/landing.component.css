@@ -1,1232 +1,462 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Playfair+Display:wght@400;700&display=swap');
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, sans-serif;
-  overflow-x: hidden;
-}
-
-/* SECCIÓN HERO CON CAROUSEL */
-.hero-carousel-section {
+.hero-reservation-section {
   position: relative;
   min-height: 100vh;
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
+  padding: 2rem;
 }
 
-/* CAROUSEL DE FONDO (solo para la sección hero) */
-.carousel-container {
+.hero-background {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, rgba(74, 107, 58, 0.85), rgba(58, 85, 48, 0.9));
   z-index: 1;
 }
 
-.carousel-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
-  /* Mejora: Añadir overlay para mejor contraste del texto */
-  background-blend-mode: overlay;
-}
-
-.carousel-slide::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.15);
-  z-index: 1;
-}
-
-.carousel-slide.active {
-  opacity: 1;
-}
-
-/* Controles del carousel - DISEÑO MEJORADO */
-.carousel-controls {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  padding: 0 40px;
-  z-index: 1000;
-  pointer-events: none;
-}
-
-.carousel-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  backdrop-filter: blur(20px);
-  color: white;
-  pointer-events: auto;
+.hero-content {
   position: relative;
-  z-index: 1001;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  /* Mejora: Mejor accesibilidad */
-  outline: none;
-}
-
-.carousel-btn:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 4px;
-}
-
-.carousel-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  border-radius: 50%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 0.05)
-  );
-  transition: all 0.3s ease;
-}
-
-.carousel-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  border-color: rgba(255, 255, 255, 0.6);
-  transform: scale(1.1);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
-}
-
-.carousel-btn:hover::before {
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.2),
-    rgba(255, 255, 255, 0.1)
-  );
-}
-
-.carousel-btn:active {
-  transform: scale(0.95);
-  transition: transform 0.1s ease;
-}
-
-.carousel-btn svg {
-  width: 20px;
-  height: 20px;
-  pointer-events: none;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-  position: relative;
-  z-index: 2;
-}
-
-/* Animación para los botones */
-.carousel-btn {
-  animation: fadeInScale 0.6s ease-out;
-}
-
-@keyframes fadeInScale {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-/* Indicadores del carousel - DISEÑO MEJORADO */
-.carousel-indicators {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 16px;
-  z-index: 1000;
-  pointer-events: none;
-  background: rgba(0, 0, 0, 0.1);
-  padding: 12px 20px;
-  border-radius: 25px;
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.indicator {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border: 2px solid transparent;
-  pointer-events: auto;
-  position: relative;
-  z-index: 1001;
-  /* Mejora: Mejor accesibilidad */
-  outline: none;
-}
-
-.indicator:focus-visible {
-  outline: 2px solid white;
-  outline-offset: 2px;
-}
-
-.indicator::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 0;
-  height: 0;
-  background: white;
-  border-radius: 50%;
-  transition: all 0.3s ease;
-}
-
-.indicator.active {
-  background: white;
-  transform: scale(1.2);
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-}
-
-.indicator.active::before {
-  width: 6px;
-  height: 6px;
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.indicator:hover:not(.active) {
-  background: rgba(255, 255, 255, 0.7);
-  transform: scale(1.1);
-}
-
-/* Efecto de pulso para el indicador activo */
-.indicator.active {
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.6);
-  }
-  100% {
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
-  }
-}
-
-/* Contenido principal */
-.main-content {
-  position: relative;
-  z-index: 50;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 40px;
-  pointer-events: none;
-}
-
-.hero-section {
+  z-index: 10;
   text-align: center;
-  max-width: 700px;
+  max-width: 800px;
   width: 100%;
-  pointer-events: auto;
-  /* Mejora: Animación de entrada */
   animation: fadeInUp 1s ease-out;
 }
-.logo-image {
-    width: 120px;
-    height: 120px;
-    margin: 0 auto 1.5rem auto;
-    display: block;
-    border-radius: 50%;
-    border: 4px solid rgba(212, 165, 116, 0.8);
-    box-shadow: 0 8px 25px rgba(45, 62, 45, 0.3);
-    transition: all 0.3s ease;
-}
-.logo-image:hover {
-    transform: scale(1.05);
-    box-shadow: 0 12px 35px rgba(45, 62, 45, 0.4);
-    border-color: #d4a574;
+
+.hero-logo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 2rem;
+  display: block;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.3));
 }
 
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.decorative-line {
+  width: 400px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+  margin: 1.5rem auto;
 }
 
-/* Título principal */
-.title {
-  font-size: 5rem;
-  color: #ffffff;
-  margin-bottom: 100px;
-  font-weight: 700;
-  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.4);
-  letter-spacing: -2px;
-  line-height: 1.1;
-  font-family: "Playfair Display", "Georgia", serif;
-  /* Mejora: Gradiente sutil en el texto */
-  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  /* Fallback para navegadores que no soporten gradientes en texto */
-}
-.subtitle {
-    font-size: 1.3rem;
-    color: #d4a574;
-    font-weight: 300;
-    text-shadow: 2px 2px 4px rgba(45, 62, 45, 0.6);
-    letter-spacing: 1px;
+.hero-label {
+  font-family: 'Questrial', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.9);
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin: 0;
+  font-weight: 400;
 }
 
-/* Formulario de reserva */
-.booking-form {
-  background: rgba(255, 255, 255, 0.55);
-  padding: 50px;
-  border-radius: 24px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  transform: translateY(0);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  /* Mejora: Sombra más elegante */
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.15),
-    0 8px 20px rgba(0, 0, 0, 0.1);
+.hero-title {
+  font-family: 'Archane', sans-serif;
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: #fff;
+  margin: 1rem 0;
+  letter-spacing: 2px;
+  text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.5);
 }
 
-.booking-form:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 25px 70px rgba(0, 0, 0, 0.2),
-    0 10px 25px rgba(0, 0, 0, 0.15);
+.hero-subtitle {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+  margin: 0 0 3rem 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.reservation-form-card {
+  background: rgba(242, 236, 228, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  padding: 3rem 2.5rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.reservation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .form-row {
-  display: flex;
-  gap: 25px;
-  margin-bottom: 30px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
 }
 
-.form-row:last-child {
-  margin-bottom: 0;
+.form-row .full-width {
+  grid-column: 1 / -1;
 }
 
 .form-group {
-  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
 }
 
-/* Labels */
 .form-label {
-  font-size: 16px;
-  color: #2c3e50;
-  margin-bottom: 10px;
-  font-weight: 600;
+  font-family: 'Questrial', sans-serif;
+  font-size: 1rem;
+  color: #e98552;
+  font-weight: 500;
   text-align: left;
-  letter-spacing: 0.5px;
+  margin-bottom: 0.3rem;
 }
 
-/* Mejora: Estilos para mat-form-field */
-::ng-deep .mat-form-field {
-  width: 100%;
-  font-family: "Montserrat", sans-serif;
-}
-
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+::ng-deep .date-field .mat-mdc-text-field-wrapper,
+::ng-deep .select-field .mat-mdc-text-field-wrapper {
+  background: #fff;
   border-radius: 12px;
-  border-width: 2px;
 }
 
-::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline-thick {
-  border-width: 2px;
-}
-
-::ng-deep .mat-form-field-appearance-outline:not(.mat-form-field-disabled) .mat-form-field-flex:hover .mat-form-field-outline {
-  border-color: #3498db;
-}
-
-::ng-deep .mat-form-field.mat-focused .mat-form-field-outline-thick {
-  border-color: #3498db;
-}
-
-::ng-deep .mat-input-element {
-  padding: 16px 20px;
-  font-size: 18px;
-  font-weight: 500;
-  color: #2c3e50;
-}
-
-::ng-deep .mat-select-value {
-  font-size: 18px;
-  font-weight: 500;
-  color: #2c3e50;
-}
-
-/* Inputs de fecha - mantenidos para compatibilidad */
-.date-input {
-  padding: 16px 20px;
-  border: 2px solid #e1e8ed;
-  border-radius: 12px;
-  font-size: 18px;
-  color: #2c3e50;
-  background: white;
+::ng-deep .date-field .mat-mdc-form-field-flex,
+::ng-deep .select-field .mat-mdc-form-field-flex {
+  background: #fff;
+  border-radius: 120px;
+  border: 2px solid rgba(233, 133, 82, 0.2);
   transition: all 0.3s ease;
-  cursor: pointer;
-  font-family: "Montserrat", sans-serif;
+}
+
+::ng-deep .date-field:hover .mat-mdc-form-field-flex,
+::ng-deep .select-field:hover .mat-mdc-form-field-flex {
+  border-color: rgba(233, 133, 82, 00.5px);
+}
+
+::ng-deep .mat-mdc-form-field-focues-overlay {
+  background-color: transparent !important;
+}
+
+::ng-deep .mat-mdc-text-field-wrapper {
+  padding: 5 !important;
+}
+
+::ng-deep .mat-mdc-text-field-infix {
+  padding: 1rem 1.2rem !important;
+  min-height: auto !important;
+}
+
+::ng-deep .mat-mdc-input-element {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1rem;
+  color: #333;
+}
+
+::ng-deep .mat-mdc-input-element::placeholder {
+  color: 999;
+}
+
+::ng-deep .mat-datepicker-toggle {
+  color: #e98552
+}
+
+::ng-deep .mat-mdc-select {
+  font-family: 'Questrial', sans-serif;
+}
+
+::ng-deep .mat-mdc-select-arrow {
+  color: #e98552;
+}
+
+.reserve-button {
+  font-family: 'Questrial', sans-serif;
+  background: linear-gradient(135deg, #e98552, rgba(233, 133, 82, 0.9));
+  color: #fff;
+  font-size: 1.1rem;
   font-weight: 500;
-}
-
-.date-input:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-  transform: translateY(-2px);
-}
-
-.date-input::-webkit-calendar-picker-indicator {
-  cursor: pointer;
-  filter: invert(0.4);
-  width: 20px;
-  height: 20px;
-}
-
-/* Select de huéspedes - mantenido para compatibilidad */
-.guests-select {
-  padding: 16px 20px;
-  border: 2px solid #e1e8ed;
-  border-radius: 12px;
-  font-size: 18px;
-  color: #2c3e50;
-  background: white;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  appearance: none;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 500;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'><path fill='%23666' d='M2 0L0 2h4zm0 5L0 3h4z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 14px;
-}
-
-.guests-select:focus {
-  outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
-  transform: translateY(-2px);
-}
-
-/* Botón de reservar */
-.reserve-btn {
-  background: #2d5f3f;
-  color: white;
+  padding: 1.2rem 3rem;
   border: none;
-  padding: 18px 40px;
-  border-radius: 12px;
-  font-size: 18px;
-  font-weight: 700;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
-  margin-top: 1px;
-  font-family: "Montserrat", sans-serif;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  min-width: 160px;
-  position: relative;
-  overflow: hidden;
-}
-
-.reserve-btn::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  transition: left 0.5s;
-}
-
-.reserve-btn:hover {
-  background: #1e4129;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(45, 95, 63, 0.3);
-}
-
-.reserve-btn:hover::before {
-  left: 100%;
-}
-
-.reserve-btn:active {
-  transform: translateY(-1px);
-}
-
-.reserve-btn:focus {
-  outline: 3px solid rgba(45, 95, 63, 0.3);
-  outline-offset: 2px;
-}
-
-/* SECCIÓN DE INFORMACIÓN DE LA FINCA CON ANIMACIONES */
-.finca-info-section {
-  background: linear-gradient(to bottom, #ffffff 0%, #f8f9fa 100%);
-  padding: 120px 0;
-  position: relative;
-  z-index: 10;
-  overflow: hidden;
-}
-
-/* Mejora: Patrón decorativo de fondo */
-.finca-info-section::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(102, 126, 234, 0.03) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(102, 126, 234, 0.03) 0%, transparent 50%);
-  pointer-events: none;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 40px;
-  position: relative;
-  z-index: 1;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 80px;
-  max-width: 800px;
+  margin-top: 1rem;
+  box-shadow: 0 8px 20px rgba(233, 133, 82, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.8rem;
   margin-left: auto;
   margin-right: auto;
-  opacity: 0;
-  transform: translateY(40px);
 }
 
-.section-title {
-  font-size: 3rem;
-  color: #2c3e50;
-  font-weight: 400;
-  line-height: 1.2;
-  margin-bottom: 30px;
-  letter-spacing: -1px;
-  font-family: "Playfair Display", serif;
+.reserve-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(233, 133, 82, 0.6);
+  background: linear-gradient(135deg, #ff9666, #e98552);
 }
 
-.section-description {
-  font-size: 18px;
-  color: #5a6c7d;
-  line-height: 1.6;
-  font-weight: 400;
+.button-icon {
+  font-size: 1.3rem;
 }
 
-/* Grid de características */
-.features-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 60px;
-  margin-top: 80px;
-}
-
-.feature-item {
+.error-message {
+  font-family: 'Questrial', sans-serif;
+  background: rgba(220, 53, 69, 0.1);
+  color: #dc3545;
+  padding: 1rem;
+  border-radius: 12px;
   text-align: center;
-  padding: 40px 20px;
-  opacity: 0;
-  transform: translateY(40px);
-  transition: all 0.3s ease;
-  border-radius: 20px;
-  position: relative;
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  margin-top: 1rem;
 }
 
-/* Mejora: Efecto hover más elegante */
-.feature-item::before {
-  content: "";
+.finca-info-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 4rem 2rem;
+}
+
+.info-background {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.info-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  z-index: 0;
+}
+
+.info-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1200px;
+  width: 100%;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.info-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.info-decorative-line {
+  width: 400px;
+  height: 1px;
+  background: #e98552;
+  margin: 1.5rem auto;
+}
+
+.info-label {
+  font-family: 'Questrial', sans-serif;
+  font-size: 0.95rem;
+  color: #888;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.info-title {
+  font-family: 'Archane', sans-serif;
+  font-size: 3rem;
+  font-weight: 400;
+  color: #e98552;
+  margin: 1rem 0;
+  letter-spacing: 1px;
+}
+
+.info-description {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1.1rem;
+  color: #666;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+}
+
+.feature-card {
+  background: #fff;
   border-radius: 20px;
-  opacity: 0;
-  transition: opacity 0.3s ease;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s ease;
 }
 
-.feature-item:hover::before {
-  opacity: 1;
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(233, 133, 82, 0.2);
 }
 
-.feature-icon {
-  width: 80px;
-  height: 80px;
-  background: #f8f9fa;
+.feature-icon-wrapper {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 2rem;
+  /* background: rgba(233, 133, 82, 0.1); */
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 30px;
-  color: #2c3e50;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-  z-index: 1;
+  transition: all 0.4s ease;
 }
 
-.feature-icon:hover {
-  transform: translateY(-10px) scale(1.05);
-  box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+.feature-card:hover .feature-icon-wrapper {
+  /* background: rgba(233, 133, 82, 0.2); */
+  transform: scale(1.1);
 }
 
-.feature-icon svg {
-  width: 32px;
-  height: 32px;
+.feature-icon-img {
+  width: 60px;
+  height: 60px;
 }
 
-.feature-title {
-  font-size: 24px;
-  color: #2c3e50;
+.feature-card-title {
+  font-family: 'Archane', serif;
+  font-size: 1.8rem;
+  color: #2d4a2d;
+  margin-bottom: 1rem;
   font-weight: 600;
-  margin-bottom: 15px;
-  letter-spacing: 0.5px;
-  position: relative;
-  z-index: 1;
 }
 
-.feature-description {
-  font-size: 16px;
-  color: #5a6c7d;
-  line-height: 1.5;
-  font-weight: 400;
-  position: relative;
-  z-index: 1;
-}
-.main-content {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    /* 🖼️ AGREGAR TU IMAGEN DE FONDO AQUÍ */
-    background: linear-gradient(135deg, rgba(45, 74, 45, 0.7), rgba(74, 107, 58, 0.5)), 
-                url('/assets/fondo.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    position: relative;
-    padding: 2rem;
-}
-.main-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 3rem;
-    font-weight: 700;
-    color: #faf8f3;
-    text-shadow: 3px 3px 6px rgba(45, 62, 45, 0.8);
-    margin-bottom: 1rem;
-    letter-spacing: 2px;
-    line-height: 1.1;
-}
-/* ANIMACIONES DE ENTRADA */
-@keyframes slideInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.feature-card-description {
+  font-family: 'Questrial', sans-serif;
+  font-size: 1.05rem;
+  color: #777;
+  line-height: 1.6;
 }
 
-@keyframes slideInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(60px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Clases de animación */
-.section-header.animate-in {
-  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-.feature-item.animate-in {
-  animation: slideInUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-}
-
-/* ANIMACIÓN DEL CALENDARIO */
-.calendar-feature .feature-icon {
-  background: linear-gradient(135deg, #2d5f3f 0%, #a2cf6e 100%);
-  overflow: hidden;
-}
-
-.calendar-animation {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.calendar-header {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 2px 2px 0 0;
-  position: relative;
-}
-
-.calendar-header::before,
-.calendar-header::after {
-  content: "";
-  position: absolute;
-  top: -3px;
-  width: 4px;
-  height: 14px;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 2px;
-}
-
-.calendar-header::before {
-  left: 8px;
-}
-
-.calendar-header::after {
-  right: 8px;
-}
-
-.calendar-body {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  margin-top: 4px;
-}
-
-.calendar-day {
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 1px;
-  animation: calendarPulse 2s infinite;
-}
-
-.calendar-selected {
-  position: absolute;
-  top: 16px;
-  left: 12px;
-  width: 8px;
-  height: 8px;
-  background-color: #5525ad;
-  border-radius: 50%;
-  animation: selectedPulse 1.5s infinite;
-}
-
-@keyframes calendarPulse {
-  0%,
-  100% {
-    opacity: 0.6;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-@keyframes selectedPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    background: #5525ad;
-  }
-  50% {
-    transform: scale(1.2);
-    background: #5535cd;
-  }
-}
-
-/* ANIMACIÓN DE HUÉSPEDES */
-.guests-feature .feature-icon {
-  background: linear-gradient(135deg, #2d5f3f 0%, #a2cf6e 100%);
-  overflow: visible;
-}
-
-.guests-animation {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.guest-icons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  width: 30px;
-  height: 30px;
-  margin: 5px auto;
-}
-
-.guest-icon {
-  opacity: 0;
-  transform: scale(0);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.guest-icon.visible {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.guest-avatar {
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-  animation: avatarFloat 2s ease-in-out infinite;
-}
-
-@keyframes counterPulse {
-  0% {
-    transform: scale(0);
-  }
-  50% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes numberChange {
-  0% {
-    transform: scale(1.2);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes avatarFloat {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-2px);
-  }
-}
-
-/* ANIMACIÓN DE BÚSQUEDA */
-.search-feature .feature-icon {
-  background: linear-gradient(135deg, #2d5f3f 0%, #a2cf6e 100%);
-  overflow: hidden;
-}
-
-.search-animation {
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.search-circle {
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(255, 255, 255, 0.8);
-  border-radius: 50%;
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  animation: searchPulse 2s ease-in-out infinite;
-}
-
-.search-handle {
-  width: 8px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.8);
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  transform: rotate(45deg);
-  border-radius: 2px;
-  animation: handleMove 2s ease-in-out infinite;
-}
-
-.search-particles {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  width: 30px;
-  height: 30px;
-}
-
-.particle {
-  position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  animation: particleFloat 3s linear infinite;
-}
-
-.particle:nth-child(1) {
-  top: 5px;
-  left: 10px;
-  animation-delay: 0s;
-}
-.particle:nth-child(2) {
-  top: 15px;
-  left: 5px;
-  animation-delay: 0.6s;
-}
-.particle:nth-child(3) {
-  top: 10px;
-  left: 20px;
-  animation-delay: 1.2s;
-}
-.particle:nth-child(4) {
-  top: 20px;
-  left: 15px;
-  animation-delay: 1.8s;
-}
-.particle:nth-child(5) {
-  top: 8px;
-  left: 12px;
-  animation-delay: 2.4s;
-}
-
-@keyframes searchPulse {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.8;
-  }
-  50% {
-    transform: scale(1.1);
-    opacity: 1;
-  }
-}
-
-@keyframes handleMove {
-  0%,
-  100% {
-    transform: rotate(45deg) translateX(0);
-  }
-  50% {
-    transform: rotate(45deg) translateX(2px);
-  }
-}
-
-@keyframes particleFloat {
-  0% {
-    opacity: 0;
-    transform: translateY(0) scale(0);
-  }
-  20% {
-    opacity: 1;
-    transform: translateY(-5px) scale(1);
-  }
-  80% {
-    opacity: 1;
-    transform: translateY(-15px) scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-20px) scale(0);
-  }
-}
-
-/* Estilo para el highlight en el texto */
-.highlight {
-  color: #a2cf6e ;
-  font-weight: bold;
-  animation: highlightPulse 2s ease-in-out infinite;
-}
-
-@keyframes highlightPulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.7;
-  }
-}
-
-/* Hover effects específicos */
-.feature-item:hover .calendar-selected {
-  animation-duration: 0.8s;
-}
-
-.feature-item:hover .guest-counter {
-  animation: counterPulse 0.3s ease-out;
-}
-
-.feature-item:hover .search-circle {
-  animation-duration: 1s;
-}
-
-.error-message {
-  color: #e74c3c;
-  margin-top: 16px;
-  font-weight: 600;
-  text-align: center;
-  padding: 12px;
-  background: rgba(231, 76, 60, 0.1);
-  border-radius: 8px;
-  border-left: 4px solid #e74c3c;
-}
-
-/* Mejora: Indicador de carga */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-  position: relative;
-}
-
-.loading::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 20px;
-  height: 20px;
-  margin: -10px 0 0 -10px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-/* Mejora: Estados de focus mejorados */
-.date-input:focus-visible,
-.guests-select:focus-visible {
-  outline: 2px solid #3498db;
-  outline-offset: 2px;
-}
-
-/* Variante para tema oscuro automático */
-@media (prefers-color-scheme: dark) {
-  .carousel-btn {
-    background: rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.2);
-  }
-
-  .carousel-btn:hover {
-    background: rgba(0, 0, 0, 0.5);
-    border-color: rgba(255, 255, 255, 0.4);
-  }
-}
-
-/* Mejora: Reducir movimiento para usuarios que lo prefieran */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-  
-  .carousel-slide {
-    transition: none;
-  }
-}
-
-/* Responsive */
 @media (max-width: 768px) {
-  .title {
-    font-size: 3.5rem;
-    margin-bottom: 60px;
+  .hero-logo {
+    width: 90px;
+    height: 90px;
+    margin-bottom: 1.5rem;
   }
 
-  .booking-form {
-    padding: 40px 30px;
+  .decorative-line,
+  .info-decorative-line {
+    width: 250px;
+    margin: 1rem auto;
   }
 
-  .form-row {
-    flex-direction: column;
-    gap: 20px;
+  .hero-label,
+  .info-label {
+    font-size: 0.85rem;
   }
 
-  .main-content {
-    padding: 30px 20px;
+  .hero-title {
+    font-size: 3rem;
   }
 
-  .carousel-controls {
-    padding: 0 20px;
-  }
-
-  .carousel-btn {
-    width: 48px;
-    height: 48px;
-  }
-
-  .carousel-btn svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .carousel-indicators {
-    bottom: 30px;
-    padding: 10px 16px;
-    gap: 12px;
-  }
-
-  .indicator {
-    width: 10px;
-    height: 10px;
-  }
-
-  .finca-info-section {
-    padding: 80px 0;
-  }
-
-  .container {
-    padding: 0 25px;
-  }
-
-  .section-title {
+  .info-title {
     font-size: 2.2rem;
   }
 
-  .section-description {
-    font-size: 16px;
+  .hero-subtitle,
+  .info-description {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
 
-  .features-grid {
+  .reservation-form-card {
+    padding: 2rem 1.5rem;
+  }
+  
+  .form-row {
     grid-template-columns: 1fr;
-    gap: 40px;
-    margin-top: 60px;
+    gap: 1.5rem;
+  }
+  
+  .reserve-button {
+    width: 100%;
+    padding: 1.1rem 2rem;
   }
 
-  .feature-item {
-    padding: 30px 15px;
-  }
-
-  .calendar-animation,
-  .guests-animation,
-  .search-animation {
-    width: 32px;
-    height: 32px;
+  .feature-card {
+    padding: 2rem 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .title {
-    font-size: 2.8rem;
-    margin-bottom: 40px;
+  .hero-logo {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .decorative-line,
+  .info-decorative-line {
+    width: 180px;
+  }
+  
+  .hero-title {
+    font-size: 2.5rem;
   }
 
-  .booking-form {
-    margin: 0 15px;
-    padding: 30px 20px;
-  }
-
-  .date-input,
-  .guests-select {
-    font-size: 16px;
-    padding: 14px 16px;
-  }
-
-  .reserve-btn {
-    font-size: 16px;
-    padding: 16px 32px;
-  }
-
-  .section-title {
+  .info-title {
     font-size: 1.8rem;
   }
-
-  .feature-icon {
-    width: 60px;
-    height: 60px;
+  
+  .hero-subtitle,
+  .info-description {
+    font-size: 0.95rem;
+  }
+  
+  .reservation-form-card {
+    padding: 1.5rem 1rem;
+  }
+  
+  .form-label {
+    font-size: 0.95rem;
   }
 
-  .feature-icon svg {
-    width: 24px;
-    height: 24px;
+  .feature-icon-wrapper {
+    width: 80px;
+    height: 80px;
   }
-
-  .feature-title {
-    font-size: 20px;
+  
+  .feature-icon-img {
+    width: 45px;
+    height: 45px;
   }
-
-  .carousel-btn {
-    width: 44px;
-    height: 44px;
+  
+  .feature-card-title {
+    font-size: 1.5rem;
   }
+}
 
-  .carousel-btn svg {
-    width: 16px;
-    height: 16px;
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
   }
-
-  .carousel-indicators {
-    bottom: 20px;
-    padding: 8px 12px;
-    gap: 10px;
-  }
-
-  .indicator {
-    width: 8px;
-    height: 8px;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

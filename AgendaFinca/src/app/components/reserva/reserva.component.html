@@ -1,249 +1,231 @@
-<!-- <header class="header">
-    <div class="navbar-line"></div>
-    <nav class="nav">
-        <a href="#" class="nav-link">Inicio</a>
-        <a href="#" class="nav-link">Acerca</a>
-        <a href="#" class="nav-link">Contacto</a>
-    </nav>
-</header> -->
-<div class="hero-container">
-<div class="logo-container">
-    <img src="/assets/logo.png" alt="Logo Finca" class="logo-image">
-    <h1 class="main-title">Reservar Tu Estadia</h1>
-    <p class="subtitle">Completa los datos para tu reserva en Finca El Progreso</p>
-</div>
-<form #formulario="ngForm">
-    <!-- Fechas (ya están bien) -->
-    <div class="form-row">
-        <div class="custom-date-field half-width">
-            <label for="fechaInicio">Fecha de llegada</label>
-            <div class="date-input-wrapper">
-                <input type="date" 
-                       id="fechaInicio"
-                       name="Inicio" 
-                       [(ngModel)]="fechaInicio" 
-                       readonly
-                       class="custom-date-input">
-                <mat-icon class="calendar-icon">calendar_today</mat-icon>
-            </div>
-        </div>
+<section class="reserva-hero-section">
+    <img src="assets/images/Jardines.webp" alt="Fondo Reserva" class="reserva-background">
+    <div class="reserva-overlay"></div>
+    <div class="reserva-content">
+        <img src="assets/logos/ISOTIPO.svg" alt="Logo Finca" class="reserva-logo">
+        <div class="reserva-decorative-line"></div>
+        <p class="reserva-label">Formulario</p>
+        <h1 class="reserva-title">Reservar Tu Estadia</h1>
+        <div class="reserva-decorative-line"></div>
+        <p class="reserva-subtitle">Completa los datos para tu reserva en Finca El Progreso</p>
+        <div class="reserva-form-card">
+            <form #formulario="ngForm" class="reserva-form">
+                <div class="form-row-two">
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Fecha de llegada</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="date" 
+                                   id="fechaInicio"
+                                   name="Inicio" 
+                                   [(ngModel)]="fechaInicio" 
+                                   readonly
+                                   class="input-reserva" placeholder="dd/mm/aaaa">
+                            <mat-icon class="input-icon-reserva">calendar_today</mat-icon>
+                        </div>
+                    </div>
 
-        <div class="custom-date-field half-width">
-            <label for="fechaFin">Fecha de salida</label>
-            <div class="date-input-wrapper">
-                <input type="date" 
-                       id="fechaFin"
-                       name="Fin" 
-                       [(ngModel)]="fechaFin" 
-                       readonly
-                       class="custom-date-input">
-                <mat-icon class="calendar-icon">calendar_today</mat-icon>
-            </div>
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Fecha de salida</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="date" 
+                                   id="fechaFin"
+                                   name="Fin" 
+                                   [(ngModel)]="fechaFin" 
+                                   readonly
+                                   class="input-reserva" placeholder="dd/mm/aaaa">
+                            <mat-icon class="input-icon-reserva">calendar_today</mat-icon>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group-reserva full-width">
+                    <label class="form-label-reserva">Huéspedes</label>
+                    <div class="select-wrapper-reserva">
+                        <select id="personas"
+                                name="personas" 
+                                [(ngModel)]="personas" 
+                                class="select-reserva">
+                                <option value="" disabled>2 personas</option>
+                                <option *ngFor="let i of huespedes" [value]="i">{{i}} personas</option>
+                        </select>
+                        <mat-icon class="select-icon-reserva">expand_more</mat-icon>
+                    </div>
+                </div>
+                
+                <div class="form-row-two">
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Nombre Completo</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="text" 
+                                    id="nombre"
+                                    name="nombre" 
+                                    [(ngModel)]="nombre" 
+                                    required 
+                                    #nombreCtrl="ngModel"
+                                    class="input-reserva"
+                                    placeholder="Escribe tu nombre">
+                        </div>
+                        <div class="error-message-reserva" *ngIf="nombreCtrl.invalid && nombreCtrl.touched">
+                            El nombre es obligatorio.
+                        </div>
+                    </div>
+
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Documento</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="text" 
+                                   id="cc"
+                                   name="cc" 
+                                   [(ngModel)]="cc" 
+                                   required 
+                                   pattern="^[0-9]+$" 
+                                   #ccCtrl="ngModel"
+                                   class="input-reserva"
+                                   placeholder="1.234.567.890">
+                        </div>
+                        <div class="error-message-reserva" *ngIf="ccCtrl.invalid && ccCtrl.touched">
+                            La cédula es obligatoria y debe contener solo números.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row-two">
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Teléfono</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="tel" 
+                                   id="telefono"
+                                   name="telefono" 
+                                   [(ngModel)]="telefono" 
+                                   required 
+                                   pattern="^[0-9]+$" 
+                                   #telCtrl="ngModel"
+                                   class="input-reserva"
+                                   placeholder="312 345 6789">
+                        </div>
+                        <div class="error-message-reserva" *ngIf="telCtrl.invalid && telCtrl.touched">
+                            El teléfono es obligatorio y debe contener solo números.
+                        </div>
+                    </div>
+
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Correo electrónico</label>
+                        <div class="input-wrapper-reserva">
+                            <input type="email" 
+                                   id="email"
+                                   name="email" 
+                                   [(ngModel)]="email" 
+                                   required 
+                                   email 
+                                   #emailCtrl="ngModel"
+                                   class="input-reserva"
+                                   placeholder="ejemplo@email.com">
+                        </div>
+                        <div class="error-message-reserva" *ngIf="emailCtrl.invalid && emailCtrl.touched">
+                            Ingresa un correo electrónico válido.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row-two">
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Documento lado frontal</label>
+                        <div class="file-wrapper-reserva">
+                            <input type="text" 
+                                   [value]="FrontalName || 'No se eligió...ningún archivo'" 
+                                   readonly
+                                   class="input-reserva file-input-display">
+                            <button type="button" class="file-button-reserva" (click)="fileFrente.click()">
+                                Elegir archivo
+                            </button>
+                        </div>
+                        <input type="file" 
+                               name="documento_f" 
+                               accept="image/*,.pdf" 
+                               hidden 
+                               #fileFrente 
+                               (change)="mostrarVistaPrevia($event, 'frente')">
+                    </div>
+                
+                    <div class="form-group-reserva">
+                        <label class="form-label-reserva">Documento lado posterior</label>
+                        <div class="file-wrapper-reserva">
+                            <input type="text" 
+                                   [value]="AtrasName || 'No se eligió...ningún archivo'" 
+                                   readonly
+                                   class="input-reserva file-input-display">
+                            <button type="button" class="file-button-reserva" (click)="fileAtras.click()">
+                                Elegir archivo
+                            </button>
+                        </div>
+                        <input type="file" 
+                               name="documento_p" 
+                               accept="image/*,.pdf" 
+                               hidden 
+                               #fileAtras 
+                               (change)="mostrarVistaPrevia($event, 'atras')">
+                    </div>
+                </div>
+                <div class="form-group-reserva full-width">
+                    <label class="form-label-reserva">Rostro con documento en mano</label>
+                    <div class="file-wrapper-reserva">
+                        <input type="text"
+                               [value]="RostroName || 'No se eligió...ningún archivo'" 
+                               readonly
+                               class="input-reserva file-input-display">
+                        <button type="button" class="file-button-reserva" (click)="fileRostro.click()">
+                            Elegir archivo
+                        </button>
+                    </div>
+                    <input type="file"
+                           name="rostro" 
+                           accept="image/*,.pdf" 
+                           hidden 
+                           #fileRostro 
+                           (change)="mostrarVistaPrevia($event, 'rostro')">
+                </div>
+
+                <img id="vistaPreviaFrente" class="preview-hidden">
+                <img id="vistaPreviaAtras" class="preview-hidden">
+                <img id="vistaPreviaRostro" class="preview-hidden">
+
+                <div class="checkbox-group-reserva">
+                    <label class="checkbox-label-reserva">
+                        <input type="checkbox" [(ngModel)]="terminos" name="terminos" required class="checkbox-input">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text-reserva">Acepto los <a href="/terminos" class="checkbox-link">términos y condiciones</a> del servicio.</span>
+                    </label>
+                
+                    <label class="checkbox-label-reserva">
+                        <input type="checkbox" [(ngModel)]="datos" name="datos" required class="checkbox-input">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text-reserva">Autorizo el <a href="/manejodatos" class="checkbox-link">manejo y tratamiento de mis datos personales.</a></span>
+                    </label>
+                
+                    <label class="checkbox-label-reserva">
+                        <input type="checkbox" [(ngModel)]="veridica" name="veridica" required class="checkbox-input">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-text-reserva">Confirmo que toda la información proporcionada es verídica.</span>
+                    </label>
+                    <p class="checkbox-note-reserva">Al marcar estas casillas, confirmas que has leído y aceptas todas las condiciones del contrato de alquiler de la Finca El Progreso.</p>
+                </div>
+                
+                <div class="button-group-reserva">
+                    <button type="submit" 
+                            [disabled]="formulario.invalid" 
+                            (click)="enviarData()"
+                            class="btn-reserva btn-primary-reserva">
+                        <mat-icon>check_circle</mat-icon>
+                        Enviar Reserva
+                    </button>
+                    <button type="button" 
+                            (click)="volver()"
+                            class="btn-reserva btn-secondary-reserva">
+                        <mat-icon>arrow_back</mat-icon>
+                        Volver
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
-
-    <!-- Huéspedes personalizado -->
-    <div class="custom-field full-width">
-        <label for="personas">Huéspedes</label>
-        <div class="select-wrapper">
-            <select id="personas" 
-                    name="personas" 
-                    [(ngModel)]="personas" 
-                    class="custom-select">
-                <option value="" disabled>Selecciona número de huéspedes</option>
-                <option *ngFor="let i of huespedes" [value]="i">{{i}} personas</option>
-            </select>
-            <mat-icon class="select-icon">expand_more</mat-icon>
-        </div>
-    </div>
-
-    <!-- Nombre Completo -->
-    <div class="custom-field full-width">
-        <label for="nombre">Nombre Completo</label>
-        <div class="input-wrapper">
-            <input type="text" 
-                   id="nombre"
-                   name="nombre" 
-                   [(ngModel)]="nombre" 
-                   required 
-                   #nombreCtrl="ngModel"
-                   class="custom-input">
-            <mat-icon class="input-icon">person</mat-icon>
-        </div>
-        <div class="error-message" *ngIf="nombreCtrl.invalid && nombreCtrl.touched">
-            El nombre es obligatorio.
-        </div>
-    </div>
-
-    <!-- Cédula -->
-    <div class="custom-field full-width">
-        <label for="cc">Cédula de Ciudadanía</label>
-        <div class="input-wrapper">
-            <input type="text" 
-                   id="cc"
-                   name="cc" 
-                   [(ngModel)]="cc" 
-                   required 
-                   pattern="^[0-9]+$" 
-                   #ccCtrl="ngModel"
-                   class="custom-input">
-            <mat-icon class="input-icon">badge</mat-icon>
-        </div>
-        <div class="error-message" *ngIf="ccCtrl.invalid && ccCtrl.touched">
-            La cédula es obligatoria y debe contener solo números.
-        </div>
-    </div>
-
-    <!-- Teléfono -->
-    <div class="custom-field full-width">
-        <label for="telefono">Teléfono</label>
-        <div class="input-wrapper">
-            <input type="tel" 
-                   id="telefono"
-                   name="telefono" 
-                   [(ngModel)]="telefono" 
-                   required 
-                   pattern="^[0-9]+$" 
-                   #telCtrl="ngModel"
-                   class="custom-input">
-            <mat-icon class="input-icon">phone</mat-icon>
-        </div>
-        <div class="error-message" *ngIf="telCtrl.invalid && telCtrl.touched">
-            El teléfono es obligatorio y debe contener solo números.
-        </div>
-    </div>
-
-    <!-- Email -->
-    <div class="custom-field full-width">
-        <label for="email">Correo electrónico</label>
-        <div class="input-wrapper">
-            <input type="email" 
-                   id="email"
-                   name="email" 
-                   [(ngModel)]="email" 
-                   required 
-                   email 
-                   #emailCtrl="ngModel"
-                   class="custom-input">
-            <mat-icon class="input-icon">email</mat-icon>
-        </div>
-        <div class="error-message" *ngIf="emailCtrl.invalid && emailCtrl.touched">
-            Ingresa un correo electrónico válido.
-        </div>
-    </div>
-
-    <!-- Documentos -->
-    <div class="form-group">
-        <!-- Documento Frontal -->
-        <div class="custom-field full-width">
-            <label for="documento_f">Escanear documento - Frontal</label>
-            <div class="file-input-wrapper">
-                <input type="text" 
-                       id="documento_f"
-                       [value]="FrontalName" 
-                       required 
-                       placeholder="Selecciona una imagen" 
-                       readonly
-                       class="custom-input">
-                <button type="button" class="file-button" (click)="fileFrente.click()">
-                    <mat-icon>upload</mat-icon>
-                </button>
-            </div>
-            <input type="file" 
-                   name="documento_f" 
-                   accept="image/*,.pdf" 
-                   hidden 
-                   #fileFrente 
-                   (change)="mostrarVistaPrevia($event, 'frente')">
-            <img id="vistaPreviaFrente" class="preview-image">
-        </div>
-
-        <!-- Documento Posterior -->
-        <div class="custom-field full-width">
-            <label for="documento_p">Escanear documento - Posterior</label>
-            <div class="file-input-wrapper">
-                <input type="text" 
-                       id="documento_p"
-                       [value]="AtrasName" 
-                       required 
-                       placeholder="Selecciona una imagen" 
-                       readonly
-                       class="custom-input">
-                <button type="button" class="file-button" (click)="fileAtras.click()">
-                    <mat-icon>upload</mat-icon>
-                </button>
-            </div>
-            <input type="file" 
-                   name="documento_p" 
-                   accept="image/*,.pdf" 
-                   hidden 
-                   #fileAtras 
-                   (change)="mostrarVistaPrevia($event, 'atras')">
-            <img id="vistaPreviaAtras" class="preview-image">
-        </div>
-
-        <!-- Rostro con documento -->
-        <div class="custom-field full-width">
-            <label for="rostro">Rostro con documento</label>
-            <div class="file-input-wrapper">
-                <input type="text" 
-                       id="rostro"
-                       [value]="RostroName" 
-                       required 
-                       placeholder="Selecciona una imagen" 
-                       readonly
-                       class="custom-input">
-                <button type="button" class="file-button" (click)="fileRostro.click()">
-                    <mat-icon>upload</mat-icon>
-                </button>
-            </div>
-            <input type="file" 
-                   name="rostro" 
-                   accept="image/*,.pdf" 
-                   hidden 
-                   #fileRostro 
-                   (change)="mostrarVistaPrevia($event, 'rostro')">
-            <img id="vistaPreviaRostro" class="preview-image">
-        </div>
-    </div>
-
-    <!-- Checkboxes personalizados -->
-    <div class="checkbox-group">
-        <label class="custom-checkbox">
-            <input type="checkbox" [(ngModel)]="terminos" name="terminos" required>
-            <span class="checkmark"></span>
-            <span class="checkbox-text">Acepto los <a href="/terminos">términos y condiciones</a> del servicio.</span>
-        </label>
-
-        <label class="custom-checkbox">
-            <input type="checkbox" [(ngModel)]="datos" name="datos" required>
-            <span class="checkmark"></span>
-            <span class="checkbox-text">Autorizo el <a href="/manejodatos">manejo y tratamiento de mis datos personales.</a></span>
-        </label>
-
-        <label class="custom-checkbox">
-            <input type="checkbox" [(ngModel)]="veridica" name="veridica" required>
-            <span class="checkmark"></span>
-            <span class="checkbox-text">Confirmo que toda la información proporcionada es verídica.</span>
-        </label>
-        <span class="checkbox-text">Al marcar estas casillas, confirmas que has leído y aceptas todas las condiciones del contrato de alquiler de la Finca El Progreso.</span>
-    </div>
-
-    <!-- Botones -->
-    <div class="button-group">
-        <button type="submit" 
-                [disabled]="formulario.invalid" 
-                (click)="enviarData()"
-                class="custom-button primary">
-            <mat-icon>send</mat-icon>
-            Enviar Reserva
-        </button>
-        <button type="button" 
-                (click)="volver()"
-                class="custom-button secondary">
-            <mat-icon>arrow_back</mat-icon>
-            Volver
-        </button>
-    </div>
-</form>
-</div>
+</section>

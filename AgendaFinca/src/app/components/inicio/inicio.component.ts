@@ -17,4 +17,8 @@ export class InicioComponent {
     this.router.navigate(['/about']);
   }
 
+  whatsapp() {
+    window.open('https://wa.me/573003918651', '_blank');
+  }
+
 }

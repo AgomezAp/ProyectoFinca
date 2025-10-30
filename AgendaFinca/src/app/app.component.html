@@ -1,45 +1,30 @@
 <header class="header" *ngIf="shouldShowNavbar()">
-    <div class="navbar-line"></div>
-    
-    <!-- Menú hamburguesa para móvil -->
-    <div class="menu-toggle" (click)="toggleMobileMenu()">
-        <span></span>
-        <span></span>
-        <span></span>
-    </div>
-    
-    <!-- Navegación -->
-    <nav class="nav" [class.mobile-menu-open]="isMobileMenuOpen">
-        <a *ngIf="shouldShowCalendario()"
-           routerLink="/calendario" 
-           class="nav-link" 
-           routerLinkActive="active"
-           (click)="closeMobileMenu()">Calendario</a>
-        <a *ngIf="shouldShowPanel()"
-           routerLink="/panel" 
-           class="nav-link" 
-           routerLinkActive="active"
-           (click)="closeMobileMenu()">Panel</a>
-        <a routerLink="/inicio" 
-           class="nav-link" 
-           routerLinkActive="active"
-           (click)="closeMobileMenu()">Inicio</a>
-        <a routerLink="/about" 
-           class="nav-link" 
-           routerLinkActive="active"
-           (click)="closeMobileMenu()">Acerca</a>
-        <a routerLink="/miReserva" 
-           class="nav-link" 
-           routerLinkActive="active"
-           (click)="closeMobileMenu()">Mi Reserva</a>
-    </nav>
-    
-    <!-- Overlay para cerrar menú en móvil -->
-    <div class="mobile-overlay" 
-         [class.active]="isMobileMenuOpen" 
-         (click)="closeMobileMenu()"></div>
+   
+
+   <div class="navbar-line"></div>
+
+   <!-- Menú hamburguesa para móvil -->
+   <div class="menu-toggle" (click)="toggleMobileMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+   </div>
+
+   <!-- Navegación -->
+   <nav class="nav" [class.mobile-menu-open]="isMobileMenuOpen">
+      <a *ngIf="shouldShowCalendario()" routerLink="/calendario" class="nav-link" routerLinkActive="active"
+         (click)="closeMobileMenu()">Calendario</a>
+      <a *ngIf="shouldShowPanel()" routerLink="/panel" class="nav-link" routerLinkActive="active"
+         (click)="closeMobileMenu()">Panel</a>
+      <a routerLink="/inicio" class="nav-link" routerLinkActive="active" (click)="closeMobileMenu()">Inicio</a>
+      <a routerLink="/about" class="nav-link" routerLinkActive="active" (click)="closeMobileMenu()">Acerca</a>
+      <a routerLink="/miReserva" class="nav-link" routerLinkActive="active" (click)="closeMobileMenu()">Mi Reserva</a>
+   </nav>
+
+   <!-- Overlay para cerrar menú en móvil -->
+   <div class="mobile-overlay" [class.active]="isMobileMenuOpen" (click)="closeMobileMenu()"></div>
 </header>
 
-<main class="main-content" [class.no-navbar]="!shouldShowNavbar()" >
-    <router-outlet></router-outlet>
+<main class="main-content" [class.no-navbar]="!shouldShowNavbar()">
+   <router-outlet></router-outlet>
 </main>

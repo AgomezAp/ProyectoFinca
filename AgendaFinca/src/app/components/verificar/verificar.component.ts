@@ -4,10 +4,11 @@ import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AgendaService } from '../../services/agenda.service';
+import { MatIcon } from "@angular/material/icon";
 
 @Component({
   selector: 'app-verificar',
-  imports: [MatFormFieldModule, CommonModule, FormsModule, MatInputModule],
+  imports: [MatFormFieldModule, CommonModule, FormsModule, MatInputModule, MatIcon],
   templateUrl: './verificar.component.html',
   styleUrl: './verificar.component.css'
 })

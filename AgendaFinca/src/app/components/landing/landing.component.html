@@ -1,186 +1,112 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Finca</title>
-  </head>
-  <body>  
+<section class="hero-reservation-section">
+    <img src="assets/images/Jardines.webp" alt="Fondo Finca" class="hero-background">
+    <div class="hero-overlay"></div>
 
-    <section class="hero-carousel-section">
-      <!-- <div class="carousel-container">
-        <div
-          *ngFor="let image of images; let i = index"
-          class="carousel-slide"
-          [class.active]="currentSlideIndex === i"
-          [style.background-image]="'url(' + image + ')'"
-        ></div>
+    <div class="hero-content">
+        <img src="assets/logos/ISOTIPO.svg" alt="Logo" class="hero-logo">
 
-        <div class="carousel-controls">
-          <button
-            class="carousel-btn prev-btn"
-            (click)="changeSlide(-1)"
-            type="button"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M15 18L9 12L15 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-          <button
-            class="carousel-btn next-btn"
-            (click)="changeSlide(1)"
-            type="button"
-          >
-            <svg
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M9 18L15 12L9 6"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
+        <div class="decorative-line"></div>
 
-        <div class="carousel-indicators">
-          <span
-            *ngFor="let image of images; let i = index"
-            class="indicator"
-            [class.active]="currentSlideIndex === i"
-            (click)="goToSlide(i)"
-          >
-          </span>
-        </div>
-      </div> -->
+        <p class="hero-label">Hospedaje</p>
+        <h1 class="hero-title">Reservar</h1>
 
-      <!-- Contenido principal -->
-  <div class="main-content">
-    <div class="hero-section">
-        <!-- NUEVO TÍTULO -->
-        <img src="/assets/logo.png" alt="Logo Finca" class="logo-image">
-        <h1 class="main-title">Finca El Progreso</h1>
-        <p class="subtitle">Encuentra las fechas disponible para disfrutar en la Finca el Progreso</p>      
-        <!-- Formulario actualizado con textos en español -->
-        <form class="booking-form">
-            <div class="form-row">
-                <div class="form-group">
-                    <label class="form-label">Fecha de llegada</label>
-                    <mat-form-field>
-                      <input matInput [matDatepicker]="pickerLlegada" [matDatepickerFilter]="filtrarFechas" id="llegada" placeholder="Fecha de llegada" readonly>
-                      <mat-datepicker-toggle matSuffix [for]="pickerLlegada"></mat-datepicker-toggle>
-                      <mat-datepicker #pickerLlegada></mat-datepicker>
-                    </mat-form-field>
+        <div class="decorative-line"></div>
+
+        <p class="hero-subtitle">
+            Encuentra las fechas disponibles para disfrutar en la Finca el Progreso.
+        </p>
+
+        <div class="reservation-form-card">
+            <form class="reservation-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Fecha de llegada</label>
+                        <mat-form-field appearance="outline" class="date-field">
+                            <input matInput [matDatepicker]="pickerLlegada" [matDatepickerFilter]="filtrarFechas"
+                                id="llegada" placeholder="dd/mm/aaaa" readonly>
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerLlegada"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerLlegada></mat-datepicker>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Fecha de salida</label>
+                        <mat-form-field appearance="outline" class="date-field">
+                            <input matInput [matDatepicker]="pickerSalida" [matDatepickerFilter]="filtrarFechas"
+                                id="salida" placeholder="dd/mm/aaaa" readonly>
+                            <mat-datepicker-toggle matIconSuffix [for]="pickerSalida"></mat-datepicker-toggle>
+                            <mat-datepicker #pickerSalida></mat-datepicker>
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label class="form-label">Fecha de salida</label>
-                    <mat-form-field>
-                      <input matInput [matDatepicker]="pickerSalida" [matDatepickerFilter]="filtrarFechas" id="salida" placeholder="Fecha de salida" readonly>
-                      <mat-datepicker-toggle matSuffix [for]="pickerSalida"></mat-datepicker-toggle>
-                      <mat-datepicker #pickerSalida></mat-datepicker>
-                    </mat-form-field>
+
+                <div class="form-row">
+                    <div class="form-group full-width">
+                        <label class="form-label">Huéspedes</label>
+                        <mat-form-field appearance="outline" class="select-field">
+                            <mat-select id="huesped" [(value)]="huespedesSeleccionados"
+                                (selectionChange)="onHuespedesChange()" placeholder="2 personas">
+                                <mat-option *ngFor="let num of numeroHuespedes" [value]="num">
+                                    {{num}} {{num ===1 ? 'persona' : 'personas'}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
                 </div>
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <mat-form-field appearance="outline">
-                  <mat-label>Huéspedes</mat-label>
-                  <mat-select id="huesped" [(value)]="huespedesSeleccionados" (selectionChange)="onHuespedesChange()">
-                    <mat-option *ngFor="let num of numeroHuespedes" [value]="num">{{num}} {{ num === 1 ? 'persona' : 'personas' }}</mat-option>
-                  </mat-select>
-                </mat-form-field>
-              </div>
-              <div class="form-group">
-                <button type="button" class="reserve-btn" (click)="redirectToReserva()">RESERVAR</button>
-              </div>
-            </div>
-            <div *ngIf="errorMessage" class="error-message">
-              {{ errorMessage }}
-            </div>
-        </form>
+
+                <button type="button" class="reserve-button" (click)="redirectToReserva()">
+                    <span class="button-icon">📅</span>
+                    Reservar
+                </button>
+
+                <div *ngIf="errorMessage" class="error-message">
+                    {{errorMessage}}
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-    </section>
+</section>
 
-    <!-- Nueva sección de información de la finca -->
-    <section class="finca-info-section" #infoSection>
-    <div class="container">
-        <div class="section-header">
-            <h2 class="section-title">Disfruta de una experiencia única en nuestra finca</h2>
-            <p class="section-description">
-                Nuestro diseño combina comodidad y funcionalidad para brindarte la mejor experiencia 
+
+<section class="finca-info-section" #infoSection>
+    <img src="assets/images/Estacionamiento.webp" alt="Fondo Info" class="info-background">
+    <div class="info-overlay"></div>
+    <div class="info-content">
+        <div class="info-header">
+            <div class="info-decorative-line"></div>
+            <p class="info-label">Tranquilidad</p>
+            <h2 class="info-title">Disfruta de una experiencia única en nuestra finca</h2>
+            <div class="info-decorative-line"></div>
+            <p class="info-description">
+                Nuestro diseño combina comodidad y funcionalidad para brindarte la mejor experiencia
                 de alojamiento rural. Perfecta para descansar y conectar con la naturaleza.
             </p>
         </div>
-
         <div class="features-grid">
-            <!-- Selección de fechas -->
-            <div class="feature-item calendar-feature">
-                <div class="feature-icon calendar-icon">
-                    <div class="calendar-animation">
-                        <div class="calendar-header"></div>
-                        <div class="calendar-body">
-                            <div class="calendar-day" *ngFor="let day of [1,2,3,4,5,6]; let i = index" 
-                                 [style.animation-delay]="(i * 0.1) + 's'"></div>
-                        </div>
-                        <div class="calendar-selected"></div>
-                    </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <img src="assets/logos/Reservas.svg" alt="Calendario" class="feature-icon-img">
                 </div>
-                <h3 class="feature-title">Selección de Fechas</h3>
-                <p class="feature-description">Elige fácilmente tus fechas de llegada y salida.</p>
+                <h3 class="feature-card-title">Selección de Fechas</h3>
+                <p class="feature-card-description">Elige fácilmente tus fechas de llegada y salida.</p>
             </div>
 
-            <!-- Capacidad de huéspedes -->
-            <div class="feature-item guests-feature">
-                <div class="feature-icon guests-icon">
-                    <div class="guests-animation">
-                        <div class="guest-icons">
-                            <div class="guest-icon" *ngFor="let guest of guestArray; let i = index"
-                                 [style.animation-delay]="(i * 0.1) + 's'"
-                                 [class.visible]="i < animatedGuestCount">
-                                <div class="guest-avatar"></div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <img src="assets/logos/Familiar.svg" alt="Huéspedes" class="feature-icon-img">
                 </div>
-                <h3 class="feature-title">Capacidad de Huéspedes</h3>
-                <p class="feature-description">Acomoda hasta <span class="highlight">{{animatedGuestCount + 25}}</span> huéspedes cómodamente.</p>
+                <h3 class="feature-card-title">Capacidad de Huéspedes</h3>
+                <p class="feature-card-description">Acomoda hasta <span class="highlight">{{animatedGuestCount + 25}}</span>
+                huéspedes cómodamente.</p>
             </div>
 
-            <!-- Búsqueda inteligente -->
-            <div class="feature-item search-feature">
-                <div class="feature-icon search-icon">
-                    <div class="search-animation">
-                        <div class="search-circle"></div>
-                        <div class="search-handle"></div>
-                        <div class="search-particles">
-                            <div class="particle" *ngFor="let p of [1,2,3,4,5]"></div>
-                        </div>
-                    </div>
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <img src="assets/logos/Baño.svg" alt="Búsqueda" class="feature-icon-img">
                 </div>
-                <h3 class="feature-title">Búsqueda Fácil</h3>
-                <p class="feature-description">Encuentra tu escapada perfecta con nuestro sistema intuitivo.</p>
+                <h3 class="feature-card-title">Búsqueda Fácil</h3>
+                <p class="feature-card-description">Encuentra tu escapada perfecta con nuestro sistema intuitivo.</p>
             </div>
         </div>
     </div>
 </section>
-  </body>
-</html>
