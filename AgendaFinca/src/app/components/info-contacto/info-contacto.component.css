@@ -1,10 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Questrial&display=swap');
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
 .container {
     max-width: 1200px;
@@ -80,10 +75,10 @@
 .finca-text {
     font-family: 'Cormorant Garamond', sans-serif;
     font-style: normal;
-    font-size: 1.8rem;
+    font-size: 2.25rem;
     font-weight: 400;
     letter-spacing: 0.8rem;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     position: relative;
     display: inline-block;
     opacity: 0.9;
@@ -95,24 +90,28 @@
     content: "";
     position: absolute;
     top: 50%;
-    height: 3px;
+    height: 2px;
     background: #fff;
     z-index: -1;
 }
 
 .finca-text::after {
-    left: 160px;
+    left: 180px;
     right: -300px;
+    /* background: #00ffff; */
+
 }
 
 .finca-text::before {
     left: -300px;
-    right: 160px;
+    right: 180px;
+    /* background: #ff0000; */
 }
 
 .main-title {
     font-family: 'Archane';
-    font-size: 4.5rem;
+    font-size: 6rem;
+    font-weight: 400;
     letter-spacing: 1rem;
     text-shadow: 3px 3px 6px rgba(45, 62, 45, 0.8);
     position: relative;
@@ -125,31 +124,33 @@
 .main-title::after {
     content: "";
     position: absolute;
-    bottom: -35px;
+    bottom: -15px;
     left: 50%;
     transform: translateX(-50%);
-    width: 750px;
-    height: 3px;
+    width: 800px;
+    height: 2px;
     background: #fff;
 }
 
 .hero-subtitle {
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Cormorant Garamond', sans-serif;
     font-style: bold;
-    font-size: 2.3rem;
+    font-weight: 700;
+    font-size: 1.875rem;
     color: #fff;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.3rem;
     text-shadow: 2px 2px 4px rgba(45, 62, 45, 0.6);
     animation: fadeInUp 1s ease-out 1.2s both;
 }
 
 .hero-description {
     font-family: 'Questrial', sans-serif;
-    font-size: 1.2rem;
+    font-style: normal;
+    font-size: 1.125rem;
     max-width: 600px;
     margin-bottom: 1.5rem;
     opacity: 0.9;
-    line-height: 1.7;
+    line-height: 1.4;
     animation: fadeInUp 1s ease-out 1.4s both;
 }
 
@@ -160,13 +161,14 @@
 }
 
 .cta-button {
+    font-family: 'Questrial', sans-serif;
     display: inline-flex;
     align-items: center;
     padding: 1.2rem 2.5rem;
     border-radius: 30px;
     text-decoration: none;
-    font-weight: 300;
-    font-size: 1.1rem;
+    font-weight: 400;
+    font-size: 1.125rem;
     transition: all 0.4s ease;
     cursor: pointer;
     border: 2px solid transparent;
@@ -232,11 +234,10 @@
 
 .about-label {
     font-family: 'Questrial', sans-serif;
-    font-size: 1rem;
-    color: #888;
-    letter-spacing: 0.3rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #505050;
+    margin-bottom: -2rem;
     position: relative;
     display: inline-block;
 }
@@ -261,10 +262,10 @@
 
 .about-main-title {
     font-family: 'Archane', serif;
-    font-size: 3.2rem;
+    font-size: 3rem;
     color: #e98552;
-    font-weight: 600;
-    margin-bottom: 1rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
     letter-spacing: 0.1rem;
 }
 
@@ -277,7 +278,8 @@
 
 .about-main-description {
     font-family: 'Questrial', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.125rem;
+    font-weight: 400;
     color: #666;
     text-align: center;
     max-width: 1800px;
@@ -298,13 +300,13 @@
 .feature-elegant {
     background: rgba(255, 255, 255, 0.8);
     border-radius: 20px;
-    padding: 2.5rem 2rem; /* Cambiado de 2.5rem 3rem */
+    padding: 1rem 1rem; 
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     border: 1px solid rgba(233, 133, 82, 0.1);
     transition: all 0.4s ease;
     backdrop-filter: blur(10px);
-    min-width: auto; /* Cambiado de 350px a auto */
+    min-width: auto; 
 }
 
 .feature-elegant:hover {
@@ -338,7 +340,7 @@
 .feature-elegant p {
     font-family: 'Questrial', sans-serif;
     color: #777;
-    line-height: 1.6;
+    line-height: 1.2;
     font-size: 1.05rem;
 }
 
@@ -402,11 +404,11 @@
 
 .gallery-label {
     font-family: 'Questrial', sans-serif;
-    font-size: 1rem;
+    font-size: 1.125rem;
+    font-style: bold;
+    font-weight: 700;
     color: rgba(255, 255, 255, 0.7);
-    letter-spacing: 0.3rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    margin-bottom: -1rem;
     position: relative;
     display: inline-block;
 }
@@ -418,7 +420,7 @@
     top: 50%;
     width: 260px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.5);
+    background: #fff;
 }
 
 .gallery-label::before {
@@ -431,24 +433,25 @@
 
 .gallery-main-title {
     font-family: 'Archane';
-    font-size: 3.2rem;
+    font-size: 3rem;
     color: #fff;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 1rem;
     letter-spacing: 0.15rem;
     text-transform: none;
 }
 
 .gallery-subtitle-line {
-    width: 685px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.7), transparent);
-    margin: 0 auto 2rem;
+    width: 645px;
+    height: 1px;
+    background: #fff;
+    margin: 0 auto 0;
 }
 
 .gallery-description {
-    font-family: 'Questrial', sans-serif;
-    font-size: 1.6rem;
+    font-family: 'Cormorant Garamond', sans-serif;
+    font-size: 1.875rem;
+    font-weight: 400;
     color: rgba(255, 255, 255, 0.9);
     text-align: center;
     margin-bottom: 3rem;
@@ -521,7 +524,7 @@
 
 .gallery-overlay h3 {
     font-family: 'Archane';
-    font-size: 1.5rem;
+    font-size: 2.25rem;
     color: #fff;
     margin-bottom: 0.8rem;
     transform: translateY(20px);
@@ -538,7 +541,7 @@
 .gallery-overlay p {
     font-family: 'Questrial', sans-serif;
     color: rgba(255, 255, 255, 0.9);
-    font-size: 0.95rem;
+    font-size: 1.125rem;
     transform: translateY(20px);
     transition: transform 0.4s ease 0.2s;
     text-align: center;
@@ -590,15 +593,15 @@
 .services-header {
     text-align: center;
     margin-bottom: 3rem;
+    padding: 0;
 }
 
 .services-label {
     font-family: 'Questrial', sans-serif;
-    font-size: 1rem;
-    color: #888;
-    letter-spacing: 0.3rem;
-    text-transform: uppercase;
-    margin-bottom: 1rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: #505050;
+    margin-bottom: -305px;
     position: relative;
     display: inline-block;
 }
@@ -623,9 +626,9 @@
 
 .services-main-title {
     font-family: 'Archane', serif;
-    font-size: 3.2rem;
+    font-size: 3rem;
     color: #e98552;
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 1rem;
     letter-spacing: 0.1rem;
 }
@@ -633,7 +636,7 @@
 .services-subtitle-line {
     width: 835px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #e98552, transparent);
+    background: linear-gradient(120deg, transparent, #e98552, transparent);
     margin: 0 auto 2rem;
 }
 

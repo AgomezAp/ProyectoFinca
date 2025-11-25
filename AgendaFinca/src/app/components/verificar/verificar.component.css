@@ -48,11 +48,18 @@
 }
 
 .verificar-decorative-line {
-  width: 350px;
+  width: 700px;
   height: 1px;
   background: rgba(255, 255, 255, 0.5);
   margin: 1.2rem auto;
 }
+
+.decorative-line-side {
+  width: 350px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
+}
+
 .verificar-label {
   font-family: 'Questrial', sans-serif;
   font-size: 0.9rem;
@@ -60,6 +67,10 @@
   letter-spacing: 0.2rem;
   text-transform: uppercase;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .verificar-title {

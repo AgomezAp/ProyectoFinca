@@ -41,7 +41,7 @@ export class ReservaComponent {
   @ViewChild('fileRostro') fileRostro!: ElementRef<HTMLInputElement>;
   terminosResumen: boolean = false
 
-  huespedes = Array.from({ length: 14 }, (_, i) => i + 2);
+  huespedes = Array.from({ length: 40 }, (_, i) => i + 2);
   
   constructor(private  reservaService: AgendaService) {}
   ngOnInit() {

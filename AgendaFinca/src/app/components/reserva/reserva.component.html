@@ -3,8 +3,11 @@
     <div class="reserva-overlay"></div>
     <div class="reserva-content">
         <img src="assets/logos/ISOTIPO.svg" alt="Logo Finca" class="reserva-logo">
-        <div class="reserva-decorative-line"></div>
-        <p class="reserva-label">Formulario</p>
+        <p class="reserva-label">
+            <span class="decorative-line-side"></span>
+            Formulario
+            <span class="decorative-line-side"></span>
+        </p>
         <h1 class="reserva-title">Reservar Tu Estadia</h1>
         <div class="reserva-decorative-line"></div>
         <p class="reserva-subtitle">Completa los datos para tu reserva en Finca El Progreso</p>
@@ -145,6 +148,7 @@
                                hidden 
                                #fileFrente 
                                (change)="mostrarVistaPrevia($event, 'frente')">
+                        <img id="vistaPreviaFrente" class="preview-hidden">
                     </div>
                 
                     <div class="form-group-reserva">
@@ -164,6 +168,7 @@
                                hidden 
                                #fileAtras 
                                (change)="mostrarVistaPrevia($event, 'atras')">
+                        <img id="vistaPreviaAtras" class="preview-hidden">
                     </div>
                 </div>
                 <div class="form-group-reserva full-width">
@@ -183,11 +188,8 @@
                            hidden 
                            #fileRostro 
                            (change)="mostrarVistaPrevia($event, 'rostro')">
+                    <img id="vistaPreviaRostro" class="preview-hidden">
                 </div>
-
-                <img id="vistaPreviaFrente" class="preview-hidden">
-                <img id="vistaPreviaAtras" class="preview-hidden">
-                <img id="vistaPreviaRostro" class="preview-hidden">
 
                 <div class="checkbox-group-reserva">
                     <label class="checkbox-label-reserva">

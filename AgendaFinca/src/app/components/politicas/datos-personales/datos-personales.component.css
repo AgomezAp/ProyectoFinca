@@ -79,10 +79,16 @@
 }
 
 .datos-decorative-line {
-  width: 350px;
+  width: 700px;
   height: 1px;
   background: #e98552;
   margin: 1rem auto;
+}
+
+.decorative-line-side {
+  width: 350px;
+  height: 1px;
+  background: #e98552;
 }
 
 .datos-label {
@@ -92,6 +98,10 @@
   letter-spacing: 0.15rem;
   text-transform: uppercase;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .datos-title {

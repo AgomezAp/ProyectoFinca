@@ -18,7 +18,7 @@ export class InicioComponent {
   }
 
   whatsapp() {
-    window.open('https://wa.me/573003918651', '_blank');
+    window.open('https://wa.me/573117414176', '_blank');
   }
 
 }

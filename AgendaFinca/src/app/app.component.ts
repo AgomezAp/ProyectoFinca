@@ -58,7 +58,7 @@ export class AppComponent implements OnInit, OnDestroy {
   shouldShowNavbar(): boolean {
     const currentUrl = this.router.url;
 
-    const routesWithOutNav = ['/inicio', '/about'];
+    const routesWithOutNav = ['/inicio'];
     return !routesWithOutNav.includes(currentUrl);
   }
 
@@ -71,8 +71,8 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   // Cerrar menú con la tecla Escape
-  @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent) {
+  @HostListener('document:keydown.escape')
+  onEscapeKey() {
     this.closeMobileMenu();
   }
 }

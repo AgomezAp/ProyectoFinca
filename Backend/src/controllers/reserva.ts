@@ -5,7 +5,7 @@ import { gridFSService } from '../services/gridfs'
 import mongoose from 'mongoose'
 import { GridFSBucket } from 'mongodb'
 import { crearPDF, crearYEnviarPDF } from '../services/facturacion'
-import { reservaPDF } from '../services/notificacion'
+import { reservaPDF, funEnviarMensaje, notificarAdminReserva } from '../services/notificacion'
 
 export const crearReserva = async (req: Request, res: Response): Promise<any> => {
     try {
@@ -26,11 +26,28 @@ export const crearReserva = async (req: Request, res: Response): Promise<any> =>
             rostro: rostroName
         });
         await nuevaReserva.save();
+        try {
+            const emailAdmin = process.env.EMAIL_ADMIN;
+            await notificarAdminReserva({ ...nuevaReserva.toObject(), emailAdmin });
+            console.log('✅ Notificación de reserva enviada al admin:', emailAdmin);
+            
+            const telefonoFinca = '573217374091'
+            const fechaLlegadaStr = new Date(nuevaReserva.fechaLlegada).toLocaleDateString('es-CO');
+            const fechaSalidaStr = new Date(nuevaReserva.fechaSalida).toLocaleDateString('es-CO');
+            const message =`Se acaba de crear una reserva a nombre de ${nuevaReserva.nombre} con el telefono ${nuevaReserva.telefono} entre las fechas ${fechaLlegadaStr} y ${fechaSalidaStr}`;
+            await funEnviarMensaje(nuevaReserva.telefono, telefonoFinca, nuevaReserva.nombre, message);
+            console.log('✅ Mensaje enviado exitosamente');
+
+            // Enviar correo al admin (puedes pasar el email aquí)
+        } catch (msgError) {
+            console.error('⚠️ Error al enviar el mensaje:', msgError instanceof Error ? msgError.message : String(msgError));
+        }
         res.status(201).json({
             ok: true,
-            reserva: nuevaReserva
+            reserva: nuevaReserva,
+            mensaje: 'Reserva creada exitosamente'
         });
-        await reservaPDF(nuevaReserva)
+        // await reservaPDF(nuevaReserva)
     } catch (error) {
         console.error(error)
         res.status(400).json({ error: error instanceof Error ? error.message : String(error) });

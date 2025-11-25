@@ -198,7 +198,7 @@ export class CalendarioComponent implements OnInit {
   }
 
   irAGestionReservas() {
-    this.router.navigate(['/panel']);
+    this.router.navigate(['/panel'], { skipLocationChange: false });
     this.cerrarModal();
   }
 }

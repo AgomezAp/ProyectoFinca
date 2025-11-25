@@ -5,9 +5,11 @@
   <div class="verificar-content">
     <img src="assets/logos/ISOTIPO.svg" alt="Logo Finca" class="verificar-logo">
 
-    <div class="verificar-decorative-line"></div>
-
-    <p class="verificar-label">Formulario</p>
+    <p class="verificar-label">
+      <span class="decorative-line-side"></span>
+      Formulario
+      <span class="decorative-line-side"></span>
+    </p>
 
     <h1 class="verificar-title">Verificar Mi Reserva</h1>
 
@@ -77,7 +79,7 @@
           </div>
           <div class="detail-info">
             <span class="detail-label">Correo electrónico:</span>
-            <span class="detail-value">{{ reserva[0].cantidad }} personas</span>
+            <span class="detail-value">{{ reserva[0].email }}</span>
           </div>
         </div>
 
@@ -87,7 +89,7 @@
           </div>
           <div class="detail-info">
             <span class="detail-label">Número de personas:</span>
-            <span class="detail-value">{{ reserva[0].email }}</span>
+            <span class="detail-value">{{ reserva[0].cantidad }} personas</span>
           </div>
         </div>
       </div>

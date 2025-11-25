@@ -24,8 +24,8 @@ export class InfoContactoComponent implements OnInit, OnDestroy{
   galleryItems = [
     {src: 'assets/images/Piscina.webp', alt: 'Piscina', titulo: 'Área de Piscina', descripcion: 'Piscina amplia para disfrutar en familia o con amigos.'},
     {src: 'assets/images/Parrilla.webp', alt: 'Parrilla', titulo: 'Zona de Parrilla', descripcion: 'Área de parrilla para disfrutar de asados y comidas al aire libre.'},
-    {src: 'assets/images/Estacionamiento.webp', alt: 'Estacionamiento', titulo: 'Estacionamiento', descripcion: 'Amplio estacionamiento para la comodidad de los visitantes.'},
     {src: 'assets/images/Baños.webp', alt: 'Baños', titulo: 'Baños', descripcion: 'Cómodos baños para tu confort durante la visita.'},
+    {src: 'assets/images/Estacionamiento.webp', alt: 'Estacionamiento', titulo: 'Estacionamiento', descripcion: 'Amplio estacionamiento para la comodidad de los visitantes.'},
     {src: 'assets/images/Jardines.webp', alt: 'Jardines', titulo: 'Jardines', descripcion: 'Hermosos jardines para pasear y relajarse al aire libre.'},
     {src: 'assets/images/Eventos.webp', alt: 'Eventos', titulo: 'Salón de Eventos', descripcion: 'Salón equipado para reuniones y celebraciones especiales.'},
     {src: 'assets/images/Juegos.webp', alt: 'Juegos', titulo: 'Zona de Juegos', descripcion: 'Espacio dedicado para la diversión de los niños.'},

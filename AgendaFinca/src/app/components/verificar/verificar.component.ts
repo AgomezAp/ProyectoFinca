@@ -59,7 +59,7 @@ export class VerificarComponent {
 
   // Cerrar modal con tecla Escape
   @HostListener('document:keydown.escape', ['$event'])
-  onEscapeKey(event: KeyboardEvent) {
+  onEscapeKey(event: Event) {
     this.cerrarModal();
   }
 }

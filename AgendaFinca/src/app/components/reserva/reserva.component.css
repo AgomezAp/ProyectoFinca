@@ -48,10 +48,16 @@
 }
 
 .reserva-decorative-line {
-  width: 350px;
+  width: 650px;
   height: 1px;
   background: rgba(255, 255, 255, 0.5);
   margin: 1.2rem auto;
+}
+
+.decorative-line-side {
+  width: 250px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .reserva-label {
@@ -61,6 +67,10 @@
   letter-spacing: 0.2rem;
   text-transform: uppercase;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .reserva-title {
@@ -227,6 +237,18 @@
 
 .preview-hidden {
   display: none;
+  max-width: 100px;
+  max-height: 100px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.preview-hidden[style*="display: block"] {
+  display: block !important;
 }
 
 .error-message-reserva {

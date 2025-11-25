@@ -48,7 +48,7 @@
 }
 
 .decorative-line {
-  width: 400px;
+  width: 560px;
   height: 1px;
   background: rgba(255, 255, 255, 0.5);
   margin: 1.5rem auto;
@@ -62,6 +62,16 @@
   text-transform: uppercase;
   margin: 0;
   font-weight: 400;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.decorative-line-side {
+  width: 200px;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .hero-title {
@@ -262,7 +272,7 @@
 }
 
 .info-decorative-line {
-  width: 400px;
+  width: 560px;
   height: 1px;
   background: #e98552;
   margin: 1.5rem auto;
@@ -275,6 +285,14 @@
   letter-spacing: 0.2rem;
   text-transform: uppercase;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.info-label .decorative-line-side {
+  background: #e98552;
 }
 
 .info-title {
@@ -284,6 +302,15 @@
   color: #e98552;
   margin: 1rem 0;
   letter-spacing: 1px;
+}
+
+.decorative-line-left,
+.decorative-line-right {
+  flex: 1;
+  max-width: 300px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
 }
 
 .info-description {
