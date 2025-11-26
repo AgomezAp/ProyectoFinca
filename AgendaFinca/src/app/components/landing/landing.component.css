@@ -328,6 +328,14 @@
   gap: 2.5rem;
 }
 
+/* Tablet grande: dos columnas en features */
+@media (max-width: 1024px) {
+  .features-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+}
+
 .feature-card {
   background: #fff;
   border-radius: 20px;
@@ -380,6 +388,10 @@
 }
 
 @media (max-width: 768px) {
+  .hero-reservation-section {
+    padding: 1.5rem 1rem;
+  }
+
   .hero-logo {
     width: 90px;
     height: 90px;
@@ -395,6 +407,10 @@
   .hero-label,
   .info-label {
     font-size: 0.85rem;
+  }
+
+  .decorative-line-side {
+    width: 120px;
   }
 
   .hero-title {
@@ -428,9 +444,22 @@
   .feature-card {
     padding: 2rem 1.5rem;
   }
+
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 1.2rem;
+  }
+
+  .finca-info-section {
+    padding: 3rem 1.25rem;
+  }
 }
 
 @media (max-width: 480px) {
+  .hero-reservation-section {
+    padding: 1rem;
+  }
+  
   .hero-logo {
     width: 70px;
     height: 70px;
@@ -439,6 +468,10 @@
   .decorative-line,
   .info-decorative-line {
     width: 180px;
+  }
+  
+  .decorative-line-side {
+    width: 80px;
   }
   
   .hero-title {
@@ -474,6 +507,10 @@
   
   .feature-card-title {
     font-size: 1.5rem;
+  }
+
+  .finca-info-section {
+    padding: 2.5rem 1rem;
   }
 }
 
