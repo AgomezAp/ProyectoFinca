@@ -31,7 +31,7 @@ export const crearReserva = async (req: Request, res: Response): Promise<any> =>
             await notificarAdminReserva({ ...nuevaReserva.toObject(), emailAdmin });
             console.log('✅ Notificación de reserva enviada al admin:', emailAdmin);
             
-            const telefonoFinca = '573217374091'
+            const telefonoFinca = process.env.TEL_ADMIN || '573217374091';
             const fechaLlegadaStr = new Date(nuevaReserva.fechaLlegada).toLocaleDateString('es-CO');
             const fechaSalidaStr = new Date(nuevaReserva.fechaSalida).toLocaleDateString('es-CO');
             const message =`Se acaba de crear una reserva a nombre de ${nuevaReserva.nombre} con el telefono ${nuevaReserva.telefono} entre las fechas ${fechaLlegadaStr} y ${fechaSalidaStr}`;
