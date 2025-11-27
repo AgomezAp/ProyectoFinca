@@ -56,9 +56,10 @@
                     </div>
                 </div>
 
-                <button type="button" class="reserve-button" (click)="redirectToReserva()">
-                    <span class="button-icon">📅</span>
-                    Reservar
+                <button type="button" class="reserve-button" (click)="redirectToReserva()" [disabled]="cargando">
+                    <mat-icon *ngIf="!cargando" class="button-icon-mat">event_available</mat-icon>
+                    <mat-icon *ngIf="cargando" class="button-icon-mat spinner-icon">refresh</mat-icon>
+                    {{ cargando ? 'Verificando...' : 'Reservar' }}
                 </button>
 
                 <div *ngIf="errorMessage" class="error-message">

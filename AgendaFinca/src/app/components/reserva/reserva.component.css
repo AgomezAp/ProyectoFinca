@@ -479,3 +479,23 @@
     transform: translateY(0);
   }
 }
+
+/* Animación de spinner para el botón de enviar */
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.btn-primary-reserva:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none !important;
+}

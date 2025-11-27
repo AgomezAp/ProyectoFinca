@@ -227,41 +227,59 @@
 
 .modal-header-verificar {
   background: linear-gradient(135deg, rgba(74, 107, 58, 0.95), rgba(58, 85, 48, 0.95));
-  padding: 3rem 2rem 2rem 2rem;
+  padding: 1.2rem 1.5rem 1rem 1.5rem;
   text-align: center;
   position: relative;
 }
 
+.modal-header-verificar.pendiente {
+  background: linear-gradient(135deg, rgba(230, 126, 34, 0.95), rgba(211, 84, 0, 0.95));
+}
+
+.modal-header-verificar.rechazado {
+  background: linear-gradient(135deg, rgba(231, 76, 60, 0.95), rgba(192, 57, 43, 0.95));
+}
+
 .success-badge {
-  width: 80px;
-  height: 80px;
+  width: 50px;
+  height: 50px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1rem;
+  margin: 0 auto 0.5rem;
   backdrop-filter: blur(10px);
-  border: 3px solid rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .success-badge mat-icon{
-  font-size: 45px;
-  width: 45px;
-  height: 45px;
+  font-size: 28px;
+  width: 28px;
+  height: 28px;
   color: #fff;
+}
+
+.success-badge.pendiente {
+  background: rgba(255, 193, 7, 0.3);
+  border-color: rgba(255, 193, 7, 0.4);
+}
+
+.success-badge.rechazado {
+  background: rgba(244, 67, 54, 0.3);
+  border-color: rgba(244, 67, 54, 0.4);
 }
 
 .modal-title-verificar {
   font-family: 'Archane', sans-serif;
-  font-size: 2.2rem;
+  font-size: 1.4rem;
   color: #fff;
-  margin: 0;
+  margin: 0 0 0.5rem 0;
   font-weight: 100;
 }
 
 .modal-body-verificar {
-  padding: 2.5rem 2rem;
+  padding: 1.5rem 2rem;
   overflow-y: auto;
 }
 
@@ -383,6 +401,37 @@
   box-shadow: 0 10px 30px rgba(233, 133, 82, 0.5);
 }
 
+/* Estilos para estado de reserva */
+.estado-reserva-badge {
+  display: inline-block;
+  padding: 0.35rem 0.9rem;
+  border-radius: 15px;
+  font-family: 'Questrial', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  margin-bottom: 0;
+}
+
+.estado-reserva-badge.aceptado {
+  background: rgba(39, 174, 96, 0.15);
+  color: #27ae60;
+  border: 2px solid rgba(39, 174, 96, 0.3);
+}
+
+.estado-reserva-badge.pendiente {
+  background: rgba(255, 243, 224, 0.95);
+  color: #d68910;
+  border: 2px solid rgba(230, 126, 34, 0.5);
+}
+
+.estado-reserva-badge.rechazado {
+  background: rgba(231, 76, 60, 0.15);
+  color: #e74c3c;
+  border: 2px solid rgba(231, 76, 60, 0.3);
+}
+
 @media (max-width: 768px) {
   .verificar-hero-section {
     padding: 1.5rem 1rem;
@@ -458,22 +507,22 @@
   }
   
   .modal-header-verificar {
-    padding: 2rem 1.5rem 1.5rem 1.5rem;
+    padding: 1rem 1.2rem 0.8rem 1.2rem;
   }
   
   .success-badge {
-    width: 70px;
-    height: 70px;
+    width: 45px;
+    height: 45px;
   }
   
   .success-badge mat-icon {
-    font-size: 38px;
-    width: 38px;
-    height: 38px;
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
   }
   
   .modal-title-verificar {
-    font-size: 1.6rem;
+    font-size: 1.3rem;
   }
   
   .modal-body-verificar {

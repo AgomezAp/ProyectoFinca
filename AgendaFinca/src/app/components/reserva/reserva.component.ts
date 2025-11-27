@@ -40,6 +40,7 @@ export class ReservaComponent {
   @ViewChild('fileAtras') fileAtras!: ElementRef<HTMLInputElement>;
   @ViewChild('fileRostro') fileRostro!: ElementRef<HTMLInputElement>;
   terminosResumen: boolean = false
+  enviando: boolean = false;
 
   huespedes = Array.from({ length: 40 }, (_, i) => i + 2);
   
@@ -113,15 +114,20 @@ export class ReservaComponent {
     for (let pair of reservaData.entries()) {
       console.log(pair[0] + ': ', pair[1]);
     }
+    
+    this.enviando = true;
+    
     this.reservaService.crearReserva(reservaData).subscribe({
       
       next: (response) => {
         console.log('Reserva enviada correctamente', response);
+        this.enviando = false;
         window.location.href = '/miReserva'
 
       },
       error: (error) => {
         console.error('Error al enviar la reserva', error);
+        this.enviando = false;
       }
     });
   }

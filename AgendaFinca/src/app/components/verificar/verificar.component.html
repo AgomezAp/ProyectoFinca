@@ -52,25 +52,24 @@
       <mat-icon>close</mat-icon>
     </button>
 
-    <div class="modal-header-verificar">
-      <div class="success-badge">
-        <mat-icon>check_circle</mat-icon>
+    <div class="modal-header-verificar" [ngClass]="getEstadoReserva()">
+      <div class="success-badge" [ngClass]="getEstadoReserva()">
+        <mat-icon>{{ getIconoEstado() }}</mat-icon>
       </div>
       <h2 class="modal-title-verificar">¡Hola {{ reserva[0].nombre }}!</h2>
+      <div class="estado-reserva-badge" [ngClass]="getEstadoReserva()">
+        {{ getTextoEstado() }}
+      </div>
     </div>
 
     <div class="modal-body-verificar">
       <p class="modal-message-primary">
-        Recuerda que tienes una reserva para disfrutar entre los días 
+        {{ getMensajePrincipal() }}
         <strong>{{ reserva[0].fechaLlegada | date:'longDate' }}</strong> y 
-        <strong>{{ reserva[0].fechaSalida | date:'longDate' }}</strong>.
+        <strong>{{ reserva[0].fechaSalida | date:'longDate' }}</strong>{{ getEstadoReserva() === 'rechazado' ? ' ha sido rechazada' : '' }}.
       </p>
 
-      <p class="modal-message-secondary">
-        Te esperamos en <strong>El Progreso</strong> para que vivas una experiencia inolvidable.<br>
-        Si tienes alguna duda, contáctanos.<br>
-        ¡Gracias por elegirnos!
-      </p>
+      <p class="modal-message-secondary" [innerHTML]="getMensajeSecundario()"></p>
 
       <div class="reserva-details-grid">
         <div class="detail-card">

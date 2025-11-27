@@ -214,11 +214,12 @@
                 
                 <div class="button-group-reserva">
                     <button type="submit" 
-                            [disabled]="formulario.invalid" 
+                            [disabled]="formulario.invalid || enviando" 
                             (click)="enviarData()"
                             class="btn-reserva btn-primary-reserva">
-                        <mat-icon>check_circle</mat-icon>
-                        Enviar Reserva
+                        <mat-icon *ngIf="!enviando">check_circle</mat-icon>
+                        <mat-icon *ngIf="enviando" class="spinner-icon">refresh</mat-icon>
+                        {{ enviando ? 'Enviando...' : 'Enviar Reserva' }}
                     </button>
                     <button type="button" 
                             (click)="volver()"

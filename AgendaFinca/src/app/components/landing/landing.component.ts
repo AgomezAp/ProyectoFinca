@@ -6,9 +6,10 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-landing',
-  imports: [CommonModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule ,MatInputModule, MatSelectModule], 
+  imports: [CommonModule, MatFormFieldModule, MatDatepickerModule, MatNativeDateModule ,MatInputModule, MatSelectModule, MatIconModule], 
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
 })
@@ -17,12 +18,13 @@ export class LandingComponent implements OnInit, OnDestroy, AfterViewInit {
   autoPlayInterval: any;
   isInView = false;
   animatedGuestCount = 2;
-  guestArray = Array(40).fill(0);
+  guestArray = Array(30).fill(0);
   private observer!: IntersectionObserver;
   fechasOcupadas: any = []
   errorMessage: string = '';
   huespedesSeleccionados: number = 2;
-  numeroHuespedes: number[] = Array.from({length: 39}, (_, i) => i + 2);
+  numeroHuespedes: number[] = Array.from({length: 29}, (_, i) => i + 2);
+  cargando: boolean = false;
   constructor(
     private reservaServices: AgendaService,
   ) {}
@@ -239,15 +241,24 @@ startGuestCountAnimation() {
     };
     console.log(formData)
 
-    this.reservaServices.Disponibilidad({FechaInicio: inicio, FechaFin: fin}).subscribe((response) => {
-      if(response.disponible) {
-      localStorage.setItem('reservaFormData', JSON.stringify(formData));
-      window.location.href = '/reserva'
-      } else {
-      this.errorMessage = response.mensaje;
+    this.cargando = true;
+    this.errorMessage = '';
+
+    this.reservaServices.Disponibilidad({FechaInicio: inicio, FechaFin: fin}).subscribe({
+      next: (response) => {
+        if(response.disponible) {
+          localStorage.setItem('reservaFormData', JSON.stringify(formData));
+          window.location.href = '/reserva'
+        } else {
+          this.errorMessage = response.mensaje;
+          this.cargando = false;
+        }
+      },
+      error: (error) => {
+        this.errorMessage = 'Error al verificar disponibilidad. Intenta nuevamente.';
+        this.cargando = false;
       }
-    }
-  )
+    })
   }
   onHuespedesChange(): void {
     console.log('Huéspedes seleccionados:', this.huespedesSeleccionados);

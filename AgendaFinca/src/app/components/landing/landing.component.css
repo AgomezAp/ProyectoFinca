@@ -198,6 +198,10 @@
   cursor: pointer;
   transition: all 0.3s ease;
   margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
   box-shadow: 0 8px 20px rgba(233, 133, 82, 0.4);
   display: flex;
   align-items: center;
@@ -211,6 +215,37 @@
   transform: translateY(-3px);
   box-shadow: 0 12px 30px rgba(233, 133, 82, 0.6);
   background: linear-gradient(135deg, #ff9666, #e98552);
+}
+
+.reserve-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reserve-button:disabled:hover {
+  transform: none;
+  box-shadow: 0 8px 20px rgba(233, 133, 82, 0.4);
+  background: linear-gradient(135deg, #e98552, rgba(233, 133, 82, 0.9));
+}
+
+.button-icon-mat {
+  font-size: 1.4rem;
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.spinner-icon {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .button-icon {
