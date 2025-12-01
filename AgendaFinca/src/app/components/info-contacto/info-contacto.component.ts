@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { SeoService } from '../../services/seo.service';
 @Component({
   selector: 'app-info-contacto',
   imports: [CommonModule],
@@ -9,7 +10,10 @@ import { Router } from '@angular/router';
 })
 export class InfoContactoComponent implements OnInit, OnDestroy{
 
-  constructor (private router: Router) {}
+  constructor (
+    private router: Router,
+    private seoService: SeoService
+  ) {}
 
   @ViewChild('carouselTrack', { static: true }) carouselTrack!: ElementRef;
   @ViewChild('prevBtn', { static: true }) prevBtn!: ElementRef;
@@ -22,19 +26,62 @@ export class InfoContactoComponent implements OnInit, OnDestroy{
   indicators: any[] = [];
 
   galleryItems = [
-    {src: 'assets/images/Piscina.webp', alt: 'Piscina', titulo: 'Área de Piscina', descripcion: 'Piscina amplia para disfrutar en familia o con amigos.'},
-    {src: 'assets/images/Parrilla.webp', alt: 'Parrilla', titulo: 'Zona de Parrilla', descripcion: 'Área de parrilla para disfrutar de asados y comidas al aire libre.'},
-    {src: 'assets/images/Baños.webp', alt: 'Baños', titulo: 'Baños', descripcion: 'Cómodos baños para tu confort durante la visita.'},
-    {src: 'assets/images/Estacionamiento.webp', alt: 'Estacionamiento', titulo: 'Estacionamiento', descripcion: 'Amplio estacionamiento para la comodidad de los visitantes.'},
-    {src: 'assets/images/Jardines.webp', alt: 'Jardines', titulo: 'Jardines', descripcion: 'Hermosos jardines para pasear y relajarse al aire libre.'},
-    {src: 'assets/images/Eventos.webp', alt: 'Eventos', titulo: 'Salón de Eventos', descripcion: 'Salón equipado para reuniones y celebraciones especiales.'},
-    {src: 'assets/images/Juegos.webp', alt: 'Juegos', titulo: 'Zona de Juegos', descripcion: 'Espacio dedicado para la diversión de los niños.'},
+    {src: 'assets/images/Piscina.webp', alt: 'Finca con piscina y jacuzzi para 30 personas - eventos y hospedaje en Pereira', titulo: 'Área de Piscina', descripcion: 'Piscina amplia para disfrutar en familia o con amigos.'},
+    {src: 'assets/images/Parrilla.webp', alt: 'Zona BBQ y sonido listos para tu celebración', titulo: 'Zona de Parrilla', descripcion: 'Área de parrilla para disfrutar de asados y comidas al aire libre.'},
+    {src: 'assets/images/Baños.webp', alt: 'Baños completos en finca para eventos Pereira', titulo: 'Baños', descripcion: 'Cómodos baños para tu confort durante la visita.'},
+    {src: 'assets/images/Estacionamiento.webp', alt: 'Parqueadero interno dentro de la finca - acceso cómodo y seguro', titulo: 'Estacionamiento', descripcion: 'Amplio estacionamiento para la comodidad de los visitantes.'},
+    {src: 'assets/images/Jardines.webp', alt: 'Zona verde y jardines para eventos familiares Pereira', titulo: 'Jardines', descripcion: 'Hermosos jardines para pasear y relajarse al aire libre.'},
+    {src: 'assets/images/Eventos.webp', alt: 'Salón de eventos finca campestre Pereira', titulo: 'Salón de Eventos', descripcion: 'Salón equipado para reuniones y celebraciones especiales.'},
+    {src: 'assets/images/Juegos.webp', alt: 'Zona de juegos infantiles finca familiar Pereira', titulo: 'Zona de Juegos', descripcion: 'Espacio dedicado para la diversión de los niños.'},
   ];
 
   ngOnInit(): void {
+    this.setupSEO();
     setTimeout(() => {
       this.initCarousel();
     })
+  }
+
+  setupSEO(): void {
+    this.seoService.updateMetaTags({
+      title: 'Finca El Progreso en Pereira para 30 personas – Jacuzzi y Piscina',
+      description: 'Reserva tu evento sin estrés: piscina, jacuzzi, BBQ, sonido y parqueadero interno. Cotiza por WhatsApp y asegura tu fecha hoy.',
+      keywords: 'Finca para eventos en Pereira, Alquiler de finca campestre, finca para fiestas en Pereira, finca para reuniones familiares, Zona verde, Piscina, Zona BBQ, Fogata, Parqueadero, Hospedaje grupos',
+      type: 'website',
+      url: 'https://www.fincaelprogreso.com'
+    });
+
+    // Datos estructurados para Google
+    const structuredData = {
+      '@context': 'https://schema.org',
+      '@type': 'EventVenue',
+      'name': 'Finca El Progreso',
+      'description': 'Finca campestre en Pereira con capacidad para 30 personas, piscina, jacuzzi, zona BBQ y parqueadero interno',
+      'address': {
+        '@type': 'PostalAddress',
+        'addressLocality': 'Pereira',
+        'addressRegion': 'Risaralda',
+        'addressCountry': 'CO'
+      },
+      'geo': {
+        '@type': 'GeoCoordinates',
+        'latitude': '4.7309281',
+        'longitude': '-75.7306993'
+      },
+      'telephone': '+573011208541',
+      'email': 'fincaelprogreso6@gmail.com',
+      'amenityFeature': [
+        {'@type': 'LocationFeatureSpecification', 'name': 'Piscina'},
+        {'@type': 'LocationFeatureSpecification', 'name': 'Jacuzzi'},
+        {'@type': 'LocationFeatureSpecification', 'name': 'Zona BBQ'},
+        {'@type': 'LocationFeatureSpecification', 'name': 'Fogata'},
+        {'@type': 'LocationFeatureSpecification', 'name': 'Parqueadero Interno'},
+        {'@type': 'LocationFeatureSpecification', 'name': 'Sistema de Sonido'}
+      ],
+      'maximumAttendeeCapacity': 30
+    };
+
+    this.seoService.updateStructuredData(structuredData);
   }
 
   ngOnDestroy(): void {
